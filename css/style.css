@@ -172,12 +172,12 @@ h6 {
 }
 
 #intro .intro-img {
-  width: 50%;
+  width: 40%;
   float: right;
 }
 
 #intro .intro-info {
-  width: 50%;
+  width: 60%;
   float: left;
 }
 
@@ -238,6 +238,10 @@ h6 {
 .main-nav {
   /* Drop Down */
   /* Deep Drop Down */
+}
+
+.rounded1{
+  border-radius: 1rem !important;
 }
 
 .main-nav,
