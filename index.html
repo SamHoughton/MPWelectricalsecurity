@@ -1,448 +1,652 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MPW Security | Security Solutions from MPW Security</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="security cameras, security solutions, alarm systems, security system supplier, electric gate installer, residential security systems, gate barrier, motion sensors, secure alarm systems, auto gate system" name="keywords">
-    <meta content="With over a decade of automated security experience MPW are able to offer bespoke solutions that suit your needs and your property. We specialise in automated gate servicing and maintenance to ensure customers get the most from their initial investments. We cover the North West area and beyond. Each customer is offered individual services to meet the different needs so always get in touch." name="description">
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4FW36QNJ8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-H4FW36QNJ8');
-    </script>
-    <!-- Bootstrap CSS File -->
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Libraries CSS Files -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/9e4a8a1123.js" crossorigin="anonymous"></script>
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <!-- Main Stylesheet File -->
-    <link href="css/style.css" rel="stylesheet">
-  </head>
-  <body>
-    <!--==========================
-      Header
-      ============================-->
-    <header id="header" class="fixed-top">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MPW Security | Security Solutions from MPW Security</title>
+  <meta name="keywords" content="security cameras, security solutions, alarm systems, security system supplier, electric gate installer, residential security systems, gate barrier, motion sensors, secure alarm systems, auto gate system">
+  <meta name="description" content="With over a decade of automated security experience MPW are able to offer bespoke solutions that suit your needs and your property. We cover the North West area and beyond.">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4FW36QNJ8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H4FW36QNJ8');
+  </script>
+
+  <!-- Custom Styles -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-spinner"></div>
+  </div>
+
+  <!-- ======= Header / Navbar ======= -->
+  <header id="header">
+    <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <div class="logo float-left">
-          <a href="#intro" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a>
-        </div>
-        <nav class="main-nav float-right d-none d-lg-block">
-          <ul>
-            <li class="active"><a href="#intro">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+        <a class="navbar-brand scroll-link" href="#hero">
+          <img src="img/logo.png" alt="MPW Security" class="logo-img">
+        </a>
+
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" id="navToggle">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+
+        <div class="navbar-collapse-custom" id="navMenu">
+          <ul class="nav-links">
+            <li><a class="nav-link active" href="#hero">Home</a></li>
+            <li><a class="nav-link" href="#about">About Us</a></li>
+            <li><a class="nav-link" href="#services">Services</a></li>
+            <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+            <li><a class="nav-link btn-nav-contact" href="#contact">Contact Us</a></li>
           </ul>
-        </nav>
-        <!-- .main-nav -->
-      </div>
-    </header>
-    <!-- #header -->
-    <!--==========================
-      Intro Section
-      ============================-->
-      <!-- ======= Hero Section ======= -->
-      <section id="hero" class="d-flex flex-column justify-content-end align-items-center">
-        <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
-
-          <!-- Slide 1 -->
-          <div class="carousel-item active">
-            <div class="carousel-container">
-                        <img src="img/edit.png" alt="" class="img-main-fluid">
-              <p class="animate__animated fanimate__adeInUp">From the Wigan area, we offer a huge range of security services. Ranging from Electric Gates to CCTV, we are able to offer bespoke solutions to suit your needs.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-            </div>
-          </div>
-
         </div>
+      </div>
+    </nav>
+  </header>
 
-        <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
-          <defs>
-            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
-          </defs>
-          <g class="wave1">
-            <use xlink:href="#wave-path" x="50" y="3" fill="rgba(210, 105, 30, .1)">
-          </g>
-          <g class="wave2">
-            <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255, 140, 0, .2)">
-          </g>
-          <g class="wave3">
-            <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
-          </g>
-        </svg>
-
-      </section><!-- End Hero -->
-    <main id="main">
-
-      <!--==========================
-        About Us Section
-        ============================-->
-      <section id="about">
-        <div class="container">
-          <header class="section-header">
-            <h3>About Us</h3>
-            <p>
-              With over a decade of automated security experience MPW are able to offer bespoke solutions that suit your needs and your property. We specialise in automated gate servicing and maintenance to ensure customers get the most from their initial investments. We cover the North West area and beyond. Each customer is offered individual services to meet the different needs so always get in touch.
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-7 hero-text-col">
+            <div class="hero-badge reveal-hero">
+              <i class="fas fa-shield-halved"></i>
+              North West's Trusted Security Provider
+            </div>
+            <h1 class="reveal-hero reveal-delay-1">
+              Professional <span class="text-accent">Security Solutions</span> For Your Property
+            </h1>
+            <p class="hero-desc reveal-hero reveal-delay-2">
+              From the Wigan area, we offer a huge range of security services. Ranging from Electric Gates to CCTV, we are able to offer bespoke solutions to suit your needs.
             </p>
-          </header>
-                <hr/>
-          <div class="row about-container">
-            <div class="col-lg-6 content order-lg-1 order-2">
-              <p>
-                Here at MPW, we pride ourselves with high quality solutions for your security needs. Here our some of our key solutions which we are proud of.
-              </p>
-              <div class="icon-box wow fadeInUp">
-                <div class="icon"><i class="fa fa-lock"></i></div>
-                <h4 class="title"><a href="">Gates</a></h4>
-                <p class="description">Gates to protect your assets. Ranging from any size, MPW can adapt to your needs.</p>
-              </div>
-              <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
-                <div class="icon"><i class="fa fa-shield"></i></div>
-                <h4 class="title"><a href="">Cameras</a></h4>
-                <p class="description">Protecting your home or company with cameras will give you the safety that you require.</p>
-              </div>
-              <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
-                <div class="icon"><i class="fa fa-id-card-o"></i></div>
-                <h4 class="title"><a href="">So Much More</a></h4>
-                <p class="description">Feel free to look below at a list of services or <strong><a href="#contact" class="btn-contact scrollto">contact us</a></strong> to dicuss more options.</p>
-              </div>
-            </div>
-            <div class="col-lg-6 background order-lg-2 order-1 wow fadeInUp">
-              <img src="img/aboutusgate.jpg" class="img-fluid rounded1" alt="">
+            <div class="hero-buttons reveal-hero reveal-delay-3">
+              <a href="#services" class="btn btn-gold scroll-link">
+                <span>Our Services</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <a href="#contact" class="btn btn-outline-hero scroll-link">
+                <span>Get In Touch</span>
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-      <!-- #about -->
-      <!--==========================
-        Services Section
-        ============================-->
-      <section id="services" class="section-bg">
-        <div class="container">
-          <header class="section-header">
-            <h3>Services</h3>
-            <p>Here is a list of the services that we can provide at MPW. If you have any questions, feel free to <strong><a href="#contact" class="btn-contact scrollto">contact us.</a></strong></p>
-          </header>
-          <div class="row row-cols-auto">
-            <div class="col-6 wow bounceInUp" data-wow-duration="1.4s">
-              <div class="box">
-                <div class="icon"><i class="iconsize fas fa-infinity" style="color: #CC8400;"></i></div>
-                <h4 class="title"><a href="">Automatic Gate Servicing</a></h4>
-                <p class="description">Call us the AA of gates. Regular servicing on your gates can really help to keep them in a good condition ensuring that they are working for you and that any issues are hopefully spotted at service stage which allows the engineer and yourself to discuss options.</p>
-              </div>
-            </div>
-            <div class="col-6 wow bounceInUp" data-wow-duration="1.4s">
-              <div class="box">
-                <div class="icon"><i class="iconsize fas fa-cogs" style="color: #CC8400;"></i></div>
-                <h4 class="title"><a href="">Gate Installation</a></h4>
-                <p class="description">Looking to put gates on your property/commercial premises, or even upgrade an existing system or automate an existing gate? There are options to discuss. Again all options are bespoke to each customer and job type to ensure you get what is viable and will work best for you.</p>
-              </div>
-            </div>
-            <div class="col-6 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-              <div class="box">
-                <div class="icon"><i class="iconsize fas fa-video" style="color: #CC8400;"></i></div>
-                <h4 class="title"><a href="">CCTV</a></h4>
-                <p class="description">Fitting cameras to your premises, home or commercial, can really help give peace of mind with the ability to check the cameras from within the property or when you are out and about or travelling. </p>
-              </div>
-            </div>
-            <div class="col-6 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-              <div class="box">
-                <div class="icon"><i class="iconsize far fa-bell" style="color: #CC8400;"></i></div>
-                <h4 class="title"><a href="">Alarm Systems</a></h4>
-                <p class="description">Having an alarm fitted and serviced by an alarm engineer will support your peace of mind and also reduces home insurance premiums. Find out more today by reaching out to us.
-                </p>
-              </div>
-            </div>
-            <div class="col-6 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
-              <div class="box">
-                <div class="icon"><i class="iconsize far fa-lightbulb" style="color: #CC8400;"></i></div>
-                <h4 class="title"><a href="">Lighting</a></h4>
-                <p class="description">Lighting in the garden has the capability to look fantastic as well as provide a deterrent for unwanted visitors and also on a simpler level- the ability to find your keys when you arrive home in the dark! </p>
-              </div>
-            </div>
-            <div class="col-6 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
-              <div class="box">
-                <div class="icon"><i class="iconsize far fa-address-card" style="color: #CC8400;"></i></div>
-                <h4 class="title"><a href="">Lots More</a></h4>
-                <p class="description">Feel free to <strong><a href="#contact" class="btn-contact scrollto">contact us</a></strong> with any questions you may have. We're happy to help with any questions or enquiries. Our excellent team will get back to you as soon as possible.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- #services -->
-      <!--==========================
-        Portfolio Section
-        ============================-->
-      <section id="portfolio" class="clearfix">
-        <div class="container">
-          <header class="section-header">
-            <h3 class="section-title">Our Portfolio</h3>
-          </header>
-          <div class="row">
-            <div class="col-lg-12">
-              <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-gate">Gate</li>
-                <li data-filter=".filter-barrier">Barrier</li>
-                <li data-filter=".filter-lighting">Lighting</li>
-              </ul>
-            </div>
-          </div>
-          <div class="row portfolio-container">
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">MPW Black Gate</a></h4>
-                  <p>Classic black gate, all automatic.</p>
-                  <div>
-                    <a href="img/portfolio/gate.jpg" data-lightbox="portfolio" data-title="Gate" class="link-preview" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Gate 2</a></h4>
-                  <p>Gate</p>
-                  <div>
-                    <a href="img/portfolio/gate2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-lighting" data-wow-delay="0.2s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/light.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Lighting Example</a></h4>
-                  <p>An example of the solution of lighting MPW can delivery for your home.</p>
-                  <div>
-                    <a href="img/portfolio/light.jpg" class="link-preview" data-lightbox="portfolio" data-title="Lighting Example" title="An example of the solution of lighting MPW can delivery for your home."><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate3.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Gate 3</a></h4>
-                  <p>Gate 3</p>
-                  <div>
-                    <a href="img/portfolio/gate3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 2" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-barrier" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/barrier1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Barrier</a></h4>
-                  <p>Barrier</p>
-                  <div>
-                    <a href="img/portfolio/barrier1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 2" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate" data-wow-delay="0.2s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate4.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Gate 4</a></h4>
-                  <p>Gate</p>
-                  <div>
-                    <a href="img/portfolio/gate4.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate5.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Gate 5</a></h4>
-                  <p>Gate</p>
-                  <div>
-                    <a href="img/portfolio/gate5.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 1" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate6.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Gate 6</a></h4>
-                  <p>Gate</p>
-                  <div>
-                    <a href="img/portfolio/gate6.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-barrier" data-wow-delay="0.2s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/barrier2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Barrier 2</a></h4>
-                  <p>Barrier</p>
-                  <div>
-                    <a href="img/portfolio/barrier2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 1" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-barrier" data-wow-delay="0.2s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/barrier3.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Barrier 3</a></h4>
-                  <p>Barrier</p>
-                  <div>
-                    <a href="img/portfolio/barrier3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 1" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate8.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Gate 7</a></h4>
-                  <p>Gate</p>
-                  <div>
-                    <a href="img/portfolio/gate8.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-gate" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/gate9.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Gate 8</a></h4>
-                  <p>Gate</p>
-                  <div>
-                    <a href="img/portfolio/gate9.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- #portfolio -->
-      <!--==========================
-        Contact Section
-        ============================-->
-      <section id="contact">
-      <div class="container-fluid">
-        <div class="section-header">
-          <h3>Contact Us</h3>
-        </div>
-        <div class="row wow fadeInUp">
-          <div class="col-6 col-md-6">
-            <div style="
-              -webkit-filter: grayscale(100%);
-              filter: grayscale(80%);">
-              <div class="map mb-4">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75877.15274061599!2d-2.7210850897720285!3d53.53703905177078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487b04345517a4d3%3A0x5702a66b03f2d953!2sWigan%2C+UK!5e0!3m2!1sen!2sgr!4v1552059437356" frameborder="0" style="border:0; width: 100%; height: 312px;" allowfullscreen></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-6 row align-items-center">
-            <div class="col-md-5 info">
-              <i class="ion-ios-location-outline"></i>
-              <p>Newton-le-Willows, WA12 9UA</p>
-            </div>
-            <div class="col-md-4 info">
-              <i class="ion-ios-email-outline"></i>
-              <p>Matt@mpwelectricalsecurity.com</p>
-            </div>
-            <div class="col-md-3 info">
-              <i class="ion-ios-telephone-outline"></i>
-              <p>07434 001222</p>
+          <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center">
+            <div class="hero-image-wrap reveal-hero reveal-delay-2">
+              <img src="img/edit.png" alt="MPW Security" class="hero-image">
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Animated Wave Divider -->
+    <div class="hero-wave-container">
+      <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+        <defs>
+          <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
+        </defs>
+        <g class="wave1"><use href="#wave-path" x="50" y="3" fill="rgba(204,132,0,.1)"/></g>
+        <g class="wave2"><use href="#wave-path" x="50" y="0" fill="rgba(204,132,0,.15)"/></g>
+        <g class="wave3"><use href="#wave-path" x="50" y="9" fill="#fff"/></g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ======= Stats Bar ======= -->
+  <section id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal-up">
+          <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-body">
+            <div class="stat-number" data-target="10">0</div><span class="stat-plus">+</span>
+            <div class="stat-label">Years Experience</div>
+          </div>
+        </div>
+        <div class="stat-item reveal-up" style="--delay:0.1s">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-body">
+            <div class="stat-number" data-target="250">0</div><span class="stat-plus">+</span>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+        </div>
+        <div class="stat-item reveal-up" style="--delay:0.2s">
+          <div class="stat-icon"><i class="fas fa-gate"></i></div>
+          <div class="stat-body">
+            <div class="stat-number" data-target="500">0</div><span class="stat-plus">+</span>
+            <div class="stat-label">Installations</div>
+          </div>
+        </div>
+        <div class="stat-item reveal-up" style="--delay:0.3s">
+          <div class="stat-icon"><i class="fas fa-star"></i></div>
+          <div class="stat-body">
+            <div class="stat-number" data-target="100">0</div><span class="stat-plus">%</span>
+            <div class="stat-label">Satisfaction Rate</div>
+          </div>
+        </div>
       </div>
-    <footer id="footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 footer-info">
-              <h3>MPW</h3>
-              <p>With over a decade of automated security experience MPW are able to offer bespoke solutions that suit your needs and your property. We specialise in automated gate servicing and maintenance to ensure customers get the most from their initial investments. We cover the North West area and beyond. Each customer is offered individual services to meet the different needs so always get in touch.</p>
-            </div>
-            <div class="col-lg-2 col-md-6 footer-links">
-              <h4>Useful Links</h4>
-              <ul>
-                <li><strong><a href="#">Home</a></strong></li>
-                <li><strong><a href="#">About us</a></strong></li>
-                <li><strong><a href="#">Services</a></strong></li>
-              </ul>
-            </div>
-            <div class="col-lg-3 col-md-6 footer-contact">
-              <h4>Contact Us</h4>
-              <p>198 Crow Lane East, Newton-le-Willows, WA12 9UA, United Kingdom<br>
-                <strong>Phone: </strong>07434 001222<br>
-                <strong>Email: </strong>Matt@mpwelectricalsecurity.com<br>
-              </p>
-              <div class="social-links">
-                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                <a href="https://www.facebook.com/mpwelec/" class="facebook"><i class="fa fa-facebook"></i></a>
-                <a href="https://www.instagram.com/mpwsecurity/" class="instagram"><i class="fa fa-instagram"></i></a>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">Who We Are</span>
+          <h2>About Us</h2>
+          <div class="section-divider"></div>
+          <p>With over a decade of automated security experience MPW are able to offer bespoke solutions that suit your needs and your property. We cover the North West area and beyond.</p>
+        </div>
+
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 reveal-left">
+            <p class="about-lead">Here at MPW, we pride ourselves with high quality solutions for your security needs. Each customer is offered individual services to meet their different needs.</p>
+
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fa fa-lock"></i>
+                </div>
+                <div class="feature-content">
+                  <h4>Gates</h4>
+                  <p>Gates to protect your assets. Ranging from any size, MPW can adapt to your needs.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fa fa-shield"></i>
+                </div>
+                <div class="feature-content">
+                  <h4>Cameras</h4>
+                  <p>Protecting your home or company with cameras will give you the safety that you require.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fa fa-id-card"></i>
+                </div>
+                <div class="feature-content">
+                  <h4>So Much More</h4>
+                  <p>Feel free to <a href="#contact" class="scroll-link text-gold">contact us</a> to discuss your requirements and explore all available options.</p>
+                </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 footer-newsletter">
-              <h4>Payment Methods</h4>
-              <p>
-                Accept all major credit and debit cards, bank transfers and cash payments.
-              </p>
+
+            <a href="#contact" class="btn btn-gold mt-4 scroll-link">
+              <span>Get a Free Quote</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="col-lg-6 reveal-right">
+            <div class="about-image-wrap">
+              <img src="img/aboutusgate.jpg" class="img-fluid" alt="MPW Security Gate Installation">
+              <div class="about-badge">
+                <span class="badge-number">10+</span>
+                <span class="badge-text">Years of Excellence</span>
+              </div>
+              <div class="about-image-accent"></div>
             </div>
           </div>
         </div>
       </div>
-    </footer>
-    <!-- #footer -->
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    <!-- JavaScript Libraries -->
-    <script src="lib/jquery/jquery.min.js"></script>
-    <script src="lib/jquery/jquery-migrate.min.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/mobile-nav/mobile-nav.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <!-- Contact Form JavaScript File -->
-    <script src="contactform/contactform.js"></script>
-    <!-- Template Main Javascript File -->
-    <script src="js/main.js"></script>
-  </body>
+    </section>
+
+    <!-- ======= Services Section ======= -->
+    <section id="services">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">What We Offer</span>
+          <h2>Our Services</h2>
+          <div class="section-divider"></div>
+          <p>Here is a list of the services that we can provide at MPW. If you have any questions, feel free to <a href="#contact" class="text-gold scroll-link">contact us.</a></p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4 reveal-up">
+            <div class="service-card">
+              <div class="service-icon-wrap">
+                <i class="fas fa-infinity"></i>
+              </div>
+              <h4>Automatic Gate Servicing</h4>
+              <p>Call us the AA of gates. Regular servicing keeps your gates in top condition, ensuring they work reliably and any issues are spotted early.</p>
+              <div class="service-card-line"></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.1s">
+            <div class="service-card">
+              <div class="service-icon-wrap">
+                <i class="fas fa-cogs"></i>
+              </div>
+              <h4>Gate Installation</h4>
+              <p>Looking to install gates or upgrade an existing system? All options are bespoke to each customer to ensure you get exactly what works best for you.</p>
+              <div class="service-card-line"></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.2s">
+            <div class="service-card">
+              <div class="service-icon-wrap">
+                <i class="fas fa-video"></i>
+              </div>
+              <h4>CCTV</h4>
+              <p>Fitting cameras to your premises gives peace of mind with the ability to monitor your property from anywhere at any time.</p>
+              <div class="service-card-line"></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.1s">
+            <div class="service-card">
+              <div class="service-icon-wrap">
+                <i class="far fa-bell"></i>
+              </div>
+              <h4>Alarm Systems</h4>
+              <p>Having an alarm fitted and serviced by an engineer supports your peace of mind and can also reduce your home insurance premiums.</p>
+              <div class="service-card-line"></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.2s">
+            <div class="service-card">
+              <div class="service-icon-wrap">
+                <i class="far fa-lightbulb"></i>
+              </div>
+              <h4>Lighting</h4>
+              <p>Garden and driveway lighting can look fantastic while providing a deterrent for unwanted visitors and illuminating your entrance in the dark.</p>
+              <div class="service-card-line"></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.3s">
+            <div class="service-card service-cta-card">
+              <div class="service-icon-wrap">
+                <i class="far fa-address-card"></i>
+              </div>
+              <h4>And Lots More</h4>
+              <p>Feel free to <a href="#contact" class="text-gold scroll-link">contact us</a> with any questions. Our excellent team will get back to you as soon as possible.</p>
+              <div class="service-card-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">Our Work</span>
+          <h2>Our Portfolio</h2>
+          <div class="section-divider"></div>
+          <p>Take a look at some of our completed installations and projects across the North West.</p>
+        </div>
+
+        <div class="portfolio-filters reveal-up">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="gate">Gates</button>
+          <button class="filter-btn" data-filter="barrier">Barriers</button>
+          <button class="filter-btn" data-filter="lighting">Lighting</button>
+        </div>
+
+        <div class="portfolio-grid" id="portfolioGrid">
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate.jpg" alt="MPW Black Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>MPW Black Gate</h5>
+                <p>Classic automatic gate</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate.jpg" data-title="MPW Black Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate2.jpg" alt="Electric Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Electric Gate</h5>
+                <p>Automated gate installation</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate2.jpg" data-title="Electric Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="lighting">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/light.jpg" alt="Garden Lighting" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Garden Lighting</h5>
+                <p>Professional outdoor lighting</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/light.jpg" data-title="Garden Lighting">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate3.jpg" alt="Residential Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Residential Gate</h5>
+                <p>Bespoke residential gate</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate3.jpg" data-title="Residential Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="barrier">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/barrier1.jpg" alt="Barrier System" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Barrier System</h5>
+                <p>Commercial barrier installation</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier1.jpg" data-title="Barrier System">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate4.jpg" alt="Commercial Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Commercial Gate</h5>
+                <p>Heavy duty commercial gate</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate4.jpg" data-title="Commercial Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate5.jpg" alt="Driveway Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Driveway Gate</h5>
+                <p>Automated driveway gate</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate5.jpg" data-title="Driveway Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate6.jpg" alt="Security Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Security Gate</h5>
+                <p>High security gate system</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate6.jpg" data-title="Security Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="barrier">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/barrier2.jpg" alt="Car Park Barrier" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Car Park Barrier</h5>
+                <p>Automated car park barrier</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier2.jpg" data-title="Car Park Barrier">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="barrier">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/barrier3.jpg" alt="Access Barrier" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Access Barrier</h5>
+                <p>Access control barrier</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier3.jpg" data-title="Access Barrier">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate8.jpg" alt="Premium Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Premium Gate</h5>
+                <p>Premium automated gate</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate8.jpg" data-title="Premium Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item" data-category="gate">
+            <div class="portfolio-wrap">
+              <img src="img/portfolio/gate9.jpg" alt="Estate Gate" loading="lazy">
+              <div class="portfolio-overlay">
+                <h5>Estate Gate</h5>
+                <p>Grand estate installation</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate9.jpg" data-title="Estate Gate">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Lightbox -->
+      <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
+        <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-next" id="lightboxNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-body">
+          <img src="" alt="" id="lightboxImg">
+          <p id="lightboxCaption"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">Get In Touch</span>
+          <h2>Contact Us</h2>
+          <div class="section-divider"></div>
+          <p>Get in touch with our team for a free, no-obligation consultation and bespoke quote.</p>
+        </div>
+
+        <div class="row g-5">
+          <div class="col-lg-5 reveal-left">
+            <div class="contact-info-panel">
+              <div class="contact-info-item">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                  <h5>Our Location</h5>
+                  <p>198 Crow Lane East, Newton-le-Willows,<br>WA12 9UA, United Kingdom</p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                <div>
+                  <h5>Call Us</h5>
+                  <p><a href="tel:07434001222">07434 001222</a></p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                  <h5>Email Us</h5>
+                  <p><a href="mailto:Matt@mpwelectricalsecurity.com">Matt@mpwelectricalsecurity.com</a></p>
+                </div>
+              </div>
+
+              <div class="contact-social">
+                <a href="https://www.facebook.com/mpwelec/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/mpwsecurity/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+
+              <div class="contact-map">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75877.15274061599!2d-2.7210850897720285!3d53.53703905177078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487b04345517a4d3%3A0x5702a66b03f2d953!2sWigan%2C+UK!5e0!3m2!1sen!2sgr!4v1552059437356"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="MPW Security location map">
+                </iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 reveal-right">
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-field">
+                    <label for="name">Your Name <span>*</span></label>
+                    <input type="text" id="name" name="name" placeholder="John Smith" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-field">
+                    <label for="email">Email Address <span>*</span></label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-field">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="07XXX XXX XXX">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-field">
+                    <label for="service">Service Interested In</label>
+                    <select id="service" name="service">
+                      <option value="">Select a service...</option>
+                      <option value="Gate Servicing">Automatic Gate Servicing</option>
+                      <option value="Gate Installation">Gate Installation</option>
+                      <option value="CCTV">CCTV</option>
+                      <option value="Alarm Systems">Alarm Systems</option>
+                      <option value="Lighting">Lighting</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-field">
+                    <label for="message">Your Message <span>*</span></label>
+                    <textarea id="message" name="message" rows="5" placeholder="Tell us about your requirements..." required></textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-gold btn-submit">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="form-success" id="formSuccess">
+                <i class="fas fa-check-circle"></i>
+                <strong>Thank you!</strong> Your message has been sent. We'll get back to you shortly.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-brand">
+              <img src="img/logo.png" alt="MPW Security" class="footer-logo">
+              <p>With over a decade of automated security experience, MPW offers bespoke solutions for your property across the North West and beyond.</p>
+              <div class="footer-social">
+                <a href="https://www.facebook.com/mpwelec/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/mpwsecurity/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6">
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="#hero" class="scroll-link"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="#about" class="scroll-link"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="#services" class="scroll-link"><i class="fas fa-chevron-right"></i> Services</a></li>
+              <li><a href="#portfolio" class="scroll-link"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+              <li><a href="#contact" class="scroll-link"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <h5>Contact Info</h5>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt"></i> 198 Crow Lane East, Newton-le-Willows, WA12 9UA</p>
+              <p><i class="fas fa-phone"></i> <a href="tel:07434001222">07434 001222</a></p>
+              <p><i class="fas fa-envelope"></i> <a href="mailto:Matt@mpwelectricalsecurity.com">Matt@mpwelectricalsecurity.com</a></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <h5>Payment Methods</h5>
+            <p class="footer-payment-text">We accept all major credit &amp; debit cards, bank transfers, and cash payments.</p>
+            <div class="payment-icons">
+              <i class="fab fa-cc-visa" title="Visa"></i>
+              <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+              <i class="fab fa-cc-amex" title="American Express"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year"></span> MPW Electrical Security. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#hero" class="back-to-top scroll-link" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+</body>
 </html>
