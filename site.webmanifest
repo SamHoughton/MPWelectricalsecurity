@@ -1,0 +1,22 @@
+{
+  "name": "MPW Electrical Security",
+  "short_name": "MPW Security",
+  "description": "Bespoke automated gates, CCTV, alarms and security lighting across the North West.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#CC8400",
+  "icons": [
+    {
+      "src": "img/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "img/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
