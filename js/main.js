@@ -17,23 +17,29 @@
     if (statusLight) statusLight.classList.add('go');
   }, 1400);
 
-  // 1.8s: gate panels slide open
-  setTimeout(() => overlay.classList.add('gate-opening'), 1800);
+  // 1.8s: gate panels slide open — simultaneously begin fading centre logo
+  setTimeout(() => {
+    overlay.classList.add('gate-opening');
+    // Logo fades out as the panels pull apart (0.4s delay, 0.65s fade)
+    // so it's fully gone by the time the overlay disappears
+    setTimeout(() => {
+      if (centerLogo) {
+        centerLogo.style.transition = 'opacity 0.65s ease';
+        centerLogo.style.opacity = '0';
+      }
+    }, 400);
+  }, 1800);
 
-  // 2.8s: fade out overlay + logo
+  // 3.0s: fade out overlay (panels are fully open by now)
   setTimeout(() => {
     overlay.classList.add('gate-done');
-    if (centerLogo) {
-      centerLogo.style.transition = 'opacity 0.4s ease';
-      centerLogo.style.opacity = '0';
-    }
-  }, 2800);
+  }, 3000);
 
-  // 3.3s: remove from DOM
+  // 3.6s: remove from DOM
   setTimeout(() => {
     overlay?.remove();
     centerLogo?.remove();
-  }, 3300);
+  }, 3600);
 })();
 
 /* ── Preloader ────────────────────────────────────────────── */
