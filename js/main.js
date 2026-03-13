@@ -133,6 +133,18 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeNav();
 });
 
+/* ── Services Dropdown (mobile toggle) ────────────────── */
+document.querySelectorAll('.nav-item-dropdown').forEach(item => {
+  const trigger = item.querySelector('.nav-link');
+  if (!trigger) return;
+  trigger.addEventListener('click', e => {
+    if (window.innerWidth <= 991) {
+      e.preventDefault();
+      item.classList.toggle('open');
+    }
+  });
+});
+
 /* ── Smooth Scroll ────────────────────────────────────────── */
 document.querySelectorAll('.scroll-link, .nav-link[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
