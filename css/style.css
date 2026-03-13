@@ -108,6 +108,8 @@ img { max-width: 100%; height: auto; display: block; }
   transition: var(--transition);
   cursor: pointer;
   text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-gold {
@@ -231,8 +233,14 @@ img { max-width: 100%; height: auto; display: block; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: .4rem;
+  padding: .6rem;
   z-index: 1001;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 .hamburger-line {
@@ -805,6 +813,9 @@ section { padding: 5rem 0; }
   background: transparent;
   cursor: pointer;
   transition: var(--transition);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 40px;
 }
 
 .filter-btn:hover,
@@ -1332,38 +1343,129 @@ section { padding: 5rem 0; }
 .mobile-overlay.active { display: block; }
 
 /* ── Responsive Adjustments ───────────────────────────────── */
+
+/* ── Tablet (≤ 991px) ─────────────────────────────────────── */
 @media (max-width: 991px) {
   section { padding: 4rem 0; }
 
-  #hero { min-height: auto; padding-top: 70px; padding-bottom: 0; }
-  .hero-content { padding: 3rem 0 3rem; }
+  #hero { min-height: auto; padding-top: 68px; padding-bottom: 0; }
+  .hero-content { padding: 2.5rem 0 3rem; }
   .hero-desc { font-size: .95rem; }
 
-  .about-image-wrap { margin-top: 2rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .about-image-wrap { margin-top: 2.5rem; }
   .about-badge { right: .5rem; }
   .about-image-accent { display: none; }
 
   .contact-form { padding: 1.75rem; }
+
+  /* Lightbox controls closer to edge */
+  .lightbox-prev { left: .75rem; }
+  .lightbox-next { right: .75rem; }
 }
 
+/* ── Large mobile (≤ 767px) ───────────────────────────────── */
 @media (max-width: 767px) {
   section { padding: 3rem 0; }
 
-  .section-header { margin-bottom: 2.5rem; }
+  .section-header { margin-bottom: 2rem; }
+  .section-header h2 { font-size: clamp(1.4rem, 5vw, 1.9rem); }
 
-  .hero-buttons { flex-direction: column; align-items: flex-start; }
+  /* Hero */
+  .hero-content { padding: 2rem 0 2.5rem; }
+  .hero-badge { font-size: .72rem; padding: .35rem .85rem; }
+  .hero-buttons { flex-direction: column; align-items: stretch; }
   .hero-buttons .btn { width: 100%; justify-content: center; }
 
+  /* About */
   .feature-item { padding: .9rem 1rem; }
+  .about-image-wrap { padding: .5rem 0; }
 
-  .contact-form { padding: 1.25rem; }
+  /* Contact */
+  .contact-form { padding: 1.5rem; }
+  .contact-map iframe { height: 180px; }
+
+  /* Footer */
+  .footer-top { padding: 3rem 0 2rem; }
 }
 
-@media (max-width: 480px) {
+/* ── Mobile (≤ 575px) ─────────────────────────────────────── */
+@media (max-width: 575px) {
+  html { overflow-x: hidden; }
+
+  section { padding: 2.5rem 0; }
+  .section-header { margin-bottom: 1.75rem; }
+
+  /* Hero */
+  .hero-content { padding: 1.5rem 0 2rem; }
+  .hero-badge { font-size: .68rem; letter-spacing: .3px; }
+  .hero-desc { font-size: .9rem; line-height: 1.7; }
+  .hero-buttons { gap: .65rem; }
+
+  /* Stats — single column */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: .65rem;
+  }
+  .stat-item { padding: .9rem 1rem; gap: .75rem; }
+  .stat-icon { width: 40px; height: 40px; min-width: 40px; font-size: 1rem; }
   .stat-number { font-size: 1.6rem; }
   .stat-label  { font-size: .72rem; }
 
+  /* About */
+  .about-lead { font-size: .95rem; }
   .about-badge { display: none; }
+
+  /* Services */
+  .service-card { padding: 1.5rem 1.25rem; }
+
+  /* Portfolio */
+  .portfolio-filters { gap: .4rem; }
+  .filter-btn { padding: .45rem 1rem; font-size: .75rem; }
+  .portfolio-overlay h5 { font-size: .82rem; }
+  .portfolio-overlay p  { font-size: .7rem; }
+
+  /* Contact */
+  .contact-form { padding: 1.25rem 1rem; }
+  /* Prevent iOS zoom on inputs (requires font-size ≥ 16px) */
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-size: 1rem;
+  }
+  .contact-icon { width: 38px; height: 38px; min-width: 38px; min-height: 38px; font-size: .85rem; }
+  .contact-info-item { gap: .75rem; }
+  .contact-map iframe { height: 160px; }
+
+  /* Footer */
+  .footer-brand img.footer-logo { height: 36px; }
+  .payment-icons { font-size: 1.6rem; gap: .5rem; }
+  .footer-links { gap: .4rem; }
+
+  /* Lightbox */
+  .lightbox-close { top: .75rem; right: .75rem; width: 38px; height: 38px; }
+  .lightbox-prev  { left: .4rem; width: 38px; height: 38px; }
+  .lightbox-next  { right: .4rem; width: 38px; height: 38px; }
+
+  /* Back to top */
+  .back-to-top { bottom: 1rem; right: 1rem; }
+}
+
+/* ── Small phones (≤ 400px) ───────────────────────────────── */
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { flex-direction: row; }
+
+  .hero-badge { display: none; }
+
+  .section-header h2 { font-size: 1.35rem; }
+
+  .filter-btn { padding: .4rem .8rem; font-size: .72rem; }
+
+  .service-card { padding: 1.25rem 1rem; }
+
+  .contact-form { padding: 1rem .875rem; }
 }
 
 /* ── Gate Opening Animation ───────────────────────────────── */
