@@ -1704,42 +1704,36 @@ section { padding: 5rem 0; }
 }
 .process-card {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(204,132,0,.25);
+  border-top: 3px solid var(--gold);
   border-radius: 12px;
   padding: 2rem 1.75rem;
   height: 100%;
   position: relative;
-  transition: border-color .3s, transform .3s;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
   overflow: hidden;
 }
-.process-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity .3s;
-}
 .process-card:hover {
-  border-color: rgba(204,132,0,.4);
-  transform: translateY(-4px);
+  border-color: rgba(204,132,0,.6);
+  border-top-color: var(--gold);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
 }
-.process-card:hover::before { opacity: 1; }
 .process-number {
   font-family: var(--font-head);
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  color: rgba(204,132,0,.12);
+  color: rgba(204,132,0,.4);
   line-height: 1;
   margin-bottom: .5rem;
   transition: color .3s;
 }
-.process-card:hover .process-number { color: rgba(204,132,0,.22); }
+.process-card:hover .process-number { color: rgba(204,132,0,.65); }
 .process-icon {
   width: 48px; height: 48px;
   border-radius: 10px;
-  background: rgba(204,132,0,.1);
+  background: rgba(204,132,0,.15);
+  border: 1px solid rgba(204,132,0,.3);
   display: flex; align-items: center; justify-content: center;
   color: var(--gold);
   font-size: 1.2rem;
@@ -1747,15 +1741,16 @@ section { padding: 5rem 0; }
 }
 .process-card h4 {
   font-family: var(--font-head);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
   margin-bottom: .75rem;
+  letter-spacing: .02em;
 }
 .process-card p {
-  font-size: .9rem;
-  color: var(--text-muted);
-  line-height: 1.7;
+  font-size: .92rem;
+  color: #b0b0b0;
+  line-height: 1.75;
   margin: 0;
 }
 
