@@ -25,6 +25,7 @@
   --transition:  all .35s ease;
   --font-body:   'Inter', 'Open Sans', sans-serif;
   --font-head:   'Rajdhani', 'Montserrat', sans-serif;
+  --text-muted:  #888;
 }
 
 /* ── Reset / Base ─────────────────────────────────────────── */
@@ -134,6 +135,24 @@ img { max-width: 100%; height: auto; display: block; }
   background: rgba(255,255,255,.1);
   border-color: var(--white);
   color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  border-radius: 6px;
+  padding: .6rem 1.6rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  letter-spacing: .04em;
+  transition: var(--transition);
+  display: inline-block;
+}
+.btn-outline-gold:hover {
+  background: var(--gold);
+  color: #000;
   transform: translateY(-2px);
 }
 
@@ -1763,13 +1782,13 @@ section { padding: 5rem 0; }
   font-family: var(--font-head);
   font-size: 1.25rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text);
   margin-bottom: .75rem;
   letter-spacing: .02em;
 }
 .process-card p {
   font-size: .92rem;
-  color: #b0b0b0;
+  color: var(--text-light);
   line-height: 1.75;
   margin: 0;
 }
@@ -1864,7 +1883,7 @@ section { padding: 5rem 0; }
 }
 
 .faq-accordion .accordion-button::after {
-  filter: invert(1) brightness(0.7);
+  filter: invert(1) brightness(1);
 }
 
 .faq-accordion .accordion-button:not(.collapsed)::after {
@@ -1874,7 +1893,7 @@ section { padding: 5rem 0; }
 
 .faq-accordion .accordion-body {
   background: var(--surface);
-  color: #c8c8c8;
+  color: var(--text);
   font-size: .95rem;
   line-height: 1.7;
   padding: .5rem 1.4rem 1.2rem;
