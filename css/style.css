@@ -1479,11 +1479,11 @@ section { padding: 5rem 0; }
 }
 
 #gate-overlay.gate-opening .gate-panel-left {
-  animation: gate-open-left 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: gate-open-left 1.1s cubic-bezier(0.6, 0, 0.2, 1) forwards;
 }
 
 #gate-overlay.gate-opening .gate-panel-right {
-  animation: gate-open-right 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: gate-open-right 1.1s cubic-bezier(0.6, 0, 0.2, 1) forwards;
 }
 
 #gate-overlay.gate-done {
@@ -1494,47 +1494,97 @@ section { padding: 5rem 0; }
 .gate-panel-right {
   width: 50%;
   height: 100%;
-  background: #080808;
+  background-color: #060606;
+  /* Realistic vertical iron bars — cylindrical gradient per bar */
+  background-image: repeating-linear-gradient(
+    90deg,
+    #000        0px,
+    #161616     2px,
+    #272727     5px,
+    rgba(204,132,0,.45) 7px,   /* gold highlight — light catching the bar */
+    #272727     9px,
+    #1a1a1a     12px,
+    #000        15px,
+    #060606     15px,           /* gap between bars */
+    #060606     48px
+  );
   position: relative;
   overflow: hidden;
+  /* Subtle perspective shadow toward the centre seam */
+  box-shadow: inset -20px 0 40px rgba(0,0,0,.6);
+}
+.gate-panel-right {
+  box-shadow: inset 20px 0 40px rgba(0,0,0,.6);
 }
 
-/* Security gate mesh pattern */
+/* Horizontal rails — top, mid, bottom */
 .gate-panel-left::before,
 .gate-panel-right::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 26px,
-      rgba(204,132,0,.22) 26px,
-      rgba(204,132,0,.22) 30px
+    /* Top rail */
+    linear-gradient(
+      to bottom,
+      #000        0,
+      #1e1e1e     3px,
+      #2e2e2e     8px,
+      rgba(204,132,0,.25) 12px,
+      #2a2a2a     16px,
+      #181818     22px,
+      #000        28px,
+      transparent 28px
     ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 26px,
-      rgba(204,132,0,.22) 26px,
-      rgba(204,132,0,.22) 30px
+    /* Mid rail */
+    linear-gradient(
+      to bottom,
+      transparent calc(50% - 14px),
+      #000        calc(50% - 14px),
+      #1e1e1e     calc(50% - 11px),
+      #2e2e2e     calc(50% - 6px),
+      rgba(204,132,0,.2) calc(50% - 2px),
+      #2a2a2a     calc(50% + 2px),
+      #181818     calc(50% + 8px),
+      #000        calc(50% + 14px),
+      transparent calc(50% + 14px)
+    ),
+    /* Bottom rail */
+    linear-gradient(
+      to top,
+      #000        0,
+      #1e1e1e     3px,
+      #2e2e2e     8px,
+      rgba(204,132,0,.25) 12px,
+      #2a2a2a     16px,
+      #181818     22px,
+      #000        28px,
+      transparent 28px
     );
+  pointer-events: none;
 }
 
-/* Heavy vertical bars */
+/* Decorative pointed spikes along the top — ornamental gate look */
 .gate-panel-left::after,
 .gate-panel-right::after {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0; left: 0; right: 0;
+  height: 60px;
   background: repeating-linear-gradient(
     90deg,
-    transparent,
-    transparent 58px,
-    rgba(180,120,0,.3) 58px,
-    rgba(180,120,0,.3) 62px
+    transparent    0px,
+    transparent    21px,
+    #1a1a1a        21px,
+    rgba(204,132,0,.6) 24px,   /* spike tip highlight */
+    #1a1a1a        27px,
+    transparent    27px,
+    transparent    48px
   );
+  /* mask so spike only shows above the top rail */
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  pointer-events: none;
 }
 
 .gate-center-logo {
@@ -1570,15 +1620,26 @@ section { padding: 5rem 0; }
   position: fixed;
   top: 0; left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 10px;
   height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+  background:
+    /* centre post — left dark edge, bright centre, right dark edge */
+    linear-gradient(
+      to right,
+      #000 0,
+      #1e1e1e 2px,
+      #2e2e2e 4px,
+      rgba(204,132,0,.7) 5px,
+      #2e2e2e 6px,
+      #1e1e1e 8px,
+      #000 10px
+    );
   z-index: 100001;
-  opacity: 0.8;
+  box-shadow: 0 0 18px rgba(204,132,0,.35);
 }
 
 #gate-overlay.gate-opening .gate-divider {
-  animation: divider-fade 0.3s ease forwards 0.6s;
+  animation: divider-fade 0.25s ease forwards 0.7s;
 }
 
 @keyframes gate-open-left  { 100% { transform: translateX(-100%); } }
@@ -1594,6 +1655,169 @@ section { padding: 5rem 0; }
 
 @media (max-width: 768px) {
   .gate-center-logo img { max-height: 40px; }
+}
+
+/* ======= Brands Bar ======= */
+#brands-bar {
+  padding: 28px 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.brands-label {
+  text-align: center;
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.brands-track {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  white-space: nowrap;
+  animation: brands-scroll 22s linear infinite;
+  width: max-content;
+}
+.brand-item {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  transition: color .3s;
+  flex-shrink: 0;
+}
+.brand-item:hover { color: var(--gold); }
+@keyframes brands-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ======= How It Works Section ======= */
+#how-it-works {
+  padding: 90px 0;
+  background: var(--dark);
+}
+.process-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  height: 100%;
+  position: relative;
+  transition: border-color .3s, transform .3s;
+  overflow: hidden;
+}
+.process-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.process-card:hover {
+  border-color: rgba(204,132,0,.4);
+  transform: translateY(-4px);
+}
+.process-card:hover::before { opacity: 1; }
+.process-number {
+  font-family: var(--font-head);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: rgba(204,132,0,.12);
+  line-height: 1;
+  margin-bottom: .5rem;
+  transition: color .3s;
+}
+.process-card:hover .process-number { color: rgba(204,132,0,.22); }
+.process-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  background: rgba(204,132,0,.1);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.process-card h4 {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .75rem;
+}
+.process-card p {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ======= Testimonials Section ======= */
+#testimonials {
+  padding: 90px 0;
+  background: var(--surface);
+}
+.testimonial-card {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color .3s, transform .3s;
+}
+.testimonial-card:hover {
+  border-color: rgba(204,132,0,.35);
+  transform: translateY(-4px);
+}
+.testimonial-stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+.testimonial-card > p {
+  font-size: .93rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  flex: 1;
+  font-style: italic;
+}
+.testimonial-card > p::before { content: '\201C'; }
+.testimonial-card > p::after  { content: '\201D'; }
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.testimonial-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(204,132,0,.15);
+  border: 1px solid rgba(204,132,0,.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.testimonial-author strong {
+  display: block;
+  font-size: .9rem;
+  color: var(--text);
+  font-weight: 600;
+}
+.testimonial-author span {
+  font-size: .78rem;
+  color: var(--text-muted);
 }
 
 /* ======= FAQ Section ======= */
