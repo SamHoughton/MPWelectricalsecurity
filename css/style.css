@@ -1659,39 +1659,59 @@ section { padding: 5rem 0; }
 
 /* ======= Brands Bar ======= */
 #brands-bar {
-  padding: 28px 0;
+  padding: 24px 0 28px;
   background: var(--surface);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
 }
 .brands-label {
   text-align: center;
-  font-size: .75rem;
-  letter-spacing: .12em;
+  font-size: .72rem;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+}
+/* Overflow wrapper handles the clip + fade edges */
+.brands-overflow {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
 }
 .brands-track {
   display: flex;
-  gap: 48px;
   align-items: center;
-  white-space: nowrap;
-  animation: brands-scroll 22s linear infinite;
   width: max-content;
+  animation: brands-scroll 28s linear infinite;
+  will-change: transform;
 }
 .brand-item {
-  font-family: var(--font-head);
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  transition: color .3s;
   flex-shrink: 0;
+  padding: 0 44px;
+  display: flex;
+  align-items: center;
+  opacity: .65;
+  transition: opacity .3s;
 }
-.brand-item:hover { color: var(--gold); }
+.brand-item:hover { opacity: 1; }
+.brand-item img {
+  height: 32px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  display: block;
+}
 @keyframes brands-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
