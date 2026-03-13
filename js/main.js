@@ -4,6 +4,38 @@
 
 'use strict';
 
+/* ── Gate Opening Animation ───────────────────────────────── */
+(function() {
+  const overlay    = document.getElementById('gate-overlay');
+  const statusLight = document.getElementById('gate-status-light');
+  const centerLogo = document.querySelector('.gate-center-logo');
+
+  if (!overlay) return;
+
+  // 1.4s: status light turns gold (unlocking)
+  setTimeout(() => {
+    if (statusLight) statusLight.classList.add('go');
+  }, 1400);
+
+  // 1.8s: gate panels slide open
+  setTimeout(() => overlay.classList.add('gate-opening'), 1800);
+
+  // 2.8s: fade out overlay + logo
+  setTimeout(() => {
+    overlay.classList.add('gate-done');
+    if (centerLogo) {
+      centerLogo.style.transition = 'opacity 0.4s ease';
+      centerLogo.style.opacity = '0';
+    }
+  }, 2800);
+
+  // 3.3s: remove from DOM
+  setTimeout(() => {
+    overlay?.remove();
+    centerLogo?.remove();
+  }, 3300);
+})();
+
 /* ── Preloader ────────────────────────────────────────────── */
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');

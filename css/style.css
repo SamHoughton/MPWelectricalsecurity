@@ -1,6 +1,6 @@
 /* ============================================================
    MPW Security — Modern Stylesheet
-   Brand: Amber/Gold (#CC8400) | Dark (#1c1208) | White (#fff)
+   Brand: Amber/Gold (#CC8400) | Dark theme
    ============================================================ */
 
 /* ── CSS Custom Properties ────────────────────────────────── */
@@ -8,21 +8,23 @@
   --gold:        #CC8400;
   --gold-light:  #e8a000;
   --gold-dark:   #a36900;
-  --dark:        #1c1208;
-  --dark-mid:    #2e1e06;
-  --text:        #444;
-  --text-light:  #777;
-  --bg-light:    #fdf8f0;
-  --bg-section:  #f9f4eb;
+  --dark:        #0a0a0a;
+  --dark-mid:    #141414;
+  --text:        #e0e0e0;
+  --text-light:  #999;
+  --bg-light:    #1a1a1a;
+  --bg-section:  #131313;
   --white:       #ffffff;
-  --shadow-sm:   0 2px 15px rgba(0,0,0,.08);
-  --shadow-md:   0 5px 30px rgba(0,0,0,.12);
-  --shadow-lg:   0 10px 50px rgba(0,0,0,.18);
+  --surface:     #1e1e1e;
+  --border:      #2a2a2a;
+  --shadow-sm:   0 2px 15px rgba(0,0,0,.4);
+  --shadow-md:   0 5px 30px rgba(0,0,0,.5);
+  --shadow-lg:   0 10px 50px rgba(0,0,0,.6);
   --radius:      12px;
   --radius-lg:   20px;
   --transition:  all .35s ease;
-  --font-body:   'Open Sans', sans-serif;
-  --font-head:   'Montserrat', sans-serif;
+  --font-body:   'Inter', 'Open Sans', sans-serif;
+  --font-head:   'Rajdhani', 'Montserrat', sans-serif;
 }
 
 /* ── Reset / Base ─────────────────────────────────────────── */
@@ -36,7 +38,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--text);
-  background: var(--white);
+  background: var(--dark);
   overflow-x: hidden;
   line-height: 1.7;
 }
@@ -143,16 +145,18 @@ img { max-width: 100%; height: auto; display: block; }
 
 #header .navbar {
   padding: .75rem 0;
-  background: rgba(255,255,255,.95);
+  background: rgba(10,10,10,.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 2px 20px rgba(0,0,0,.08);
+  box-shadow: 0 1px 0 var(--border);
   transition: var(--transition);
+  border-bottom: 1px solid var(--border);
 }
 
 #header.scrolled .navbar {
   padding: .5rem 0;
-  box-shadow: 0 4px 30px rgba(0,0,0,.12);
+  background: rgba(6,6,6,.98);
+  box-shadow: 0 4px 30px rgba(0,0,0,.5);
 }
 
 #header .container {
@@ -185,8 +189,10 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-link {
   font-family: var(--font-head);
   font-size: .85rem;
-  font-weight: 500;
-  color: var(--text) !important;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #bbb !important;
   padding: .5rem .9rem !important;
   border-radius: 50px;
   transition: var(--transition);
@@ -547,7 +553,7 @@ section { padding: 5rem 0; }
 
 .section-header h2 {
   font-size: clamp(1.6rem, 3vw, 2.4rem);
-  color: var(--dark);
+  color: var(--text);
   margin-bottom: .75rem;
 }
 
@@ -566,11 +572,11 @@ section { padding: 5rem 0; }
 }
 
 /* ── About Section ────────────────────────────────────────── */
-#about { background: var(--white); }
+#about { background: var(--dark); }
 
 .about-lead {
   font-size: 1.05rem;
-  color: var(--text);
+  color: var(--text-light);
   line-height: 1.8;
   margin-bottom: 2rem;
 }
@@ -583,7 +589,7 @@ section { padding: 5rem 0; }
   align-items: flex-start;
   padding: 1.1rem 1.25rem;
   border-radius: var(--radius);
-  border: 1px solid rgba(204,132,0,.12);
+  border: 1px solid var(--border);
   background: var(--bg-light);
   transition: var(--transition);
 }
@@ -616,7 +622,7 @@ section { padding: 5rem 0; }
 .feature-content h4 {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--text);
   margin-bottom: .25rem;
 }
 
@@ -683,12 +689,12 @@ section { padding: 5rem 0; }
 #services { background: var(--bg-section); }
 
 .service-card {
-  background: var(--white);
+  background: var(--surface);
   border-radius: var(--radius-lg);
   padding: 2rem 1.75rem;
   height: 100%;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(0,0,0,.05);
+  border: 1px solid var(--border);
   position: relative;
   overflow: hidden;
   transition: var(--transition);
@@ -745,7 +751,7 @@ section { padding: 5rem 0; }
 .service-card h4 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--text);
   margin-bottom: .75rem;
 }
 
@@ -776,7 +782,7 @@ section { padding: 5rem 0; }
 }
 
 /* ── Portfolio Section ────────────────────────────────────── */
-#portfolio { background: var(--white); }
+#portfolio { background: var(--dark); }
 
 .portfolio-filters {
   display: flex;
@@ -1007,7 +1013,7 @@ section { padding: 5rem 0; }
 .contact-info-item h5 {
   font-size: .88rem;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--text);
   margin-bottom: .2rem;
   text-transform: uppercase;
   letter-spacing: .5px;
@@ -1030,8 +1036,8 @@ section { padding: 5rem 0; }
 
 .contact-social a {
   width: 40px; height: 40px;
-  background: var(--white);
-  border: 2px solid var(--gold);
+  background: var(--surface);
+  border: 2px solid var(--border);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1065,10 +1071,11 @@ section { padding: 5rem 0; }
 
 /* Contact Form */
 .contact-form {
-  background: var(--white);
+  background: var(--surface);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
   box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
 }
 
 .form-field {
@@ -1081,7 +1088,7 @@ section { padding: 5rem 0; }
   font-family: var(--font-head);
   font-size: .8rem;
   font-weight: 600;
-  color: var(--dark);
+  color: var(--text);
   text-transform: uppercase;
   letter-spacing: .5px;
 }
@@ -1093,7 +1100,7 @@ section { padding: 5rem 0; }
 .form-field textarea {
   width: 100%;
   padding: .75rem 1rem;
-  border: 2px solid #eee;
+  border: 2px solid var(--border);
   border-radius: var(--radius);
   font-family: var(--font-body);
   font-size: .92rem;
@@ -1108,8 +1115,8 @@ section { padding: 5rem 0; }
 .form-field select:focus,
 .form-field textarea:focus {
   border-color: var(--gold);
-  background: var(--white);
-  box-shadow: 0 0 0 4px rgba(204,132,0,.1);
+  background: var(--bg-light);
+  box-shadow: 0 0 0 4px rgba(204,132,0,.15);
 }
 
 .form-field input.invalid,
@@ -1353,4 +1360,132 @@ section { padding: 5rem 0; }
   .stat-label  { font-size: .72rem; }
 
   .about-badge { display: none; }
+}
+
+/* ── Gate Opening Animation ───────────────────────────────── */
+#gate-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 99999;
+  display: flex;
+  pointer-events: none;
+}
+
+#gate-overlay.gate-opening .gate-panel-left {
+  animation: gate-open-left 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#gate-overlay.gate-opening .gate-panel-right {
+  animation: gate-open-right 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#gate-overlay.gate-done {
+  animation: gate-overlay-fade 0.4s ease forwards;
+}
+
+.gate-panel-left,
+.gate-panel-right {
+  width: 50%;
+  height: 100%;
+  background: #080808;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Security gate mesh pattern */
+.gate-panel-left::before,
+.gate-panel-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 26px,
+      rgba(204,132,0,.22) 26px,
+      rgba(204,132,0,.22) 30px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 26px,
+      rgba(204,132,0,.22) 26px,
+      rgba(204,132,0,.22) 30px
+    );
+}
+
+/* Heavy vertical bars */
+.gate-panel-left::after,
+.gate-panel-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 58px,
+    rgba(180,120,0,.3) 58px,
+    rgba(180,120,0,.3) 62px
+  );
+}
+
+.gate-center-logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100000;
+  text-align: center;
+  pointer-events: none;
+}
+
+.gate-center-logo img {
+  max-height: 60px;
+  filter: brightness(0) invert(1);
+  animation: gate-logo-pulse 1s ease-in-out infinite alternate;
+}
+
+.gate-status-light {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #ff2200;
+  margin: 14px auto 0;
+  box-shadow: 0 0 10px #ff2200;
+  animation: status-blink 0.4s step-end infinite;
+}
+
+.gate-status-light.go {
+  animation: status-switch 0.5s ease forwards;
+}
+
+.gate-divider {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+  z-index: 100001;
+  opacity: 0.8;
+}
+
+#gate-overlay.gate-opening .gate-divider {
+  animation: divider-fade 0.3s ease forwards 0.6s;
+}
+
+@keyframes gate-open-left  { 100% { transform: translateX(-100%); } }
+@keyframes gate-open-right { 100% { transform: translateX(100%); } }
+@keyframes gate-overlay-fade { to { opacity: 0; visibility: hidden; } }
+@keyframes gate-logo-pulse { from { opacity: .7; } to { opacity: 1; } }
+@keyframes status-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes status-switch {
+  0%   { background: #ff2200; box-shadow: 0 0 10px #ff2200; }
+  100% { background: var(--gold); box-shadow: 0 0 20px var(--gold); animation: none; }
+}
+@keyframes divider-fade { to { opacity: 0; } }
+
+@media (max-width: 768px) {
+  .gate-center-logo img { max-height: 40px; }
 }
