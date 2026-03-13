@@ -316,32 +316,20 @@ if (contactForm) {
 
     if (!valid) return;
 
-    // Build mailto link
-    const name    = document.getElementById('name').value.trim();
-    const email   = emailEl.value.trim();
-    const phone   = (document.getElementById('phone').value || '').trim();
-    const service = (document.getElementById('service').value || '');
-    const message = document.getElementById('message').value.trim();
-
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone    ? `Phone: ${phone}`       : '',
-      service  ? `Service: ${service}`   : '',
-      '',
-      `Message:\n${message}`,
-    ].filter(Boolean).join('\n');
-
-    const subject = encodeURIComponent(`Enquiry from ${name} - MPW Security`);
-    const bodyEnc = encodeURIComponent(body);
-
-    window.location.href = `mailto:Matt@mpwelectricalsecurity.com?subject=${subject}&body=${bodyEnc}`;
-
-    // Show success message
-    formSuccess.classList.add('visible');
-    contactForm.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
-
-    setTimeout(() => formSuccess.classList.remove('visible'), 6000);
+    // Submit to Netlify Forms
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(contactForm)).toString()
+    })
+    .then(() => {
+      formSuccess.classList.add('visible');
+      contactForm.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
+      setTimeout(() => formSuccess.classList.remove('visible'), 6000);
+    })
+    .catch(() => {
+      alert('Sorry, there was a problem sending your message. Please call us on 07434 001222.');
+    });
   });
 
   // Live validation clear on input
