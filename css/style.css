@@ -169,7 +169,6 @@ img { max-width: 100%; height: auto; display: block; }
   height: 36px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);
 }
 
 /* Desktop nav */
@@ -1176,9 +1175,8 @@ section { padding: 5rem 0; }
 }
 
 .footer-brand img.footer-logo {
-  height: 52px;
+  height: 44px;
   margin-bottom: 1rem;
-  filter: brightness(0) invert(1);
 }
 
 .footer-brand p {
