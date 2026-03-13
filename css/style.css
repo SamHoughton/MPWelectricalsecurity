@@ -1634,7 +1634,8 @@ section { padding: 5rem 0; }
 }
 
 .faq-accordion .accordion-body {
-  color: var(--text-muted);
+  background: var(--surface);
+  color: #c8c8c8;
   font-size: .95rem;
   line-height: 1.7;
   padding: .5rem 1.4rem 1.2rem;
