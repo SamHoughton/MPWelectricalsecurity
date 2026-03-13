@@ -142,18 +142,24 @@ img { max-width: 100%; height: auto; display: block; }
   background: transparent;
   color: var(--gold);
   border: 2px solid var(--gold);
-  border-radius: 6px;
-  padding: .6rem 1.6rem;
+  border-radius: 50px;
+  padding: .75rem 1.75rem;
   font-family: var(--font-head);
+  font-size: .88rem;
   font-weight: 600;
-  letter-spacing: .04em;
+  letter-spacing: .5px;
   transition: var(--transition);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  text-decoration: none;
 }
 .btn-outline-gold:hover {
   background: var(--gold);
   color: #000;
   transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(204,132,0,.35);
 }
 
 /* ── Header / Navbar ──────────────────────────────────────── */
@@ -419,6 +425,31 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.hero-phone {
+  margin: 1.1rem 0 0;
+  font-size: .88rem;
+  color: rgba(255,255,255,.5);
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.hero-phone i {
+  font-size: .78rem;
+  color: var(--gold);
+}
+
+.hero-phone a {
+  color: var(--gold-light);
+  font-weight: 600;
+  font-family: var(--font-head);
+  letter-spacing: .3px;
+}
+
+.hero-phone a:hover {
+  color: var(--white);
 }
 
 .hero-image-wrap {
@@ -1185,17 +1216,17 @@ section { padding: 5rem 0; }
   display: none;
   align-items: center;
   gap: .75rem;
-  background: rgba(76,175,80,.08);
-  border: 1px solid rgba(76,175,80,.3);
+  background: rgba(76,175,80,.1);
+  border: 1px solid rgba(76,175,80,.35);
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
-  color: #2e7d32;
+  color: #81c784;
   font-size: .92rem;
   margin-top: 1.25rem;
 }
 
 .form-success.visible { display: flex; }
-.form-success i { font-size: 1.2rem; color: #4caf50; }
+.form-success i { font-size: 1.2rem; color: #66bb6a; }
 
 /* ── Footer ───────────────────────────────────────────────── */
 #footer { background: var(--dark); }
@@ -1396,6 +1427,7 @@ section { padding: 5rem 0; }
   .hero-badge { font-size: .72rem; padding: .35rem .85rem; }
   .hero-buttons { flex-direction: column; align-items: stretch; }
   .hero-buttons .btn { width: 100%; justify-content: center; }
+  .hero-phone { font-size: .82rem; flex-wrap: wrap; }
 
   /* About */
   .feature-item { padding: .9rem 1rem; }
@@ -1962,7 +1994,7 @@ section { padding: 5rem 0; }
 }
 
 /* ======= Areas We Cover Section ======= */
-.areas-section { padding: 80px 0; background: var(--bg); }
+.areas-section { padding: 80px 0; background: var(--dark); }
 
 .area-card {
   background: var(--surface);
