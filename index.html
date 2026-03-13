@@ -38,9 +38,17 @@
   <meta name="twitter:description" content="Bespoke automated gates, CCTV, alarm systems and security lighting across the North West. Free site visit & quote.">
   <meta name="twitter:image" content="https://www.mpwelectricalsecurity.com/img/aboutusgate.jpg">
 
-  <!-- Favicons -->
+  <!-- Favicons & App Icons -->
   <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/logo.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MPW Security">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Preload critical assets -->
+  <link rel="preload" as="image" href="img/edit.png" fetchpriority="high">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,6 +136,64 @@
     }
   }
   </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does an automatic gate installation cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Costs vary depending on gate type, size, materials, and access control requirements. A standard residential swing or sliding gate installation typically starts from around £2,000. We provide free site visits and no-obligation quotes tailored to your exact requirements — contact us to arrange yours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What areas do you cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MPW Electrical Security covers the whole of the North West, including Wigan, Newton-le-Willows, St Helens, Warrington, Manchester, Leigh, and surrounding areas. Contact us to check coverage for your location."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need planning permission for electric gates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In most cases, no — automatic gates are considered permitted development for residential properties, provided they don't exceed 1 metre in height adjacent to a highway or 2 metres elsewhere. We'll advise you on any restrictions specific to your property during your free site visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a gate installation take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most residential gate installations are completed within 1–2 days. More complex or commercial projects may take longer. We'll give you a clear timeline when we quote for your job."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer gate servicing and maintenance contracts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We offer regular servicing and maintenance for all automated gate systems — not just ones we've installed. Regular servicing keeps your gates running reliably, extends their lifespan, and helps avoid costly breakdowns. Get in touch to discuss a maintenance plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I view my CCTV remotely on my phone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All CCTV systems we install support remote viewing via a smartphone app, so you can check live or recorded footage from anywhere in the world. We set everything up and walk you through how to use it before we leave."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -168,6 +234,7 @@
             <li><a class="nav-link" href="#about">About Us</a></li>
             <li><a class="nav-link" href="#services">Services</a></li>
             <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+            <li><a class="nav-link" href="#faq">FAQ</a></li>
             <li><a class="nav-link btn-nav-contact" href="#contact">Contact Us</a></li>
           </ul>
         </div>
@@ -204,7 +271,7 @@
           </div>
           <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center">
             <div class="hero-image-wrap reveal-hero reveal-delay-2">
-              <img src="img/edit.png" alt="MPW Electrical Security — automated gate installation North West" class="hero-image">
+              <img src="img/edit.png" alt="MPW Electrical Security — automated gate installation North West" class="hero-image" fetchpriority="high" loading="eager">
             </div>
           </div>
         </div>
@@ -421,7 +488,7 @@
         <div class="portfolio-grid" id="portfolioGrid">
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate.jpg" alt="MPW Black Gate" loading="lazy">
+              <img src="img/portfolio/gate.jpg" alt="Black automatic driveway gate installed by MPW Electrical Security, North West" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>MPW Black Gate</h5>
                 <p>Classic automatic gate</p>
@@ -433,7 +500,7 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate2.jpg" alt="Residential Sliding Gate" loading="lazy">
+              <img src="img/portfolio/gate2.jpg" alt="Residential automatic sliding gate with remote access control installed in North West" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Residential Sliding Gate</h5>
                 <p>Space-saving sliding gate with remote access control</p>
@@ -445,7 +512,7 @@
           </div>
           <div class="portfolio-item" data-category="lighting">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/light.jpg" alt="Garden Lighting" loading="lazy">
+              <img src="img/portfolio/light.jpg" alt="Professional garden and driveway security lighting installation by MPW Electrical Security" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Garden Lighting</h5>
                 <p>Professional outdoor lighting</p>
@@ -457,7 +524,7 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate3.jpg" alt="Wrought Iron Swing Gates" loading="lazy">
+              <img src="img/portfolio/gate3.jpg" alt="Wrought iron double swing gates with video intercom installed by MPW Security" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Wrought Iron Swing Gates</h5>
                 <p>Classic wrought iron double swing gates with intercom</p>
@@ -469,7 +536,7 @@
           </div>
           <div class="portfolio-item" data-category="barrier">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/barrier1.jpg" alt="Car Park Entry Barrier" loading="lazy">
+              <img src="img/portfolio/barrier1.jpg" alt="Automated car park entry barrier for commercial access control by MPW Electrical Security" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Car Park Entry Barrier</h5>
                 <p>Automated entry barrier for commercial car park access control</p>
@@ -481,7 +548,7 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate4.jpg" alt="Timber Automated Gates" loading="lazy">
+              <img src="img/portfolio/gate4.jpg" alt="Natural timber bi-folding automated gates with electric motor and keypad, North West" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Timber Automated Gates</h5>
                 <p>Natural timber bi-folding gates with electric motor and keypad</p>
@@ -493,7 +560,7 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate5.jpg" alt="Driveway Security Gates" loading="lazy">
+              <img src="img/portfolio/gate5.jpg" alt="Full-width driveway security gates with integrated CCTV, installed by MPW" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Driveway Security Gates</h5>
                 <p>Full-width driveway gates with CCTV integration</p>
@@ -505,7 +572,7 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate6.jpg" alt="Commercial Security Gates" loading="lazy">
+              <img src="img/portfolio/gate6.jpg" alt="Heavy-duty commercial security gates for industrial premises, North West" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Commercial Security Gates</h5>
                 <p>Heavy-duty gates for industrial and commercial premises</p>
@@ -517,7 +584,7 @@
           </div>
           <div class="portfolio-item" data-category="barrier">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/barrier2.jpg" alt="Car Park Barrier" loading="lazy">
+              <img src="img/portfolio/barrier2.jpg" alt="Automated car park barrier installation by MPW Electrical Security, North West" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Car Park Barrier</h5>
                 <p>Automated car park barrier</p>
@@ -529,7 +596,7 @@
           </div>
           <div class="portfolio-item" data-category="barrier">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/barrier3.jpg" alt="Height Restriction Barrier" loading="lazy">
+              <img src="img/portfolio/barrier3.jpg" alt="Height restriction barrier for multi-storey car park installed by MPW Security" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Height Restriction Barrier</h5>
                 <p>Height restriction barrier for multi-storey car parks</p>
@@ -541,7 +608,7 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate8.jpg" alt="Remote Access Driveway Gates" loading="lazy">
+              <img src="img/portfolio/gate8.jpg" alt="App-controlled automatic driveway gates with smartphone remote access, North West" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Remote Access Driveway Gates</h5>
                 <p>App-controlled automated gates with smartphone remote access</p>
@@ -553,7 +620,7 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate9.jpg" alt="Electric Double Swing Gates" loading="lazy">
+              <img src="img/portfolio/gate9.jpg" alt="Bespoke electric double swing gates with video intercom, installed by MPW Electrical Security" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Electric Double Swing Gates</h5>
                 <p>Bespoke double swing gates with video intercom system</p>
@@ -574,6 +641,104 @@
         <div class="lightbox-body">
           <img src="" alt="" id="lightboxImg">
           <p id="lightboxCaption"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= FAQ Section ======= -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">Got Questions?</span>
+          <h2>Frequently Asked Questions</h2>
+          <div class="section-divider"></div>
+          <p>Everything you need to know before getting in touch. Can't find your answer? <a href="#contact" class="text-gold scroll-link">Just ask us directly.</a></p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8 reveal-up">
+            <div class="accordion faq-accordion" id="faqAccordion">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq1-head">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                    How much does an automatic gate installation cost?
+                  </button>
+                </h3>
+                <div id="faq1" class="accordion-collapse collapse" aria-labelledby="faq1-head" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Costs vary depending on gate type, size, materials, and access control requirements. A standard residential swing or sliding gate installation typically starts from around £2,000. We provide free site visits and no-obligation quotes tailored to your exact requirements — <a href="#contact" class="text-gold scroll-link">contact us to arrange yours</a>.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq2-head">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                    What areas do you cover?
+                  </button>
+                </h3>
+                <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2-head" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    We cover the whole of the North West, including Wigan, Newton-le-Willows, St Helens, Warrington, Manchester, Leigh, and surrounding areas. Not sure if we cover your location? <a href="#contact" class="text-gold scroll-link">Drop us a message</a> and we'll confirm.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq3-head">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                    Do I need planning permission for electric gates?
+                  </button>
+                </h3>
+                <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3-head" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    In most cases, no. Automatic gates are considered permitted development for residential properties, provided they don't exceed 1 metre in height adjacent to a highway or 2 metres elsewhere. We'll advise you on any restrictions specific to your property during your free site visit.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq4-head">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                    How long does a gate installation take?
+                  </button>
+                </h3>
+                <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4-head" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Most residential gate installations are completed within 1–2 days. More complex or commercial projects may take a little longer. We'll give you a clear timeline when we quote for your job, and we keep you updated throughout.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq5-head">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                    Do you offer gate servicing and maintenance contracts?
+                  </button>
+                </h3>
+                <div id="faq5" class="accordion-collapse collapse" aria-labelledby="faq5-head" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Yes. We offer regular servicing and maintenance for all automated gate systems — not just ones we've installed. Regular servicing keeps your gates running reliably, extends their lifespan, and helps avoid costly breakdowns. <a href="#contact" class="text-gold scroll-link">Get in touch</a> to discuss a maintenance plan.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq6-head">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                    Can I view my CCTV remotely on my phone?
+                  </button>
+                </h3>
+                <div id="faq6" class="accordion-collapse collapse" aria-labelledby="faq6-head" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Yes. All CCTV systems we install support remote viewing via a smartphone app, giving you live and recorded footage from anywhere in the world. We set everything up and walk you through how to use it before we leave — no technical knowledge needed.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -713,6 +878,7 @@
               <li><a href="#about" class="scroll-link"><i class="fas fa-chevron-right"></i> About Us</a></li>
               <li><a href="#services" class="scroll-link"><i class="fas fa-chevron-right"></i> Services</a></li>
               <li><a href="#portfolio" class="scroll-link"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+              <li><a href="#faq" class="scroll-link"><i class="fas fa-chevron-right"></i> FAQ</a></li>
               <li><a href="#contact" class="scroll-link"><i class="fas fa-chevron-right"></i> Contact</a></li>
             </ul>
           </div>
