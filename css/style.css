@@ -166,10 +166,12 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .logo-img {
-  height: 36px;
+  height: 32px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);
+  background: #fff;
+  border-radius: 6px;
+  padding: 3px 8px;
 }
 
 /* Desktop nav */
@@ -1176,9 +1178,11 @@ section { padding: 5rem 0; }
 }
 
 .footer-brand img.footer-logo {
-  height: 52px;
+  height: 44px;
   margin-bottom: 1rem;
-  filter: brightness(0) invert(1);
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
 }
 
 .footer-brand p {
