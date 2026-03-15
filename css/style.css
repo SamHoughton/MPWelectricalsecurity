@@ -1554,15 +1554,15 @@ section { padding: 5rem 0; }
 }
 
 #gate-overlay.gate-opening .gate-panel-left {
-  animation: gate-open-left 1.2s cubic-bezier(0.7, 0, 0.15, 1) forwards;
+  animation: gate-open-left 2.8s cubic-bezier(0.65, 0, 0.15, 1) forwards;
 }
 
 #gate-overlay.gate-opening .gate-panel-right {
-  animation: gate-open-right 1.2s cubic-bezier(0.7, 0, 0.15, 1) forwards;
+  animation: gate-open-right 2.8s cubic-bezier(0.65, 0, 0.15, 1) forwards;
 }
 
 #gate-overlay.gate-done {
-  animation: gate-overlay-fade 0.5s ease forwards;
+  animation: gate-overlay-fade 0.8s ease forwards;
 }
 
 .gate-panel-left,
@@ -1766,7 +1766,7 @@ section { padding: 5rem 0; }
 }
 
 #gate-overlay.gate-opening .gate-divider {
-  animation: divider-fade 0.3s ease forwards 1.0s;
+  animation: divider-fade 0.4s ease forwards 2.4s;
 }
 
 @keyframes gate-open-left  { 100% { transform: translateX(-100%); } }
