@@ -121,6 +121,13 @@
       "https://www.facebook.com/mpwelec/",
       "https://www.instagram.com/mpwsecurity/"
     ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "47",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Security Installation Services",
@@ -197,6 +204,9 @@
 </head>
 <body>
 
+  <!-- Skip to main content (accessibility) -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
   <!-- ======= Gate Opening Animation ======= -->
   <div id="gate-overlay">
     <div class="gate-panel-left"></div>
@@ -233,7 +243,7 @@
             <li><a class="nav-link active" href="#hero">Home</a></li>
             <li><a class="nav-link" href="#about">About Us</a></li>
             <li class="nav-item-dropdown">
-              <a class="nav-link" href="#services">Services <i class="fas fa-chevron-down nav-caret"></i></a>
+              <a class="nav-link" href="#services" aria-haspopup="true" aria-expanded="false">Services <i class="fas fa-chevron-down nav-caret"></i></a>
               <ul class="nav-dropdown">
                 <li><a href="automated-gates.html"><i class="fas fa-archway"></i> Automated Gates</a></li>
                 <li><a href="cctv-installation.html"><i class="fas fa-camera"></i> CCTV Installation</a></li>
@@ -889,7 +899,7 @@
         </div>
 
         <div class="text-center mt-5 reveal-up">
-          <a href="https://www.google.com/maps/place/MPW+Electrical+Security" target="_blank" rel="noopener noreferrer" class="btn btn-outline-gold" aria-label="See all MPW Electrical Security reviews on Google">
+          <a href="https://www.google.com/maps/search/MPW+Electrical+Security+Newton-le-Willows+WA12+9UA/@53.4533,-2.6215,15z" target="_blank" rel="noopener noreferrer" class="btn btn-outline-gold" aria-label="See all MPW Electrical Security reviews on Google Maps">
             <i class="fab fa-google me-2"></i>See All Reviews on Google
           </a>
         </div>
@@ -1233,7 +1243,23 @@
     </div>
   </footer>
 
-  <!-- WhatsApp Floating Button -->
+  <!-- Mobile Sticky CTA Bar (hidden on desktop) -->
+  <div class="mobile-cta-bar" id="mobileCTABar" aria-label="Quick contact">
+    <a href="tel:07434001222" class="mobile-cta-btn mobile-cta-call">
+      <i class="fas fa-phone"></i>
+      <span>Call Us</span>
+    </a>
+    <a href="https://wa.me/447434001222" class="mobile-cta-btn mobile-cta-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+      <span>WhatsApp</span>
+    </a>
+    <a href="#contact" class="mobile-cta-btn mobile-cta-quote scroll-link">
+      <i class="fas fa-comment-dots"></i>
+      <span>Free Quote</span>
+    </a>
+  </div>
+
+  <!-- WhatsApp Floating Button (desktop only) -->
   <a href="https://wa.me/447434001222" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
