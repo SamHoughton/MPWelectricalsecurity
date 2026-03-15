@@ -1274,5 +1274,50 @@
 
   <!-- Custom JS -->
   <script src="js/main.js"></script>
+
+  <!-- Gate Animation Controller -->
+  <script>
+    (function () {
+      var overlay    = document.getElementById('gate-overlay');
+      var statusLight = document.getElementById('gate-status-light');
+      if (!overlay) return;
+
+      // Skip instantly on reduced-motion or repeat visits
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+          sessionStorage.getItem('mpw_gate_seen')) {
+        overlay.style.display = 'none';
+        var logo = document.querySelector('.gate-center-logo');
+        if (logo) logo.style.display = 'none';
+        return;
+      }
+
+      // Lock scroll while gate is showing
+      document.body.style.overflow = 'hidden';
+
+      // After 1.4s: switch status light red → gold, then open gates
+      setTimeout(function () {
+        if (statusLight) statusLight.classList.add('go');
+      }, 1400);
+
+      // After 1.8s: add gate-opening class — triggers the 2.8s swing
+      setTimeout(function () {
+        overlay.classList.add('gate-opening');
+      }, 1800);
+
+      // After swing completes (1.8 + 2.8 = 4.6s): fade overlay out
+      setTimeout(function () {
+        overlay.classList.add('gate-done');
+        var logo = document.querySelector('.gate-center-logo');
+        if (logo) logo.style.display = 'none';
+      }, 4600);
+
+      // After fade (4.6 + 0.8 = 5.4s): remove, unlock scroll, mark seen
+      setTimeout(function () {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        sessionStorage.setItem('mpw_gate_seen', '1');
+      }, 5400);
+    })();
+  </script>
 </body>
 </html>
