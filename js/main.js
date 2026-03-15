@@ -6,11 +6,20 @@
 
 /* ── Gate Opening Animation ───────────────────────────────── */
 (function() {
-  const overlay    = document.getElementById('gate-overlay');
+  const overlay     = document.getElementById('gate-overlay');
   const statusLight = document.getElementById('gate-status-light');
-  const centerLogo = document.querySelector('.gate-center-logo');
+  const centerLogo  = document.querySelector('.gate-center-logo');
 
   if (!overlay) return;
+
+  // Only play animation once per browser session — skip on back-nav / refresh
+  if (sessionStorage.getItem('mpw-gate-shown')) {
+    overlay.remove();
+    centerLogo?.remove();
+    return;
+  }
+
+  sessionStorage.setItem('mpw-gate-shown', '1');
 
   // 1.4s: status light turns gold (unlocking)
   setTimeout(() => {
@@ -20,8 +29,6 @@
   // 1.8s: gate panels slide open — simultaneously begin fading centre logo
   setTimeout(() => {
     overlay.classList.add('gate-opening');
-    // Logo fades out as the panels pull apart (0.4s delay, 0.65s fade)
-    // so it's fully gone by the time the overlay disappears
     setTimeout(() => {
       if (centerLogo) {
         centerLogo.style.transition = 'opacity 0.65s ease';
@@ -30,7 +37,7 @@
     }, 400);
   }, 1800);
 
-  // 3.0s: fade out overlay (panels are fully open by now)
+  // 3.0s: fade out overlay
   setTimeout(() => {
     overlay.classList.add('gate-done');
   }, 3000);
@@ -67,9 +74,9 @@ function initParticles() {
     const p = document.createElement('span');
     p.classList.add('hero-particle');
 
-    const size = Math.random() * 6 + 3;
-    const left = Math.random() * 100;
-    const delay = Math.random() * 15;
+    const size     = Math.random() * 6 + 3;
+    const left     = Math.random() * 100;
+    const delay    = Math.random() * 15;
     const duration = Math.random() * 12 + 10;
 
     p.style.cssText = `
@@ -111,6 +118,7 @@ document.body.appendChild(mobileOverlay);
 function openNav() {
   navMenu.classList.add('open');
   navToggle.classList.add('open');
+  navToggle.setAttribute('aria-expanded', 'true');
   mobileOverlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -118,9 +126,20 @@ function openNav() {
 function closeNav() {
   navMenu.classList.remove('open');
   navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
   mobileOverlay.classList.remove('active');
   document.body.style.overflow = '';
+
+  // Reset all open service sub-menus
+  document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
+    item.classList.remove('open');
+    const trigger = item.querySelector('[aria-expanded]');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+  });
 }
+
+navToggle.setAttribute('aria-expanded', 'false');
+navToggle.setAttribute('aria-controls', 'navMenu');
 
 navToggle.addEventListener('click', () => {
   navMenu.classList.contains('open') ? closeNav() : openNav();
@@ -133,14 +152,16 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeNav();
 });
 
-/* ── Services Dropdown (mobile toggle) ────────────────── */
+/* ── Services Dropdown (mobile toggle + aria) ─────────────── */
 document.querySelectorAll('.nav-item-dropdown').forEach(item => {
-  const trigger = item.querySelector('.nav-link');
+  const trigger = item.querySelector('.nav-link[aria-haspopup]');
   if (!trigger) return;
+
   trigger.addEventListener('click', e => {
     if (window.innerWidth <= 991) {
       e.preventDefault();
-      item.classList.toggle('open');
+      const isOpen = item.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
   });
 });
@@ -165,8 +186,8 @@ document.querySelectorAll('.scroll-link, .nav-link[href^="#"]').forEach(link => 
 });
 
 /* ── Active Nav on Scroll ─────────────────────────────────── */
-const sections   = document.querySelectorAll('section[id]');
-const navLinks   = document.querySelectorAll('.nav-link[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
 
 const navObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -223,7 +244,7 @@ document.querySelectorAll('.stat-number')
   .forEach(el => counterObserver.observe(el));
 
 /* ── Portfolio Filter ─────────────────────────────────────── */
-const filterBtns  = document.querySelectorAll('.filter-btn');
+const filterBtns     = document.querySelectorAll('.filter-btn');
 const portfolioItems = document.querySelectorAll('.portfolio-item');
 
 filterBtns.forEach(btn => {
@@ -241,19 +262,18 @@ filterBtns.forEach(btn => {
 });
 
 /* ── Lightbox ─────────────────────────────────────────────── */
-const lightbox       = document.getElementById('lightbox');
-const lightboxImg    = document.getElementById('lightboxImg');
+const lightbox        = document.getElementById('lightbox');
+const lightboxImg     = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
-const lightboxClose  = document.getElementById('lightboxClose');
-const lightboxPrev   = document.getElementById('lightboxPrev');
-const lightboxNext   = document.getElementById('lightboxNext');
+const lightboxClose   = document.getElementById('lightboxClose');
+const lightboxPrev    = document.getElementById('lightboxPrev');
+const lightboxNext    = document.getElementById('lightboxNext');
 
-let visibleItems = [];
 let currentIndex = 0;
 
 function openLightbox(src, title, index) {
-  lightboxImg.src    = src;
-  lightboxImg.alt    = title;
+  lightboxImg.src = src;
+  lightboxImg.alt = title;
   lightboxCaption.textContent = title;
   currentIndex = index;
   lightbox.classList.add('active');
@@ -273,7 +293,7 @@ function showLightboxItem(index) {
   if (!items.length) return;
 
   currentIndex = (index + items.length) % items.length;
-  const btn  = items[currentIndex].querySelector('.portfolio-zoom-btn');
+  const btn = items[currentIndex].querySelector('.portfolio-zoom-btn');
   if (btn) {
     lightboxImg.src = btn.dataset.src;
     lightboxImg.alt = btn.dataset.title;
@@ -281,7 +301,7 @@ function showLightboxItem(index) {
   }
 }
 
-document.querySelectorAll('.portfolio-zoom-btn').forEach((btn, i) => {
+document.querySelectorAll('.portfolio-zoom-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const visItems = Array.from(portfolioItems).filter(item => !item.classList.contains('hidden'));
     const visIndex = visItems.indexOf(btn.closest('.portfolio-item'));
@@ -304,35 +324,100 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') showLightboxItem(currentIndex + 1);
 });
 
+/* ── Lightbox Touch Swipe (mobile) ───────────────────────── */
+let touchStartX = 0;
+let touchStartY = 0;
+
+lightbox.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].clientX;
+  touchStartY = e.changedTouches[0].clientY;
+}, { passive: true });
+
+lightbox.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+
+  // Only respond to primarily horizontal swipes (dx > dy)
+  if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+
+  if (dx < 0) {
+    showLightboxItem(currentIndex + 1); // swipe left → next
+  } else {
+    showLightboxItem(currentIndex - 1); // swipe right → prev
+  }
+}, { passive: true });
+
 /* ── Contact Form ─────────────────────────────────────────── */
-const contactForm   = document.getElementById('contactForm');
-const formSuccess   = document.getElementById('formSuccess');
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+const formErrorMessages = {
+  name:    'Please enter your name.',
+  email:   'Please enter a valid email address.',
+  message: 'Please enter a message.'
+};
+
+function setFieldError(id, message) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('invalid');
+
+  // Add or update inline error text
+  let errEl = el.parentElement.querySelector('.field-error');
+  if (!errEl) {
+    errEl = document.createElement('span');
+    errEl.className = 'field-error';
+    errEl.setAttribute('role', 'alert');
+    el.parentElement.appendChild(errEl);
+  }
+  errEl.textContent = message;
+}
+
+function clearFieldError(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('invalid');
+  const errEl = el.parentElement.querySelector('.field-error');
+  if (errEl) errEl.remove();
+}
 
 if (contactForm) {
   contactForm.addEventListener('submit', e => {
     e.preventDefault();
 
-    const fields = ['name', 'email', 'message'];
     let valid = true;
 
-    fields.forEach(id => {
+    // Validate required text fields
+    ['name', 'message'].forEach(id => {
       const el = document.getElementById(id);
       if (el && !el.value.trim()) {
-        el.classList.add('invalid');
+        setFieldError(id, formErrorMessages[id]);
         valid = false;
-      } else if (el) {
-        el.classList.remove('invalid');
+      } else {
+        clearFieldError(id);
       }
     });
 
-    // Basic email validation
+    // Validate email
     const emailEl = document.getElementById('email');
-    if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-      emailEl.classList.add('invalid');
-      valid = false;
+    if (emailEl) {
+      if (!emailEl.value.trim()) {
+        setFieldError('email', 'Please enter your email address.');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+        setFieldError('email', 'Please enter a valid email address.');
+        valid = false;
+      } else {
+        clearFieldError('email');
+      }
     }
 
-    if (!valid) return;
+    if (!valid) {
+      // Scroll to first invalid field
+      const first = contactForm.querySelector('.invalid');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
     // Submit to Netlify Forms
     fetch('/', {
@@ -343,17 +428,35 @@ if (contactForm) {
     .then(() => {
       formSuccess.classList.add('visible');
       contactForm.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
-      setTimeout(() => formSuccess.classList.remove('visible'), 6000);
+      setTimeout(() => formSuccess.classList.remove('visible'), 7000);
     })
     .catch(() => {
       alert('Sorry, there was a problem sending your message. Please call us on 07434 001222.');
     });
   });
 
-  // Live validation clear on input
+  // Clear errors live as user types
   contactForm.querySelectorAll('input, textarea').forEach(el => {
-    el.addEventListener('input', () => el.classList.remove('invalid'));
+    el.addEventListener('input', () => {
+      if (el.id) clearFieldError(el.id);
+    });
   });
+}
+
+/* ── Mobile CTA Bar ───────────────────────────────────────── */
+const mobileCTABar = document.getElementById('mobileCTABar');
+
+if (mobileCTABar) {
+  // Hide the bar when the contact section is visible (avoids overlap)
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    const ctaObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        mobileCTABar.classList.toggle('hidden-by-contact', entry.isIntersecting);
+      });
+    }, { threshold: 0.2 });
+    ctaObserver.observe(contactSection);
+  }
 }
 
 /* ── Back to Top ──────────────────────────────────────────── */

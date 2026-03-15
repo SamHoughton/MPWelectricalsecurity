@@ -2518,3 +2518,137 @@ section { padding: 5rem 0; }
   color: #000;
   border-color: var(--gold);
 }
+
+/* ── Skip to main content (accessibility) ─────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--gold);
+  color: #000;
+  font-family: var(--font-head);
+  font-size: .85rem;
+  font-weight: 700;
+  padding: .6rem 1.2rem;
+  border-radius: 0 0 var(--radius) var(--radius);
+  z-index: 99999;
+  text-decoration: none;
+  transition: top .2s ease;
+}
+.skip-link:focus {
+  top: 0;
+  color: #000;
+}
+
+/* ── Inline form field errors ─────────────────────────────── */
+.field-error {
+  display: block;
+  color: #ef5350;
+  font-size: .78rem;
+  margin-top: .3rem;
+  font-family: var(--font-head);
+  font-weight: 500;
+  letter-spacing: .2px;
+}
+
+/* ── Mobile Sticky CTA Bar ────────────────────────────────── */
+.mobile-cta-bar {
+  display: none; /* hidden on desktop */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 600;
+  background: var(--dark-mid);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 20px rgba(0,0,0,.5);
+  transition: transform .35s ease;
+}
+
+.mobile-cta-bar.hidden-by-contact {
+  transform: translateY(100%);
+}
+
+.mobile-cta-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  padding: .65rem .5rem;
+  text-decoration: none;
+  font-family: var(--font-head);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  flex: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-cta-btn i { font-size: 1.15rem; }
+
+.mobile-cta-call {
+  color: var(--white);
+  background: var(--gold);
+}
+.mobile-cta-call:hover,
+.mobile-cta-call:active {
+  background: var(--gold-dark);
+  color: var(--white);
+}
+
+.mobile-cta-whatsapp {
+  color: var(--white);
+  background: #25d366;
+}
+.mobile-cta-whatsapp:hover,
+.mobile-cta-whatsapp:active {
+  background: #1ebe57;
+  color: var(--white);
+}
+
+.mobile-cta-quote {
+  color: var(--white);
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.mobile-cta-quote:hover,
+.mobile-cta-quote:active {
+  background: rgba(204,132,0,.15);
+  color: var(--gold);
+}
+
+/* Show only on mobile */
+@media (max-width: 991px) {
+  .mobile-cta-bar {
+    display: flex;
+  }
+
+  /* Push page content up so bottom of page isn't hidden behind the bar */
+  body {
+    padding-bottom: 64px;
+  }
+
+  /* Shift WhatsApp float and back-to-top above the sticky bar */
+  .whatsapp-float {
+    bottom: 5.5rem;
+  }
+
+  /* Hide desktop-only WhatsApp float (replaced by the sticky bar) */
+  .whatsapp-float {
+    display: none;
+  }
+
+  .back-to-top {
+    bottom: 5rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .back-to-top {
+    bottom: 4.75rem;
+  }
+}
