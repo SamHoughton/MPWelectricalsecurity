@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instant Cost Estimator | MPW Electrical Security | Gates &amp; CCTV North West</title>
+  <meta name="description" content="Get an instant ballpark price for your automated gate, CCTV or security system in under 2 minutes. Free site visit to confirm your exact quote.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.mpwelectricalsecurity.com/quote.html">
+  <meta name="author" content="MPW Electrical Security">
+  <meta name="theme-color" content="#CC8400">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MPW Electrical Security">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:url" content="https://www.mpwelectricalsecurity.com/quote.html">
+  <meta property="og:title" content="Instant Cost Estimator | MPW Electrical Security">
+  <meta property="og:description" content="Answer 5 quick questions and get a ballpark price for your gate or CCTV installation in under 2 minutes.">
+  <meta property="og:image" content="https://www.mpwelectricalsecurity.com/img/aboutusgate.jpg">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/logo.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4FW36QNJ8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H4FW36QNJ8');
+  </script>
+
+  <!-- Site Styles -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       Quote Tool — Page Styles
+       ============================================================ */
+
+    /* ── Page hero ───────────────────────────────────────────── */
+    .quote-hero {
+      padding: 130px 0 56px;
+      background: linear-gradient(160deg, #0d0d0d 0%, #131313 60%, #0d0d0d 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(204,132,0,.13), transparent);
+      pointer-events: none;
+    }
+    .quote-hero h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .9rem;
+    }
+    .quote-hero p {
+      color: rgba(255,255,255,.65);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto 1.8rem;
+    }
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .trust-chip {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      color: rgba(255,255,255,.55);
+      font-size: .83rem;
+    }
+    .trust-chip i { color: #CC8400; }
+
+    /* ── Configurator section ────────────────────────────────── */
+    .quote-section {
+      padding: 40px 0 100px;
+      background: #0a0a0a;
+    }
+
+    .configurator-card {
+      background: #111;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 18px;
+      padding: 44px 48px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    @media (max-width: 640px) {
+      .configurator-card { padding: 26px 18px; border-radius: 14px; }
+    }
+
+    /* ── Progress bar ────────────────────────────────────────── */
+    .config-progress { margin-bottom: 38px; }
+    .config-progress-track {
+      height: 4px;
+      background: rgba(255,255,255,.09);
+      border-radius: 2px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    .config-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #CC8400, #f0a830);
+      border-radius: 2px;
+      transition: width .45s cubic-bezier(.4,0,.2,1);
+      width: 20%;
+    }
+    .config-progress-dots {
+      display: flex;
+      justify-content: space-between;
+    }
+    .cpd {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.3);
+      transition: all .3s;
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0;
+    }
+    .cpd.active { border-color: #CC8400; color: #CC8400; }
+    .cpd.done   { border-color: #CC8400; background: #CC8400; color: #000; }
+    .config-step-counter {
+      text-align: center;
+      color: rgba(255,255,255,.35);
+      font-size: .78rem;
+      margin-top: 9px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Step panels ─────────────────────────────────────────── */
+    .config-panels { min-height: 300px; }
+    .config-panel  { display: none; }
+    .config-panel.active        { display: block; animation: cfSlideIn  .28s ease; }
+    .config-panel.active.is-back{ animation: cfSlideBack .28s ease; }
+
+    @keyframes cfSlideIn   { from { opacity:0; transform:translateX(22px);  } to { opacity:1; transform:none; } }
+    @keyframes cfSlideBack { from { opacity:0; transform:translateX(-22px); } to { opacity:1; transform:none; } }
+
+    /* ── Question heading ────────────────────────────────────── */
+    .config-question {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      margin-bottom: .4rem;
+    }
+    .config-hint {
+      text-align: center;
+      color: rgba(255,255,255,.45);
+      font-size: .88rem;
+      margin-bottom: 1.6rem;
+    }
+
+    /* ── Option cards ────────────────────────────────────────── */
+    .config-opts {
+      display: grid;
+      gap: 11px;
+      margin-bottom: 6px;
+    }
+    .config-opts.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .config-opts.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    @media (max-width: 580px) {
+      .config-opts.cols-2,
+      .config-opts.cols-3 { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 581px) and (max-width: 720px) {
+      .config-opts.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .config-opt {
+      background: #1a1a1a;
+      border: 1.5px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 15px 16px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      cursor: pointer;
+      transition: border-color .18s, background .18s, transform .18s;
+      text-align: left;
+      position: relative;
+      outline: none;
+      width: 100%;
+    }
+    .config-opt:hover {
+      border-color: rgba(204,132,0,.55);
+      background: #1d1b16;
+      transform: translateY(-2px);
+    }
+    .config-opt:focus-visible { outline: 2px solid #CC8400; outline-offset: 2px; }
+    .config-opt.selected {
+      border-color: #CC8400;
+      background: rgba(204,132,0,.09);
+    }
+    .config-opt.selected::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 9px;
+      right: 12px;
+      font-size: .68rem;
+      color: #CC8400;
+    }
+    .config-opt-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(204,132,0,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      color: #CC8400;
+      transition: background .18s;
+    }
+    .config-opt:hover .config-opt-icon,
+    .config-opt.selected .config-opt-icon { background: rgba(204,132,0,.2); }
+    .config-opt-text strong {
+      display: block;
+      color: #fff;
+      font-size: .93rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+    .config-opt-text span {
+      display: block;
+      color: rgba(255,255,255,.45);
+      font-size: .76rem;
+      line-height: 1.35;
+    }
+
+    /* ── Nav bar ─────────────────────────────────────────────── */
+    .config-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .btn-config-back {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.55);
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: .84rem;
+      cursor: pointer;
+      transition: all .18s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-config-back:hover { border-color: rgba(255,255,255,.35); color: #fff; }
+    .config-nav-hint {
+      color: rgba(255,255,255,.28);
+      font-size: .78rem;
+      font-style: italic;
+    }
+
+    /* ── Result panel ────────────────────────────────────────── */
+    .result-panel { text-align: center; }
+    .result-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(204,132,0,.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      color: #CC8400;
+      margin: 0 auto 1.4rem;
+    }
+    .result-panel > h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .3rem;
+    }
+    .result-panel > p {
+      color: rgba(255,255,255,.45);
+      font-size: .88rem;
+    }
+
+    .result-price-box {
+      display: inline-block;
+      background: rgba(204,132,0,.07);
+      border: 1.5px solid rgba(204,132,0,.28);
+      border-radius: 16px;
+      padding: 22px 36px;
+      margin: 20px 0;
+      min-width: 260px;
+    }
+    .result-price-label {
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 6px;
+    }
+    .result-price-value {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(2.2rem, 7vw, 3.4rem);
+      font-weight: 700;
+      color: #CC8400;
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+    .result-price-note {
+      font-size: .73rem;
+      color: rgba(255,255,255,.38);
+    }
+
+    .result-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .result-tag {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 20px;
+      padding: 4px 13px;
+      font-size: .78rem;
+      color: rgba(255,255,255,.65);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .result-tag i { color: #CC8400; font-size: .66rem; }
+
+    .result-cctv-tip {
+      background: rgba(204,132,0,.07);
+      border-left: 3px solid #CC8400;
+      border-radius: 0 8px 8px 0;
+      padding: 11px 15px;
+      font-size: .82rem;
+      color: rgba(255,255,255,.6);
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .result-cctv-tip i { color: #CC8400; margin-right: 6px; }
+
+    hr.result-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,.07);
+      margin: 26px 0;
+    }
+
+    .result-form-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .25rem;
+    }
+    .result-form-sub {
+      color: rgba(255,255,255,.45);
+      font-size: .85rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .result-form .form-field { margin-bottom: 13px; text-align: left; }
+    .result-form label {
+      display: block;
+      font-size: .79rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 5px;
+    }
+    .result-form input,
+    .result-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,.05);
+      border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: .9rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color .2s;
+      resize: vertical;
+    }
+    .result-form input:focus,
+    .result-form textarea:focus { outline: none; border-color: #CC8400; }
+    .result-form input.err,
+    .result-form textarea.err { border-color: #e74c3c; }
+    .result-form input::placeholder,
+    .result-form textarea::placeholder { color: rgba(255,255,255,.22); }
+
+    .result-alt-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .result-alt-actions a {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .18s;
+    }
+    .btn-call {
+      background: rgba(255,255,255,.07);
+      border: 1.5px solid rgba(255,255,255,.1);
+      color: #fff;
+    }
+    .btn-call:hover { background: rgba(255,255,255,.12); color: #fff; }
+    .btn-wa {
+      background: rgba(37,211,102,.09);
+      border: 1.5px solid rgba(37,211,102,.22);
+      color: #25d366;
+    }
+    .btn-wa:hover { background: rgba(37,211,102,.16); color: #25d366; }
+
+    .btn-restart {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,.28);
+      font-size: .78rem;
+      cursor: pointer;
+      margin-top: 18px;
+      text-decoration: underline;
+      transition: color .18s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-restart:hover { color: rgba(255,255,255,.55); }
+
+    .quote-success-msg {
+      background: rgba(39,174,96,.1);
+      border: 1.5px solid rgba(39,174,96,.3);
+      border-radius: 10px;
+      padding: 18px 22px;
+      color: #2ecc71;
+      font-size: .92rem;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .quote-success-msg i { font-size: 1.2rem; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Preloader -->
+  <div id="preloader"><div class="preloader-spinner"></div></div>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="img/logo.png" alt="MPW Electrical Security" class="logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" id="navToggle">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        <div class="navbar-collapse-custom" id="navMenu">
+          <ul class="nav-links">
+            <li><a class="nav-link" href="index.html">Home</a></li>
+            <li><a class="nav-link" href="index.html#about">About Us</a></li>
+            <li class="nav-item-dropdown">
+              <a class="nav-link" href="index.html#services" aria-haspopup="true" aria-expanded="false">Services <i class="fas fa-chevron-down nav-caret"></i></a>
+              <ul class="nav-dropdown">
+                <li><a href="automated-gates.html"><i class="fas fa-archway"></i> Automated Gates</a></li>
+                <li><a href="cctv-installation.html"><i class="fas fa-camera"></i> CCTV Installation</a></li>
+                <li><a href="alarm-systems.html"><i class="fas fa-bell"></i> Alarm Systems</a></li>
+                <li><a href="gate-servicing.html"><i class="fas fa-screwdriver-wrench"></i> Gate Servicing</a></li>
+                <li><a href="access-control.html"><i class="fas fa-fingerprint"></i> Access Control</a></li>
+                <li><a href="security-lighting.html"><i class="fas fa-lightbulb"></i> Security Lighting</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link" href="index.html#portfolio">Portfolio</a></li>
+            <li><a class="nav-link" href="index.html#faq">FAQ</a></li>
+            <li><a class="nav-link" href="index.html#areas">Areas</a></li>
+            <li><a class="nav-link active btn-nav-contact" href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ======= Hero ======= -->
+    <section class="quote-hero">
+      <div class="container">
+        <span class="section-tag"><i class="fas fa-calculator me-1"></i> Free Instant Estimate</span>
+        <h1>How Much Will Your Security System Cost?</h1>
+        <p>Answer five quick questions and get a ballpark price in under two minutes. We'll then come out for a free site visit to confirm the exact figure.</p>
+        <div class="trust-row">
+          <div class="trust-chip"><i class="fas fa-circle-check"></i> No obligation</div>
+          <div class="trust-chip"><i class="fas fa-circle-check"></i> Takes 2 minutes</div>
+          <div class="trust-chip"><i class="fas fa-circle-check"></i> Free site visit included</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Configurator ======= -->
+    <section class="quote-section">
+      <div class="container">
+        <div class="configurator-card">
+
+          <!-- Progress -->
+          <div class="config-progress">
+            <div class="config-progress-track">
+              <div class="config-progress-fill" id="progressFill"></div>
+            </div>
+            <div class="config-progress-dots">
+              <div class="cpd active" id="dot1">1</div>
+              <div class="cpd"        id="dot2">2</div>
+              <div class="cpd"        id="dot3">3</div>
+              <div class="cpd"        id="dot4">4</div>
+              <div class="cpd"        id="dot5">5</div>
+            </div>
+            <div class="config-step-counter" id="stepCounter">Step 1 of 5</div>
+          </div>
+
+          <!-- Step panels -->
+          <div class="config-panels" id="configPanels">
+
+            <!-- Step 1: Property type -->
+            <div class="config-panel active" id="panel1">
+              <h2 class="config-question">What type of property is this for?</h2>
+              <p class="config-hint">This helps us apply the right pricing and product range.</p>
+              <div class="config-opts cols-2">
+                <button class="config-opt" data-step="1" data-value="residential">
+                  <div class="config-opt-icon"><i class="fas fa-house"></i></div>
+                  <div class="config-opt-text"><strong>Residential</strong><span>Home, driveway or private property</span></div>
+                </button>
+                <button class="config-opt" data-step="1" data-value="commercial">
+                  <div class="config-opt-icon"><i class="fas fa-building"></i></div>
+                  <div class="config-opt-text"><strong>Commercial</strong><span>Business, industrial or mixed-use site</span></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: What do you need -->
+            <div class="config-panel" id="panel2">
+              <h2 class="config-question">What are you looking to have installed?</h2>
+              <p class="config-hint">Pick the option that best describes what you need. Not sure? Choose the last option.</p>
+              <div class="config-opts cols-3">
+                <button class="config-opt" data-step="2" data-value="swing">
+                  <div class="config-opt-icon"><i class="fas fa-archway"></i></div>
+                  <div class="config-opt-text"><strong>Swing Gates</strong><span>Open inward or outward, classic look</span></div>
+                </button>
+                <button class="config-opt" data-step="2" data-value="sliding">
+                  <div class="config-opt-icon"><i class="fas fa-arrows-left-right"></i></div>
+                  <div class="config-opt-text"><strong>Sliding Gate</strong><span>Space-saving, great for tighter drives</span></div>
+                </button>
+                <button class="config-opt" data-step="2" data-value="bifold">
+                  <div class="config-opt-icon"><i class="fas fa-table-columns"></i></div>
+                  <div class="config-opt-text"><strong>Bi-fold Gates</strong><span>Fast-opening, works in limited space</span></div>
+                </button>
+                <button class="config-opt" data-step="2" data-value="barrier">
+                  <div class="config-opt-icon"><i class="fas fa-road-barrier"></i></div>
+                  <div class="config-opt-text"><strong>Barrier / Bollard</strong><span>Car park or commercial access point</span></div>
+                </button>
+                <button class="config-opt" data-step="2" data-value="cctv_only">
+                  <div class="config-opt-icon"><i class="fas fa-camera"></i></div>
+                  <div class="config-opt-text"><strong>CCTV System</strong><span>Cameras, recording and remote viewing</span></div>
+                </button>
+                <button class="config-opt" data-step="2" data-value="unsure">
+                  <div class="config-opt-icon"><i class="fas fa-circle-question"></i></div>
+                  <div class="config-opt-text"><strong>Not Sure Yet</strong><span>We'll advise at your free site visit</span></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: dynamic (width / camera count) -->
+            <div class="config-panel" id="panel3">
+              <h2 class="config-question" id="q3title"></h2>
+              <p class="config-hint" id="q3hint"></p>
+              <div class="config-opts" id="q3opts"></div>
+            </div>
+
+            <!-- Step 4: dynamic (access control / coverage) -->
+            <div class="config-panel" id="panel4">
+              <h2 class="config-question" id="q4title"></h2>
+              <p class="config-hint" id="q4hint"></p>
+              <div class="config-opts" id="q4opts"></div>
+            </div>
+
+            <!-- Step 5: dynamic (material / storage) -->
+            <div class="config-panel" id="panel5">
+              <h2 class="config-question" id="q5title"></h2>
+              <p class="config-hint" id="q5hint"></p>
+              <div class="config-opts" id="q5opts"></div>
+            </div>
+
+            <!-- Result panel -->
+            <div class="config-panel" id="panelResult">
+              <div class="result-panel">
+                <div class="result-icon"><i class="fas fa-sterling-sign"></i></div>
+                <h3>Your Instant Estimate</h3>
+                <p>Based on your selections below</p>
+
+                <div class="result-price-box">
+                  <div class="result-price-label">Estimated Installation Cost</div>
+                  <div class="result-price-value" id="resultPriceDisplay"></div>
+                  <div class="result-price-note">Supply, installation &amp; commissioning included. Subject to free site survey.</div>
+                </div>
+
+                <div class="result-summary" id="resultSummary"></div>
+
+                <div class="result-cctv-tip" id="cctvTip" style="display:none">
+                  <i class="fas fa-circle-info"></i>Adding CCTV alongside your gate installation can often be done at a reduced combined rate. Ask us when you book your survey.
+                </div>
+
+                <hr class="result-divider">
+
+                <p class="result-form-title">Book Your Free Site Visit</p>
+                <p class="result-form-sub">We'll come out to you, have a look and give you an exact price. No charge, no pressure.</p>
+
+                <form class="result-form" id="quoteForm" name="quote-estimate" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+                  <input type="hidden" name="form-name" value="quote-estimate">
+                  <p style="display:none"><label>Don't fill this in: <input name="bot-field"></label></p>
+                  <input type="hidden" name="estimate" id="hiddenEstimate">
+                  <input type="hidden" name="selections" id="hiddenSelections">
+                  <div class="row g-2">
+                    <div class="col-sm-6">
+                      <div class="form-field">
+                        <label for="qName">Your Name <span style="color:#CC8400">*</span></label>
+                        <input type="text" id="qName" name="name" placeholder="John Smith" required autocomplete="name">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-field">
+                        <label for="qPhone">Phone Number <span style="color:#CC8400">*</span></label>
+                        <input type="tel" id="qPhone" name="phone" placeholder="07XXX XXX XXX" required autocomplete="tel">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-field">
+                        <label for="qEmail">Email Address</label>
+                        <input type="email" id="qEmail" name="email" placeholder="john@example.com" autocomplete="email">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-field">
+                        <label for="qMessage">Anything else we should know?</label>
+                        <textarea id="qMessage" name="message" rows="3" placeholder="e.g. preferred dates, existing gate removal, any access questions..."></textarea>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-gold w-100">
+                        <span>Book My Free Site Visit</span>
+                        <i class="fas fa-calendar-check"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="result-alt-actions">
+                    <a href="tel:07434001222" class="btn-call"><i class="fas fa-phone"></i> Call Now</a>
+                    <a href="https://wa.me/447434001222" target="_blank" rel="noopener" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                  </div>
+                </form>
+
+                <div class="quote-success-msg" id="quoteSuccess" style="display:none">
+                  <i class="fas fa-circle-check"></i>
+                  <span><strong>Thanks, we'll be in touch!</strong> We get back to most enquiries the same working day.</span>
+                </div>
+
+                <button class="btn-restart" id="restartBtn">Start over</button>
+              </div>
+            </div>
+
+          </div><!-- /config-panels -->
+
+          <!-- Bottom nav -->
+          <div class="config-nav">
+            <button class="btn-config-back" id="backBtn" style="visibility:hidden">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <span class="config-nav-hint" id="navHint">Select an option to continue</span>
+          </div>
+
+        </div><!-- /configurator-card -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-brand">
+              <img src="img/logo.png" alt="MPW Electrical Security" class="footer-logo">
+              <p>Looking after homes and businesses across the North West for over ten years. Every job is built around you.</p>
+              <div class="footer-social">
+                <a href="https://www.facebook.com/mpwelec/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/mpwsecurity/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="index.html#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+              <li><a href="index.html#portfolio"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+              <li><a href="index.html#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+              <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5>Contact Info</h5>
+            <div class="footer-contact">
+              <p><i class="fas fa-location-dot"></i> 198 Crow Lane East, Newton-le-Willows, WA12 9UA</p>
+              <p><i class="fas fa-phone"></i> <a href="tel:07434001222">07434 001222</a></p>
+              <p><i class="fas fa-envelope"></i> <a href="mailto:Matt@mpwelectricalsecurity.com">Matt@mpwelectricalsecurity.com</a></p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5>Payment Methods</h5>
+            <p class="footer-payment-text">We accept all major credit &amp; debit cards, bank transfers, and cash payments.</p>
+            <div class="payment-icons">
+              <i class="fab fa-cc-visa" title="Visa"></i>
+              <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+              <i class="fab fa-cc-amex" title="American Express"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year"></span> MPW Electrical Security. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile CTA bar -->
+  <div class="mobile-cta-bar" id="mobileCTABar" aria-label="Quick contact">
+    <a href="tel:07434001222" class="mobile-cta-btn mobile-cta-call"><i class="fas fa-phone"></i><span>Call Us</span></a>
+    <a href="https://wa.me/447434001222" class="mobile-cta-btn mobile-cta-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+    <a href="index.html#contact" class="mobile-cta-btn mobile-cta-quote"><i class="fas fa-comment-dots"></i><span>Contact</span></a>
+  </div>
+
+  <a href="https://wa.me/447434001222" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Site JS (header scroll, mobile nav, back-to-top, footer year) -->
+  <script src="js/main.js"></script>
+
+  <!-- ── Quote Configurator ──────────────────────────────────── -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Pricing tables ───────────────────────────────────────── */
+    var PRICE = {
+      base: {
+        swing:     [1800, 3400],
+        sliding:   [2600, 4600],
+        bifold:    [3100, 5600],
+        barrier:   [1200, 2900],
+        cctv_only: [400,  1200],
+        unsure:    [1800, 3400]
+      },
+      width: {
+        w_u3:  [0,    0   ],
+        w_35:  [350,  750 ],
+        w_58:  [900,  1900],
+        w_o8:  [2300, 4800]
+      },
+      cameras: {
+        c_12: [0,    0   ],
+        c_34: [250,  550 ],
+        c_58: [700,  1500],
+        c_9p: [1600, 3500]
+      },
+      access: {
+        a_remote:   [0,   0  ],
+        a_keypad:   [150, 380],
+        a_intercom: [420, 780],
+        a_app:      [260, 520],
+        a_unsure:   [0,   0  ]
+      },
+      cctvCoverage: {
+        cv_out:   [0,   0  ],
+        cv_in:    [0,   0  ],
+        cv_both:  [200, 480],
+        cv_unsure:[0,   0  ]
+      },
+      material: {
+        m_steel:  [0,   0  ],
+        m_timber: [520, 980],
+        m_unsure: [0,   0  ]
+      },
+      storage: {
+        s_nvr:   [0,   0  ],
+        s_cloud: [100, 320],
+        s_both:  [160, 420],
+        s_unsure:[0,   0  ]
+      },
+      commercialMult: 1.45
+    };
+
+    /* ── Step content definitions ─────────────────────────────── */
+    var STEPS = {
+      gate: {
+        3: {
+          title: 'What\u2019s the approximate opening width?',
+          hint:  'Not sure? Most residential drives are between 3 and 5 metres wide.',
+          cols:  'cols-2',
+          opts: [
+            { v:'w_u3', icon:'fa-compress', label:'Under 3 metres', sub:'Smaller residential drive' },
+            { v:'w_35', icon:'fa-car',      label:'3 \u2013 5 metres', sub:'Standard double driveway' },
+            { v:'w_58', icon:'fa-truck',    label:'5 \u2013 8 metres', sub:'Wider or small commercial entrance' },
+            { v:'w_o8', icon:'fa-warehouse',label:'Over 8 metres',  sub:'Commercial or industrial site' }
+          ]
+        },
+        4: {
+          title: 'How do you want to control access?',
+          hint:  null,
+          cols:  'cols-2',
+          opts: [
+            { v:'a_remote',   icon:'fa-satellite-dish', label:'Remote Fob',          sub:'Key fob to open and close the gate' },
+            { v:'a_keypad',   icon:'fa-hashtag',        label:'Keypad / PIN Code',   sub:'Enter a code at the gate' },
+            { v:'a_intercom', icon:'fa-video',          label:'Video Intercom',       sub:'See and speak to visitors on your phone' },
+            { v:'a_app',      icon:'fa-mobile-screen',  label:'App / Smart Control', sub:'Open your gate from a smartphone' }
+          ]
+        },
+        5: {
+          title: 'Any preference on gate material?',
+          hint:  'Material affects the look, maintenance requirements and cost. We\u2019ll advise at the survey.',
+          cols:  'cols-3',
+          opts: [
+            { v:'m_steel',  icon:'fa-shield-halved',   label:'Steel / Metal', sub:'Durable, low maintenance, most popular' },
+            { v:'m_timber', icon:'fa-tree',            label:'Timber',        sub:'Natural look, ideal for traditional properties' },
+            { v:'m_unsure', icon:'fa-circle-question', label:'Not Sure Yet',  sub:'We\u2019ll advise on what suits your property' }
+          ]
+        }
+      },
+      barrier: {
+        3: {
+          title: 'How wide is the entrance?',
+          hint:  'A standard single-lane barrier suits most car park entrances.',
+          cols:  'cols-2',
+          opts: [
+            { v:'w_u3', icon:'fa-car',      label:'Single lane',       sub:'Up to 3 metres' },
+            { v:'w_35', icon:'fa-car-side', label:'Wide single lane',  sub:'3 \u2013 5 metres' },
+            { v:'w_58', icon:'fa-truck',    label:'Dual lane',         sub:'5 \u2013 8 metres (two barriers)' },
+            { v:'w_o8', icon:'fa-warehouse',label:'Large commercial',  sub:'Over 8 metres' }
+          ]
+        },
+        4: {
+          title: 'What access control do you need?',
+          hint:  null,
+          cols:  'cols-2',
+          opts: [
+            { v:'a_remote',   icon:'fa-satellite-dish', label:'Remote / Push Button', sub:'Simple control for authorised staff' },
+            { v:'a_keypad',   icon:'fa-hashtag',        label:'Keypad / PIN',         sub:'Code entry for approved users' },
+            { v:'a_intercom', icon:'fa-video',          label:'ANPR / Intercom',      sub:'Camera-based or video entry system' },
+            { v:'a_app',      icon:'fa-mobile-screen',  label:'Remote Management',    sub:'Manage access from anywhere' }
+          ]
+        },
+        5: {
+          title: 'Will you need CCTV alongside this?',
+          hint:  'We often fit barriers and CCTV together at a combined rate.',
+          cols:  'cols-3',
+          opts: [
+            { v:'m_steel',  icon:'fa-xmark',          label:'No, barrier only',    sub:'Just the access control system' },
+            { v:'m_timber', icon:'fa-camera',         label:'Yes, add CCTV',       sub:'Cameras alongside the barrier' },
+            { v:'m_unsure', icon:'fa-circle-question',label:'Not sure yet',        sub:'We\u2019ll discuss at the site visit' }
+          ]
+        }
+      },
+      cctv: {
+        3: {
+          title: 'Roughly how many cameras do you need?',
+          hint:  'Not sure? A typical 3-bed home usually needs 3\u20134 cameras for full coverage.',
+          cols:  'cols-2',
+          opts: [
+            { v:'c_12', icon:'fa-camera',          label:'1 \u2013 2 Cameras', sub:'Small property or specific area' },
+            { v:'c_34', icon:'fa-video',           label:'3 \u2013 4 Cameras', sub:'Standard residential coverage' },
+            { v:'c_58', icon:'fa-eye',             label:'5 \u2013 8 Cameras', sub:'Larger property or small commercial' },
+            { v:'c_9p', icon:'fa-building-shield', label:'9 or more',          sub:'Commercial or multi-building site' }
+          ]
+        },
+        4: {
+          title: 'Where do you mainly need coverage?',
+          hint:  null,
+          cols:  'cols-2',
+          opts: [
+            { v:'cv_out',   icon:'fa-house',          label:'Outdoor only',        sub:'Driveway, garden, perimeter' },
+            { v:'cv_in',    icon:'fa-couch',          label:'Indoor only',         sub:'Warehouse, shop floor, office' },
+            { v:'cv_both',  icon:'fa-expand',         label:'Indoor and outdoor',  sub:'Full combined coverage' },
+            { v:'cv_unsure',icon:'fa-circle-question',label:'Not sure yet',        sub:'We\u2019ll advise at the site visit' }
+          ]
+        },
+        5: {
+          title: 'How would you like footage stored?',
+          hint:  'All systems include remote smartphone viewing as standard.',
+          cols:  'cols-2',
+          opts: [
+            { v:'s_nvr',   icon:'fa-hard-drive',     label:'Local Recorder (NVR)', sub:'Stored on-site \u2014 most common' },
+            { v:'s_cloud', icon:'fa-cloud',          label:'Cloud Storage',         sub:'Stored remotely, accessible anywhere' },
+            { v:'s_both',  icon:'fa-database',       label:'Both (NVR + Cloud)',    sub:'On-site recorder plus cloud backup' },
+            { v:'s_unsure',icon:'fa-circle-question',label:'Not Sure',              sub:'We\u2019ll advise what suits you best' }
+          ]
+        }
+      }
+    };
+
+    /* Human-readable labels for summary tags */
+    var LABELS = {
+      residential:'Residential', commercial:'Commercial',
+      swing:'Swing Gates', sliding:'Sliding Gate', bifold:'Bi-fold Gates',
+      barrier:'Barrier/Bollard', cctv_only:'CCTV System', unsure:'Not Sure',
+      w_u3:'Under 3m', w_35:'3\u20135m', w_58:'5\u20138m', w_o8:'Over 8m',
+      c_12:'1\u20132 Cameras', c_34:'3\u20134 Cameras', c_58:'5\u20138 Cameras', c_9p:'9+ Cameras',
+      a_remote:'Remote Fob', a_keypad:'Keypad', a_intercom:'Video Intercom',
+      a_app:'App Control', a_unsure:'Access TBC',
+      cv_out:'Outdoor', cv_in:'Indoor', cv_both:'Indoor & Outdoor', cv_unsure:'Coverage TBC',
+      m_steel:'Steel', m_timber:'Timber', m_unsure:'Material TBC',
+      s_nvr:'Local NVR', s_cloud:'Cloud Storage', s_both:'NVR + Cloud', s_unsure:'Storage TBC'
+    };
+
+    /* ── State ────────────────────────────────────────────────── */
+    var state = { step: 1, answers: {}, back: false };
+
+    function typeCategory() {
+      var t = state.answers[2];
+      if (t === 'cctv_only') return 'cctv';
+      if (t === 'barrier')   return 'barrier';
+      return 'gate'; // swing/sliding/bifold/unsure/undefined
+    }
+
+    /* ── DOM refs ─────────────────────────────────────────────── */
+    var progressFill = document.getElementById('progressFill');
+    var stepCounter  = document.getElementById('stepCounter');
+    var backBtn      = document.getElementById('backBtn');
+    var navHint      = document.getElementById('navHint');
+    var panels       = document.getElementById('configPanels');
+
+    /* ── Render dynamic step (3/4/5) ─────────────────────────── */
+    function renderDynamicStep(n) {
+      var cat  = typeCategory();
+      var data = STEPS[cat][n];
+      if (!data) return;
+
+      document.getElementById('q' + n + 'title').textContent = data.title;
+      var hintEl = document.getElementById('q' + n + 'hint');
+      if (data.hint) { hintEl.textContent = data.hint; hintEl.style.display = ''; }
+      else           { hintEl.style.display = 'none'; }
+
+      var optsEl = document.getElementById('q' + n + 'opts');
+      optsEl.className = 'config-opts ' + data.cols;
+      optsEl.innerHTML = data.opts.map(function(o) {
+        return '<button class="config-opt" data-step="' + n + '" data-value="' + o.v + '">' +
+          '<div class="config-opt-icon"><i class="fas ' + o.icon + '"></i></div>' +
+          '<div class="config-opt-text"><strong>' + o.label + '</strong><span>' + o.sub + '</span></div>' +
+          '</button>';
+      }).join('');
+
+      /* Restore previous selection */
+      var prev = state.answers[n];
+      if (prev) {
+        var prevBtn = optsEl.querySelector('[data-value="' + prev + '"]');
+        if (prevBtn) prevBtn.classList.add('selected');
+      }
+
+      /* Attach click listeners */
+      optsEl.querySelectorAll('.config-opt').forEach(function(b) {
+        b.addEventListener('click', onOptionClick);
+      });
+    }
+
+    /* ── Navigate to step ─────────────────────────────────────── */
+    function goToStep(n, isBack) {
+      state.step = n;
+      state.back = !!isBack;
+
+      var isDone = (n === 6);
+      var pct    = isDone ? 100 : Math.round(((n - 1) / 5) * 100);
+      progressFill.style.width = pct + '%';
+      stepCounter.textContent  = isDone ? 'Complete!' : 'Step ' + n + ' of 5';
+
+      for (var i = 1; i <= 5; i++) {
+        var dot = document.getElementById('dot' + i);
+        if (!dot) continue;
+        dot.classList.remove('active', 'done');
+        if      (isDone || i < n) dot.classList.add('done');
+        else if (i === n)         dot.classList.add('active');
+      }
+
+      /* Activate the right panel */
+      var allPanels = panels.querySelectorAll('.config-panel');
+      allPanels.forEach(function(p) { p.classList.remove('active', 'is-back'); });
+
+      var target = isDone
+        ? document.getElementById('panelResult')
+        : document.getElementById('panel' + n);
+
+      if (!target) return;
+      target.classList.add('active');
+      if (isBack) target.classList.add('is-back');
+
+      if (n >= 3 && n <= 5) renderDynamicStep(n);
+      if (isDone)           buildResult();
+
+      backBtn.style.visibility = (n === 1 || isDone) ? 'hidden' : 'visible';
+      navHint.textContent      = isDone ? '' : 'Select an option to continue';
+    }
+
+    /* ── Option click handler ─────────────────────────────────── */
+    function onOptionClick(e) {
+      var btn   = e.currentTarget;
+      var step  = parseInt(btn.dataset.step, 10);
+      var value = btn.dataset.value;
+
+      btn.closest('.config-opts').querySelectorAll('.config-opt')
+        .forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+
+      state.answers[step] = value;
+
+      /* Slight delay for visual feedback */
+      setTimeout(function() { goToStep(step + 1, false); }, 200);
+    }
+
+    /* ── Calculate price ──────────────────────────────────────── */
+    function calcPrice() {
+      var type = state.answers[2] || 'swing';
+      var cat  = typeCategory();
+      var isComm = (state.answers[1] === 'commercial');
+
+      var base = PRICE.base[type] || PRICE.base.swing;
+      var low  = base[0], high = base[1];
+
+      var s3 = state.answers[3];
+      var s4 = state.answers[4];
+      var s5 = state.answers[5];
+
+      /* Step 3 */
+      if (s3) {
+        var add3 = (cat === 'cctv') ? (PRICE.cameras[s3] || [0,0]) : (PRICE.width[s3] || [0,0]);
+        low += add3[0]; high += add3[1];
+      }
+
+      /* Step 4 */
+      if (s4) {
+        var add4 = (cat === 'cctv') ? (PRICE.cctvCoverage[s4] || [0,0]) : (PRICE.access[s4] || [0,0]);
+        low += add4[0]; high += add4[1];
+      }
+
+      /* Step 5 */
+      if (s5) {
+        var add5 = (cat === 'cctv') ? (PRICE.storage[s5] || [0,0]) : (PRICE.material[s5] || [0,0]);
+        low += add5[0]; high += add5[1];
+      }
+
+      if (isComm) {
+        low  = Math.round(low  * PRICE.commercialMult);
+        high = Math.round(high * PRICE.commercialMult);
+      }
+
+      /* Round to nearest £50 */
+      low  = Math.round(low  / 50) * 50;
+      high = Math.round(high / 50) * 50;
+
+      return { low: low, high: high };
+    }
+
+    /* ── Build result panel ───────────────────────────────────── */
+    function buildResult() {
+      var prices   = calcPrice();
+      var priceStr = '\u00a3' + prices.low.toLocaleString('en-GB') + ' \u2013 \u00a3' + prices.high.toLocaleString('en-GB');
+
+      document.getElementById('resultPriceDisplay').textContent = priceStr;
+      document.getElementById('hiddenEstimate').value           = priceStr;
+
+      /* Summary tags */
+      var tags = [1,2,3,4,5].map(function(n) {
+        return LABELS[state.answers[n]];
+      }).filter(Boolean);
+
+      document.getElementById('resultSummary').innerHTML = tags.map(function(t) {
+        return '<span class="result-tag"><i class="fas fa-circle-dot"></i>' + t + '</span>';
+      }).join('');
+
+      /* CCTV upsell tip: only show for gate types */
+      var isGate = ['swing','sliding','bifold','unsure'].indexOf(state.answers[2]) !== -1;
+      document.getElementById('cctvTip').style.display = isGate ? '' : 'none';
+
+      /* Pre-fill selections hidden field */
+      document.getElementById('hiddenSelections').value = [1,2,3,4,5].map(function(n) {
+        return 'Step ' + n + ': ' + (LABELS[state.answers[n]] || state.answers[n] || 'n/a');
+      }).join(' | ');
+
+      /* GA event */
+      if (typeof gtag === 'function') {
+        gtag('event', 'quote_complete', {
+          event_category: 'Quote Tool',
+          event_label: state.answers[2] || 'unknown',
+          value: Math.round((prices.low + prices.high) / 2)
+        });
+      }
+    }
+
+    /* ── Form submit ──────────────────────────────────────────── */
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var nameEl  = document.getElementById('qName');
+      var phoneEl = document.getElementById('qPhone');
+      var valid   = true;
+
+      [nameEl, phoneEl].forEach(function(el) {
+        if (!el.value.trim()) { el.classList.add('err'); valid = false; }
+        else                   el.classList.remove('err');
+      });
+
+      if (!valid) {
+        nameEl.closest('.configurator-card').querySelector('.err').focus();
+        return;
+      }
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(document.getElementById('quoteForm'))).toString()
+      })
+      .then(function() {
+        document.getElementById('quoteForm').style.display = 'none';
+        document.getElementById('quoteSuccess').style.display = '';
+        if (typeof gtag === 'function') {
+          gtag('event', 'quote_form_submit', { event_category: 'Quote Tool' });
+        }
+      })
+      .catch(function() {
+        alert('Sorry, something went wrong. Please call us on 07434 001222.');
+      });
+    });
+
+    /* ── Static option listeners (steps 1 & 2) ───────────────── */
+    document.querySelectorAll('.config-opt[data-step]').forEach(function(btn) {
+      btn.addEventListener('click', onOptionClick);
+    });
+
+    /* ── Back button ──────────────────────────────────────────── */
+    backBtn.addEventListener('click', function() {
+      if (state.step > 1) goToStep(state.step - 1, true);
+    });
+
+    /* ── Restart ──────────────────────────────────────────────── */
+    document.getElementById('restartBtn').addEventListener('click', function() {
+      state.answers = {};
+      document.getElementById('quoteForm').style.display = '';
+      document.getElementById('quoteSuccess').style.display = 'none';
+      goToStep(1, true);
+    });
+
+    /* ── Init ─────────────────────────────────────────────────── */
+    goToStep(1, false);
+
+  }());
+  </script>
+
+</body>
+</html>
