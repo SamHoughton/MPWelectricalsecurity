@@ -2652,3 +2652,99 @@ section { padding: 5rem 0; }
     bottom: 4.75rem;
   }
 }
+
+/* ============================================================
+   Quote Tool CTA Banner (index.html)
+   ============================================================ */
+
+#quote-cta-banner {
+  padding: 0 0 20px;
+  background: #0a0a0a;
+}
+
+.quote-banner-inner {
+  background: linear-gradient(135deg, #141414 0%, #1a1600 50%, #141414 100%);
+  border: 1px solid rgba(204,132,0,.2);
+  border-radius: 18px;
+  padding: 52px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-banner-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(204,132,0,.07), transparent);
+  pointer-events: none;
+}
+
+.quote-banner-inner::after {
+  content: '\f013';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14rem;
+  color: rgba(204,132,0,.04);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.quote-banner-text { flex: 1; }
+
+.quote-banner-text h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .6rem;
+}
+
+.quote-banner-text p {
+  color: rgba(255,255,255,.6);
+  font-size: .98rem;
+  margin: 0;
+  max-width: 440px;
+}
+
+.quote-banner-cta {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.quote-banner-cta .btn-lg {
+  padding: 14px 34px;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.quote-banner-note {
+  margin-top: 10px;
+  font-size: .78rem;
+  color: rgba(255,255,255,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.quote-banner-note i { color: #CC8400; }
+
+@media (max-width: 768px) {
+  .quote-banner-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 38px 28px;
+    gap: 28px;
+  }
+  .quote-banner-text p { max-width: none; }
+  .quote-banner-cta .btn-lg { width: 100%; }
+  .quote-banner-note { justify-content: center; }
+}
