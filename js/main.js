@@ -4,51 +4,6 @@
 
 'use strict';
 
-/* ── Gate Opening Animation ───────────────────────────────── */
-(function() {
-  const overlay     = document.getElementById('gate-overlay');
-  const statusLight = document.getElementById('gate-status-light');
-  const centerLogo  = document.querySelector('.gate-center-logo');
-
-  if (!overlay) return;
-
-  // Only play animation once per browser session — skip on back-nav / refresh
-  if (sessionStorage.getItem('mpw-gate-shown')) {
-    overlay.remove();
-    centerLogo?.remove();
-    return;
-  }
-
-  sessionStorage.setItem('mpw-gate-shown', '1');
-
-  // 1.4s: status light turns gold (unlocking)
-  setTimeout(() => {
-    if (statusLight) statusLight.classList.add('go');
-  }, 1400);
-
-  // 1.8s: gate panels slide open — simultaneously begin fading centre logo
-  setTimeout(() => {
-    overlay.classList.add('gate-opening');
-    setTimeout(() => {
-      if (centerLogo) {
-        centerLogo.style.transition = 'opacity 0.65s ease';
-        centerLogo.style.opacity = '0';
-      }
-    }, 400);
-  }, 1800);
-
-  // 3.0s: fade out overlay
-  setTimeout(() => {
-    overlay.classList.add('gate-done');
-  }, 3000);
-
-  // 3.6s: remove from DOM
-  setTimeout(() => {
-    overlay?.remove();
-    centerLogo?.remove();
-  }, 3600);
-})();
-
 /* ── Preloader ────────────────────────────────────────────── */
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
