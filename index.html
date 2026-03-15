@@ -32,6 +32,18 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
+
+    <!-- ======= Gate Entry Curtain ======= -->
+    <div id="gateCurtain" aria-hidden="true" role="presentation">
+      <div class="gate-door gate-door-left"></div>
+      <div class="gate-door gate-door-right"></div>
+      <div class="gate-centre-lock">
+        <img src="img/logo.png" alt="MPW Electrical Security">
+        <p class="gate-tagline">Security Solutions</p>
+      </div>
+    </div>
+    <!-- End Gate Entry Curtain -->
+
     <!--==========================
       Header
       ============================-->
@@ -444,5 +456,36 @@
     <script src="contactform/contactform.js"></script>
     <!-- Template Main Javascript File -->
     <script src="js/main.js"></script>
+
+    <!-- Gate Curtain Logic -->
+    <script>
+      (function () {
+        var curtain = document.getElementById('gateCurtain');
+        if (!curtain) return;
+
+        // Respect reduced-motion preference or already-seen session
+        var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reducedMotion || sessionStorage.getItem('mpw_gate_seen')) {
+          curtain.style.display = 'none';
+          return;
+        }
+
+        // Block scrolling while curtain is active
+        document.body.style.overflow = 'hidden';
+
+        // Curtain delay (0.6s) + swing duration (1.5s) + small buffer
+        var totalMs = (0.6 + 1.5) * 1000 + 150;
+
+        setTimeout(function () {
+          curtain.classList.add('gate-open');
+        }, 50); // tiny delay so CSS transition is painted first
+
+        setTimeout(function () {
+          curtain.style.display = 'none';
+          document.body.style.overflow = '';
+          sessionStorage.setItem('mpw_gate_seen', '1');
+        }, totalMs);
+      })();
+    </script>
   </body>
 </html>
