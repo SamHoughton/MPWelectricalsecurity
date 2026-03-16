@@ -1,8 +1,51 @@
 /* ============================================================
    MPW Security — Modern Stylesheet
    Brand: Amber/Gold (#CC8400) | Dark theme
+
+   TABLE OF CONTENTS
+   -----------------
+   1.  CSS Custom Properties (colour variables, spacing, fonts)
+   2.  Reset / Base styles
+   3.  Utility classes (.text-gold, .bg-gold, etc.)
+   4.  Preloader spinner
+   5.  Buttons (.btn-gold, .btn-outline-hero, .btn-outline-gold)
+   6.  Header / Navbar (sticky, scrolled state, hamburger)
+   7.  Hero Section (full-height, particles, wave divider)
+   8.  Scroll Reveal Animations
+   9.  Stats Bar (gold background, animated counters)
+   10. Shared Section styles (padding, section-header, divider)
+   11. About Section
+   12. Services Section (service cards)
+   13. Portfolio Section (filter, grid, lightbox)
+   14. Contact Section (info panel, map, form)
+   15. Footer
+   16. Back to Top button
+   17. WhatsApp Float button
+   18. Mobile Overlay (behind nav)
+   19. Responsive Breakpoints (991px, 767px, 575px, 400px)
+   20. Gate Opening Animation (overlay, panels, rails, spikes,
+       status light, keyframes)
+   21. Brands Scroll Bar
+   22. How It Works Section (process cards)
+   23. Testimonials Section
+   24. FAQ Accordion
+   25. Areas We Cover Section
+   26. Multi-page Additions (nav dropdown, inner page hero,
+       service page sections, quick enquiry, CTA banner)
+   27. Related Pages Bar
+   28. Skip Link (accessibility)
+   29. Field Error styles
+   30. Mobile Sticky CTA Bar
+   31. Quote Tool CTA Banner (index.html)
    ============================================================ */
 
+/* ══════════════════════════════════════════════════════════
+   1. CSS CUSTOM PROPERTIES
+   These variables control the entire colour scheme and shared
+   values like border-radius, box-shadow, font families, and
+   transition timing. Change a colour here once and it updates
+   everywhere on the site automatically.
+   ══════════════════════════════════════════════════════════ */
 /* ── CSS Custom Properties ────────────────────────────────── */
 :root {
   --gold:        #CC8400;
@@ -28,6 +71,14 @@
   --text-muted:  #888;
 }
 
+/* ══════════════════════════════════════════════════════════
+   2. RESET / BASE STYLES
+   Normalises browser defaults. box-sizing:border-box means
+   padding is included inside an element's stated width —
+   this prevents layout surprises. scroll-padding-top accounts
+   for the sticky header height when jumping to anchor links.
+   overflow-x:hidden prevents horizontal scroll on mobile.
+   ══════════════════════════════════════════════════════════ */
 /* ── Reset / Base ─────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -62,11 +113,23 @@ a:hover { color: var(--gold-dark); }
 
 img { max-width: 100%; height: auto; display: block; }
 
+/* ══════════════════════════════════════════════════════════
+   3. UTILITY CLASSES
+   Small single-purpose classes used inline in HTML to apply
+   the brand colour quickly without writing custom CSS each time.
+   ══════════════════════════════════════════════════════════ */
 /* ── Utility ──────────────────────────────────────────────── */
 .text-gold   { color: var(--gold) !important; }
 .text-accent { color: var(--gold); }
 .bg-gold     { background: var(--gold); }
 
+/* ══════════════════════════════════════════════════════════
+   4. PRELOADER
+   Full-screen dark overlay shown while the page loads.
+   JavaScript adds class="hidden" once window load fires,
+   triggering the opacity transition. The element is then
+   removed from the DOM entirely via JS after 600ms.
+   ══════════════════════════════════════════════════════════ */
 /* ── Preloader ────────────────────────────────────────────── */
 #preloader {
   position: fixed; inset: 0;
@@ -94,6 +157,16 @@ img { max-width: 100%; height: auto; display: block; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ══════════════════════════════════════════════════════════
+   5. BUTTONS
+   Three button styles used throughout the site:
+   - .btn-gold          — filled gold, used for primary CTAs
+   - .btn-outline-hero  — white outlined, used on dark hero bg
+   - .btn-outline-gold  — gold outlined, used on dark sections
+   All buttons use the Rajdhani heading font and pill shape
+   (border-radius:50px). The :focus-visible state ensures
+   keyboard users can see which button is focused.
+   ══════════════════════════════════════════════════════════ */
 /* ── Buttons ──────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
@@ -171,6 +244,15 @@ img { max-width: 100%; height: auto; display: block; }
   outline-offset: 3px;
 }
 
+/* ══════════════════════════════════════════════════════════
+   6. HEADER / NAVBAR
+   The header is position:fixed so it stays at the top as the
+   user scrolls. It starts near-transparent and becomes more
+   opaque when the 'scrolled' class is added by JavaScript
+   (after 80px of scroll). The hamburger button is hidden on
+   desktop and visible only below 991px. The three
+   .hamburger-line spans animate into an X when .open is added.
+   ══════════════════════════════════════════════════════════ */
 /* ── Header / Navbar ──────────────────────────────────────── */
 #header {
   position: fixed;
@@ -356,6 +438,22 @@ img { max-width: 100%; height: auto; display: block; }
   .mobile-overlay.active { display: block; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   7. HERO SECTION
+   The hero takes up the full viewport height (min-height:100vh)
+   with a dark brown-black gradient background. It contains:
+   - Floating gold particle dots (created by JS)
+   - Hero content (badge, headline, description, buttons)
+   - Hero image (gate graphic, floats gently up and down)
+   - Wave SVG at the bottom to blend into the next section
+
+   The .hero-particle elements use the @keyframes float animation
+   which translates them from bottom to top of the screen with a
+   slow random duration, creating an ambient particle effect.
+
+   The wave SVG uses three layered paths at slightly different
+   speeds and offsets to create a liquid animated wave divider.
+   ══════════════════════════════════════════════════════════ */
 /* ── Hero Section ─────────────────────────────────────────── */
 #hero {
   min-height: 100vh;
@@ -501,6 +599,22 @@ img { max-width: 100%; height: auto; display: block; }
   to   { transform: translate(-90px, 0); }
 }
 
+/* ══════════════════════════════════════════════════════════
+   8. SCROLL REVEAL ANIMATIONS
+   Elements start invisible and offset. JavaScript's
+   IntersectionObserver adds class="visible" when they scroll
+   into view, triggering the transition back to opacity:1 and
+   transform:none.
+
+   .reveal-hero / .show — used for hero section elements,
+     triggered by the window load event (not scroll).
+   .reveal-up    — fades in from below (translateY)
+   .reveal-left  — slides in from the left (translateX negative)
+   .reveal-right — slides in from the right (translateX positive)
+
+   The --delay CSS variable (set inline on each element, e.g.
+   style="--delay:0.1s") staggers animation timing within a group.
+   ══════════════════════════════════════════════════════════ */
 /* ── Scroll Reveal Animations ─────────────────────────────── */
 .reveal-hero      { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
 .reveal-delay-1   { transition-delay: .2s; }
@@ -519,6 +633,16 @@ img { max-width: 100%; height: auto; display: block; }
   transform: none;
 }
 
+/* ══════════════════════════════════════════════════════════
+   9. STATS BAR
+   A gold-background strip showing key numbers: 10+ Years,
+   250+ Customers, 500+ Installations, 100% Satisfaction.
+   The .stat-number elements contain animated counters driven
+   by JavaScript (see main.js counterObserver). They start at
+   0 and count up when scrolled into view.
+
+   On mobile the grid switches from 4 columns to 2, then 1.
+   ══════════════════════════════════════════════════════════ */
 /* ── Stats Section ────────────────────────────────────────── */
 #stats {
   background: var(--gold);
@@ -599,6 +723,13 @@ img { max-width: 100%; height: auto; display: block; }
   .stats-grid { grid-template-columns: 1fr; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   10. SHARED SECTION STYLES
+   All <section> elements get 5rem padding top and bottom.
+   The .section-header pattern (gold tag label, h2, gold
+   divider line, paragraph) is reused in every section and
+   keeps the visual rhythm consistent throughout the page.
+   ══════════════════════════════════════════════════════════ */
 /* ── Section Shared ───────────────────────────────────────── */
 section { padding: 5rem 0; }
 
@@ -638,6 +769,15 @@ section { padding: 5rem 0; }
   margin: 0 auto;
 }
 
+/* ══════════════════════════════════════════════════════════
+   11. ABOUT SECTION
+   Two-column layout: feature list on the left, photo on the right.
+   The .about-image-wrap has a decorative gold border offset
+   behind the photo (.about-image-accent, hidden on mobile).
+   The .about-badge is a gold "10+ Years" tag overlaid on the
+   photo at top-right. Feature items have a subtle slide effect
+   on hover.
+   ══════════════════════════════════════════════════════════ */
 /* ── About Section ────────────────────────────────────────── */
 #about { background: var(--dark); }
 
@@ -752,6 +892,15 @@ section { padding: 5rem 0; }
   opacity: .9;
 }
 
+/* ══════════════════════════════════════════════════════════
+   12. SERVICES SECTION
+   Six service cards plus a CTA card in a 3-column grid.
+   Each .service-card has a hidden gold top-border bar
+   (::before pseudo-element, scaleX:0) that slides in on hover.
+   The icon rotates and turns gold on hover for a lively effect.
+   .service-cta-card is styled differently (darker gradient)
+   to stand out as a contact prompt rather than a service.
+   ══════════════════════════════════════════════════════════ */
 /* ── Services Section ─────────────────────────────────────── */
 #services { background: var(--bg-section); }
 
@@ -848,6 +997,23 @@ section { padding: 5rem 0; }
   background: linear-gradient(90deg, var(--gold-light), var(--gold));
 }
 
+/* ══════════════════════════════════════════════════════════
+   13. PORTFOLIO SECTION + LIGHTBOX
+   The portfolio grid uses CSS Grid (3 columns → 2 → 1 on
+   mobile). Each .portfolio-wrap enforces aspect-ratio:4/3 so
+   all thumbnails are the same size regardless of the photo.
+
+   The .portfolio-overlay is always visible (gradient at bottom)
+   showing the title. The zoom button (.portfolio-zoom-btn)
+   starts at opacity:0 and scale:0.8 — on hover it fades in
+   and scales up to 1.
+
+   The .lightbox is a full-screen fixed overlay that starts
+   hidden (opacity:0, visibility:hidden). JavaScript adds
+   class="active" to show it. The prev/next buttons are
+   position:fixed so they stay on screen regardless of the
+   image dimensions.
+   ══════════════════════════════════════════════════════════ */
 /* ── Portfolio Section ────────────────────────────────────── */
 #portfolio { background: var(--dark); }
 
@@ -1065,6 +1231,16 @@ section { padding: 5rem 0; }
   .portfolio-grid { grid-template-columns: 1fr; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   14. CONTACT SECTION + FORM
+   Two-column layout: contact info on the left, form on the right.
+   The form has focus styles (gold border + faint gold glow) and
+   invalid states (red border + red glow) for clear feedback.
+   The select dropdown uses a custom SVG gold arrow via
+   background-image to replace the browser's default arrow.
+   .form-success and .form-error start display:none and show
+   as flexbox when JavaScript adds class="visible".
+   ══════════════════════════════════════════════════════════ */
 /* ── Contact Section ──────────────────────────────────────── */
 #contact { background: var(--bg-section); }
 
@@ -1253,6 +1429,14 @@ section { padding: 5rem 0; }
 .form-error i { font-size: 1.2rem; color: #e57373; }
 .form-error a { color: #ef9a9a; text-decoration: underline; }
 
+/* ══════════════════════════════════════════════════════════
+   15. FOOTER
+   Four-column grid: brand/social | quick links | contact info
+   | payment methods. The .footer-bottom holds the copyright
+   line with the auto-updated year (set by JavaScript).
+   All text is muted (rgba white at low opacity) to keep the
+   footer understated compared to the content above it.
+   ══════════════════════════════════════════════════════════ */
 /* ── Footer ───────────────────────────────────────────────── */
 #footer { background: var(--dark); }
 
@@ -1372,7 +1556,19 @@ section { padding: 5rem 0; }
   margin: 0;
 }
 
+/* ══════════════════════════════════════════════════════════
+   16. BACK TO TOP BUTTON
+   Fixed gold circle at bottom-right. Starts invisible.
+   JavaScript adds class="visible" after 400px of scroll.
+   ══════════════════════════════════════════════════════════ */
 /* ── Back to Top ──────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════
+   17. WHATSAPP FLOAT BUTTON
+   Green floating button (matching WhatsApp's brand colour
+   #25d366) that appears on desktop above the back-to-top
+   button. On mobile it is hidden — the Mobile CTA Bar takes
+   its place instead. Links to https://wa.me/447434001222.
+   ══════════════════════════════════════════════════════════ */
 /* WhatsApp Floating Button */
 .whatsapp-float {
   position: fixed;
@@ -1430,6 +1626,12 @@ section { padding: 5rem 0; }
   box-shadow: 0 8px 25px rgba(204,132,0,.5);
 }
 
+/* ══════════════════════════════════════════════════════════
+   18. MOBILE OVERLAY
+   A semi-transparent dark layer added behind the mobile nav
+   drawer when it opens. Created by JavaScript and displayed
+   here. Clicking it closes the nav menu.
+   ══════════════════════════════════════════════════════════ */
 /* ── Mobile Overlay ───────────────────────────────────────── */
 .mobile-overlay {
   display: none;
@@ -1441,6 +1643,18 @@ section { padding: 5rem 0; }
 }
 .mobile-overlay.active { display: block; }
 
+/* ══════════════════════════════════════════════════════════
+   19. RESPONSIVE BREAKPOINTS
+   The site has four main breakpoints:
+   - 991px  (tablet) — nav switches to mobile drawer,
+                        2-column stats grid
+   - 767px  (large mobile) — reduced section padding,
+                        hero buttons stack vertically
+   - 575px  (mobile) — further padding reductions, inputs get
+                        font-size:1rem to prevent iOS zoom
+   - 400px  (small phones) — stats go to single column,
+                        hide hero badge
+   ══════════════════════════════════════════════════════════ */
 /* ── Responsive Adjustments ───────────────────────────────── */
 
 /* ── Tablet (≤ 991px) ─────────────────────────────────────── */
@@ -1568,6 +1782,52 @@ section { padding: 5rem 0; }
   .contact-form { padding: 1rem .875rem; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   20. GATE OPENING ANIMATION
+   The opening animation simulates a pair of iron security
+   gates parting to reveal the site content. It only plays
+   on the first visit per browser session (controlled by JS).
+
+   STRUCTURE:
+   - #gate-overlay            — full-screen container, flexbox
+   - .gate-panel-left         — left half gate panel
+   - .gate-panel-right        — right half gate panel
+   - .gate-divider            — centre post between the gates
+   - .gate-center-logo        — MPW logo centred on screen
+   - .gate-status-light       — small LED dot below the logo
+
+   HOW THE PANELS LOOK:
+   The gate panels use complex CSS background-image layers to
+   simulate a photorealistic iron gate:
+   1. Ambient light gradient (warm gold glow from ground,
+      cool darkness above)
+   2. repeating-linear-gradient for vertical iron bars —
+      each bar has a dark edge, highlight in the middle,
+      and dark edge on the other side to simulate a curved
+      cylindrical surface catching the light
+   3. ::before pseudo-element adds four horizontal rails
+      (top, upper-third, lower-third, bottom) each with
+      their own shadow and highlight
+   4. ::after pseudo-element adds ornamental spike finials
+      at the top of each bar, using a mask to fade them out
+
+   ANIMATION SEQUENCE (controlled by JS):
+   - At 0ms:     overlay visible, scroll locked
+   - At 1400ms:  status light switches red → gold (.go class)
+   - At 1800ms:  .gate-opening class triggers the 2.8s
+                  translateX animation (panels slide off-screen)
+   - At 4600ms:  .gate-done class triggers 0.8s fade-out
+   - At 5400ms:  overlay removed, scroll unlocked
+
+   KEYFRAMES:
+   - gate-open-left   — translates left panel to -100%
+   - gate-open-right  — translates right panel to +100%
+   - gate-overlay-fade — fades entire overlay to opacity:0
+   - gate-logo-pulse  — gentle opacity pulse on the logo
+   - status-blink     — red light blinks on/off
+   - status-switch    — transitions red light to gold
+   - divider-fade     — centre post fades out as gates open
+   ══════════════════════════════════════════════════════════ */
 /* ── Gate Opening Animation ───────────────────────────────── */
 #gate-overlay {
   position: fixed;
@@ -1809,6 +2069,22 @@ section { padding: 5rem 0; }
   .gate-center-logo img { max-height: 40px; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   21. BRANDS SCROLL BAR
+   A horizontally scrolling strip showing the logos of trusted
+   brands MPW works with (CAME, BFT, FAAC, Hikvision, etc.).
+   The logos are duplicated in the HTML so the scroll animation
+   loops seamlessly — when the first set reaches the left edge,
+   the duplicate set has already filled the visible area.
+
+   .brands-overflow clips the container and applies a fade mask
+   on the left and right edges using -webkit-mask-image so the
+   logos gracefully fade in/out rather than cutting off abruptly.
+
+   All logos use filter:brightness(0) invert(1) to convert them
+   to white — this ensures they all look consistent on the dark
+   background regardless of their original colours.
+   ══════════════════════════════════════════════════════════ */
 /* ======= Brands Bar ======= */
 #brands-bar {
   padding: 24px 0 28px;
@@ -1869,6 +2145,13 @@ section { padding: 5rem 0; }
   100% { transform: translateX(-50%); }
 }
 
+/* ══════════════════════════════════════════════════════════
+   22. HOW IT WORKS SECTION
+   Four numbered process cards in a row explaining the customer
+   journey: site survey → bespoke design → installation →
+   aftercare. Each card has a large faint number (01–04) in the
+   background, a gold icon, and content. Cards lift on hover.
+   ══════════════════════════════════════════════════════════ */
 /* ======= How It Works Section ======= */
 #how-it-works {
   padding: 90px 0;
@@ -1926,6 +2209,14 @@ section { padding: 5rem 0; }
   margin: 0;
 }
 
+/* ══════════════════════════════════════════════════════════
+   23. TESTIMONIALS SECTION
+   Three customer review cards. Each has gold stars, quote text
+   (with CSS-generated open/close quote marks via ::before and
+   ::after), and an author with initials avatar. Cards are on
+   a slightly lighter background (.surface) to distinguish
+   from adjacent sections. Cards lift subtly on hover.
+   ══════════════════════════════════════════════════════════ */
 /* ======= Testimonials Section ======= */
 #testimonials {
   padding: 90px 0;
@@ -1987,6 +2278,16 @@ section { padding: 5rem 0; }
   color: var(--text-muted);
 }
 
+/* ══════════════════════════════════════════════════════════
+   24. FAQ ACCORDION
+   Uses Bootstrap's native accordion component. The custom
+   styles here override Bootstrap's defaults to match the
+   dark theme — dark background for items, gold for the
+   active/open button text, gold chevron for the open state.
+   The accordion-button::after is the Bootstrap expand/collapse
+   arrow icon — we override its filter to make it white on dark
+   and gold when open.
+   ══════════════════════════════════════════════════════════ */
 /* ======= FAQ Section ======= */
 #faq { padding: 80px 0; }
 
@@ -2042,6 +2343,13 @@ section { padding: 5rem 0; }
   text-decoration: underline;
 }
 
+/* ══════════════════════════════════════════════════════════
+   25. AREAS WE COVER SECTION
+   Six area cards in a grid (6 per row on large screens,
+   fewer on smaller). Each card has a small gold circle icon,
+   area name, and postcode/service description. Cards lift
+   and show a gold border on hover.
+   ══════════════════════════════════════════════════════════ */
 /* ======= Areas We Cover Section ======= */
 .areas-section { padding: 80px 0; background: var(--dark); }
 
@@ -2104,10 +2412,21 @@ section { padding: 5rem 0; }
 
 .areas-note a:hover { text-decoration: underline; }
 
+/* ══════════════════════════════════════════════════════════
+   26–31. MULTI-PAGE ADDITIONS
+   Styles used exclusively by the standalone service pages,
+   area pages, and the quote tool — not on the homepage.
+   ══════════════════════════════════════════════════════════ */
 /* ======================================================
    MULTI-PAGE ADDITIONS
    ====================================================== */
 
+/* ── Services Dropdown Nav ───────────────────────────────────
+   Desktop: the dropdown appears on hover/focus-within, sliding
+   down from slightly above its final position. On mobile
+   (≤991px) it becomes a static indented list that toggles
+   via JavaScript when the "Services" link is tapped.
+   ─────────────────────────────────────────────────────────── */
 /* ── Services Dropdown Nav ──────────────────────────── */
 .nav-item-dropdown { position: relative; }
 
@@ -2197,6 +2516,13 @@ section { padding: 5rem 0; }
   .nav-caret { display: none; }
 }
 
+/* ── Inner Page Hero ─────────────────────────────────────────
+   Used by all service pages and area pages as the top banner.
+   Shorter than the homepage hero (min-height:340px vs 100vh).
+   Contains a breadcrumb trail, h1, subtitle, CTA button, and
+   phone number. The ::before pseudo-element adds a subtle
+   radial gold glow from the right side.
+   ─────────────────────────────────────────────────────────── */
 /* ── Inner Page Hero ─────────────────────────────────── */
 .page-hero {
   min-height: 340px;
@@ -2270,6 +2596,14 @@ section { padding: 5rem 0; }
   .page-hero-actions { flex-direction: column; align-items: flex-start; gap: .65rem; }
 }
 
+/* ── Content Page Sections ───────────────────────────────────
+   Service pages use a consistent alternating pattern:
+   intro-section (dark bg) → details-section (bg-section) →
+   why-section (dark) → page-faq-section (bg-section).
+   The .check-list uses a Font Awesome checkmark via ::before
+   (Unicode F058 = fa-circle-check) rather than HTML so the
+   markup stays clean.
+   ─────────────────────────────────────────────────────────── */
 /* ── Content Page Sections ───────────────────────────── */
 .intro-section   { background: var(--dark);       padding: 5rem 0; }
 .details-section { background: var(--bg-section);  padding: 5rem 0; }
@@ -2378,6 +2712,12 @@ section { padding: 5rem 0; }
 .why-card h4 { font-size: .92rem; font-weight: 700; color: var(--text); margin-bottom: .35rem; }
 .why-card p  { font-size: .83rem; color: var(--text-light); line-height: 1.6; margin: 0; }
 
+/* Quick enquiry sidebar panel ───────────────────────────────
+   A sticky contact box that follows the user as they scroll
+   down a service page (position:sticky, top:90px accounts
+   for the fixed header). Shows phone, email, address, and a
+   quote button.
+   ─────────────────────────────────────────────────────────── */
 /* Quick enquiry sidebar panel */
 .quick-enquiry {
   background: var(--surface);
@@ -2400,6 +2740,12 @@ section { padding: 5rem 0; }
 .quick-enquiry .contact-info-item h5 { font-size: .8rem; }
 .quick-enquiry .contact-info-item p  { font-size: .85rem; }
 
+/* ── Page CTA Banner ─────────────────────────────────────────
+   Gold-background full-width CTA section at the bottom of
+   each service page ("Ready to Get Started?"). Has two buttons:
+   a white filled button (.btn-cta-white) and a white outlined
+   button (.btn-cta-outline). Both invert on hover.
+   ─────────────────────────────────────────────────────────── */
 /* ── Page CTA Banner ─────────────────────────────────── */
 .page-cta-section {
   background: var(--gold);
@@ -2488,6 +2834,12 @@ section { padding: 5rem 0; }
   background: radial-gradient(ellipse at 60% 50%, rgba(0,80,180,.07) 0%, transparent 65%);
 }
 
+/* ── Related Links Bar ───────────────────────────────────────
+   A thin bar below the CTA section on service/area pages
+   showing pill-shaped links to related pages (e.g. from the
+   Automated Gates page, links to Gate Servicing, CCTV etc.).
+   Helps with internal linking and SEO.
+   ─────────────────────────────────────────────────────────── */
 /* ── Related links bar ───────────────────────────────── */
 .related-pages {
   background: var(--surface);
@@ -2544,6 +2896,13 @@ section { padding: 5rem 0; }
   border-color: var(--gold);
 }
 
+/* ── Skip to Main Content (accessibility) ────────────────────
+   A hidden link that becomes visible only when focused via
+   keyboard (Tab key). Screen reader and keyboard users can
+   skip the header navigation and jump straight to the main
+   content. It's visually hidden off-screen (top:-100px) and
+   slides into view on focus (top:0).
+   ─────────────────────────────────────────────────────────── */
 /* ── Skip to main content (accessibility) ─────────────────── */
 .skip-link {
   position: absolute;
@@ -2565,6 +2924,11 @@ section { padding: 5rem 0; }
   color: #000;
 }
 
+/* ── Inline Form Field Errors ────────────────────────────────
+   Error message text that appears below a form field when
+   validation fails. Created dynamically by JavaScript's
+   setFieldError() function in main.js.
+   ─────────────────────────────────────────────────────────── */
 /* ── Inline form field errors ─────────────────────────────── */
 .field-error {
   display: block;
@@ -2576,6 +2940,21 @@ section { padding: 5rem 0; }
   letter-spacing: .2px;
 }
 
+/* ── Mobile Sticky CTA Bar ───────────────────────────────────
+   A three-button bar fixed to the bottom of the screen on
+   mobile (≤991px). Contains: Call Us (gold), WhatsApp (green),
+   Free Quote (dark). Hidden on desktop — desktop users see the
+   floating WhatsApp button and the nav "Get a Quote" button
+   instead.
+
+   When the user scrolls the contact section into view,
+   JavaScript adds class="hidden-by-contact" which translates
+   the bar off-screen downward — avoiding the awkward
+   situation of showing "Get a Quote" right next to the form.
+
+   The bar also adds padding-bottom to <body> so the page
+   content isn't hidden behind it.
+   ─────────────────────────────────────────────────────────── */
 /* ── Mobile Sticky CTA Bar ────────────────────────────────── */
 .mobile-cta-bar {
   display: none; /* hidden on desktop */
@@ -2678,6 +3057,14 @@ section { padding: 5rem 0; }
   }
 }
 
+/* ══════════════════════════════════════════════════════════
+   31. QUOTE TOOL CTA BANNER (index.html)
+   A dark card with a gold border and subtle gradients that
+   appears between the How It Works and Portfolio sections.
+   It prompts visitors to use the price estimator tool on
+   quote.html. The ::after pseudo-element adds a decorative
+   giant gear icon as a faint watermark in the background.
+   ══════════════════════════════════════════════════════════ */
 /* ============================================================
    Quote Tool CTA Banner (index.html)
    ============================================================ */

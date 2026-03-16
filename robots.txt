@@ -1,4 +1,29 @@
+# ============================================================
+# robots.txt — Instructions for Search Engine Crawlers
+# ============================================================
+# This file tells search engine bots (like Googlebot) which
+# pages they are allowed or not allowed to crawl and index.
+#
+# FORMAT:
+# User-agent: *     — applies to all bots
+# Allow: /          — allow crawling of everything
+# Sitemap: <url>    — tells bots where to find the sitemap
+#
+# Currently this file allows ALL bots to crawl ALL pages.
+# If you ever want to block a specific page from being
+# indexed (e.g. a thank-you page), you would add:
+# Disallow: /thank-you.html
+#
+# IMPORTANT: Blocking a page here prevents crawling but does
+# NOT guarantee it won't appear in search results — use
+# <meta name="robots" content="noindex"> on the page itself
+# for that.
+# ============================================================
+
+# Allow all search engine bots to crawl the entire site
 User-agent: *
 Allow: /
 
+# Location of the XML sitemap — tells bots where to find
+# the full list of pages to index
 Sitemap: https://www.mpwelectricalsecurity.com/sitemap.xml

@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     MPW Electrical Security — Quote / Price Estimator (quote.html)
+     ============================================================
+     This page contains a 5-step interactive pricing wizard that
+     gives visitors a ballpark price range before they commit to
+     booking a site survey. It does NOT give exact prices — just
+     a guide to set expectations.
+
+     HOW IT WORKS:
+     1. Visitor answers 5 questions (property type, system type,
+        size/camera count, access control, material/storage)
+     2. JavaScript calculates a price range from the PRICE table
+     3. Result is shown with a form to book a free site survey
+     4. Form submits to Netlify Forms
+
+     HOW TO UPDATE PRICES:
+     Find the PRICE object in the <script> block at the bottom
+     of this file (around line 815). Each entry is [low, high]
+     in pounds. Change the numbers, save and deploy.
+
+     NETLIFY FORM:
+     The result form uses name="quote-estimate" — this must match
+     the form-name hidden input. Submissions appear in the Netlify
+     dashboard under Forms > quote-estimate.
+     ============================================================ -->
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
@@ -550,11 +575,37 @@
       </div>
     </section>
 
+    <!-- ======= Configurator ══════════════════════════════════════
+         The main wizard card. All 5 step panels and the result panel
+         live inside this single .configurator-card div.
+
+         HOW THE PANEL SYSTEM WORKS:
+         - Each .config-panel starts hidden (no class)
+         - JavaScript adds class="active" to the current step panel
+         - When navigating back, class="is-back" is also added for
+           a reverse slide animation
+         - The result panel has id="panelResult" and is shown when
+           JavaScript calls goToStep(6)
+
+         STEPS 3, 4, 5 ARE DYNAMIC:
+         The question title, hint text, and option buttons for steps
+         3–5 are different depending on what was chosen in step 2.
+         JavaScript's renderDynamicStep(n) function reads the STEPS
+         data object and builds the HTML on the fly.
+         ──────────────────────────────────────────────────────────── -->
     <!-- ======= Configurator ======= -->
     <section class="quote-section">
       <div class="container">
         <div class="configurator-card">
 
+          <!-- ── Progress Bar ─────────────────────────────────────────
+               Shows the user how far through the 5 steps they are.
+               - #progressFill: the gold bar — JS sets its width as a %
+               - #dot1–#dot5: circular step indicators
+                 - class="active" = current step (gold border)
+                 - class="done" = completed step (gold fill with checkmark)
+               - #stepCounter: text like "Step 2 of 5"
+               ──────────────────────────────────────────────────────── -->
           <!-- Progress -->
           <div class="config-progress">
             <div class="config-progress-track">
@@ -570,9 +621,14 @@
             <div class="config-step-counter" id="stepCounter">Step 1 of 5</div>
           </div>
 
-          <!-- Step panels -->
+          <!-- Step panels — JavaScript shows/hides these via class="active" -->
           <div class="config-panels" id="configPanels">
 
+            <!-- ── Step 1: Property Type ──────────────────────────────
+                 Residential or Commercial. This sets a multiplier:
+                 commercial jobs use PRICE.commercialMult (1.45) to
+                 add 45% to the total estimate.
+                 ──────────────────────────────────────────────────────── -->
             <!-- Step 1: Property type -->
             <div class="config-panel active" id="panel1">
               <h2 class="config-question">What type of property is this for?</h2>
@@ -589,6 +645,16 @@
               </div>
             </div>
 
+            <!-- ── Step 2: System Type ────────────────────────────────
+                 The answer to this step determines which version of
+                 steps 3, 4, 5 the visitor sees:
+                 - swing/sliding/bifold/unsure → 'gate' path
+                   (width → access control → material)
+                 - barrier → 'barrier' path
+                   (entrance width → access control → CCTV add-on?)
+                 - cctv_only → 'cctv' path
+                   (camera count → coverage area → storage type)
+                 ──────────────────────────────────────────────────────── -->
             <!-- Step 2: What do you need -->
             <div class="config-panel" id="panel2">
               <h2 class="config-question">What are you looking to have installed?</h2>
@@ -621,6 +687,14 @@
               </div>
             </div>
 
+            <!-- ── Steps 3, 4, 5: Dynamic panels ─────────────────────
+                 These panels have empty content in the HTML.
+                 JavaScript's renderDynamicStep(n) function fills in
+                 the title, hint, and option buttons at runtime based
+                 on what was selected in step 2.
+                 The STEPS data object (in the script at the bottom)
+                 contains the content for each path (gate/barrier/cctv).
+                 ──────────────────────────────────────────────────────── -->
             <!-- Step 3: dynamic (width / camera count) -->
             <div class="config-panel" id="panel3">
               <h2 class="config-question" id="q3title"></h2>
@@ -642,6 +716,21 @@
               <div class="config-opts" id="q5opts"></div>
             </div>
 
+            <!-- ── Result Panel ───────────────────────────────────────
+                 Shown after step 5 is answered (step 6 = result).
+                 JavaScript's buildResult() function:
+                 1. Calls calcPrice() to get {low, high} price range
+                 2. Fills #resultPriceDisplay with formatted price string
+                 3. Fills #resultSummary with tag chips for each answer
+                 4. Shows/hides #cctvTip based on whether it's a gate job
+                 5. Pre-fills hidden inputs with the estimate and selections
+                 6. Fires a GA event 'quote_complete'
+
+                 The form below the price lets the visitor book a site visit.
+                 It submits to Netlify (name="quote-estimate").
+                 Hidden inputs pass the price estimate and full selections
+                 to Matt so he can see what the visitor was interested in.
+                 ──────────────────────────────────────────────────────── -->
             <!-- Result panel -->
             <div class="config-panel" id="panelResult">
               <div class="result-panel">
@@ -803,11 +892,53 @@
   <!-- Site JS (header scroll, mobile nav, back-to-top, footer year) -->
   <script src="js/main.js"></script>
 
+  <!-- ── Quote Configurator ─────────────────────────────────────
+       All the pricing logic and wizard behaviour lives in this
+       self-contained IIFE (Immediately Invoked Function Expression).
+       It uses 'var' instead of 'const/let' for maximum browser
+       compatibility without needing a build step.
+
+       KEY DATA STRUCTURES:
+       - PRICE      — all price ranges [low, high] in pounds
+       - STEPS      — question content for the 3 dynamic steps,
+                       keyed by path (gate/barrier/cctv)
+       - LABELS     — human-readable labels for result summary tags
+       - state      — tracks current step and all answers
+
+       KEY FUNCTIONS:
+       - typeCategory()       — returns 'gate', 'barrier', or 'cctv'
+                                 based on the step 2 answer
+       - renderDynamicStep(n) — builds steps 3–5 HTML based on
+                                 current category
+       - goToStep(n, isBack)  — shows the correct panel, updates
+                                 progress bar, triggers buildResult()
+                                 on step 6
+       - onOptionClick(e)     — handles button clicks, stores answer,
+                                 advances to next step after 200ms delay
+       - calcPrice()          — adds up base + step 3/4/5 additions,
+                                 applies commercial multiplier, rounds to £50
+       - buildResult()        — fills the result panel with the price,
+                                 summary tags, and fires GA event
+       ──────────────────────────────────────────────────────────── -->
   <!-- ── Quote Configurator ──────────────────────────────────── -->
   <script>
   (function () {
     'use strict';
 
+    /* ── Pricing tables ─────────────────────────────────────────
+       All prices are in pounds sterling [low, high].
+       To update a price, change the two numbers in the array.
+       E.g. to raise the swing gate starting price: swing: [2000, 4000]
+
+       PRICE.base        — starting price for each system type
+       PRICE.width       — added cost based on gate opening width
+       PRICE.cameras     — added cost based on number of CCTV cameras
+       PRICE.access      — added cost for access control type
+       PRICE.cctvCoverage— added cost for CCTV coverage area
+       PRICE.material    — added cost for gate material choice
+       PRICE.storage     — added cost for CCTV recording method
+       PRICE.commercialMult — multiplier for commercial jobs (1.45 = +45%)
+       ────────────────────────────────────────────────────────── */
     /* ── Pricing tables ───────────────────────────────────────── */
     var PRICE = {
       base: {
