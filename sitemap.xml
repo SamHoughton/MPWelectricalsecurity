@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.mpwelectricalsecurity.com/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,37 +12,37 @@
   <!-- Service Pages -->
   <url>
     <loc>https://www.mpwelectricalsecurity.com/automated-gates.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mpwelectricalsecurity.com/cctv-installation.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mpwelectricalsecurity.com/alarm-systems.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mpwelectricalsecurity.com/gate-servicing.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mpwelectricalsecurity.com/access-control.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mpwelectricalsecurity.com/security-lighting.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -50,29 +50,29 @@
   <!-- Location Pages -->
   <url>
     <loc>https://www.mpwelectricalsecurity.com/wigan.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mpwelectricalsecurity.com/st-helens.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mpwelectricalsecurity.com/newton-le-willows.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Utility -->
+  <!-- Quote Tool -->
   <url>
-    <loc>https://www.mpwelectricalsecurity.com/youtube.html</loc>
-    <lastmod>2026-03-13</lastmod>
+    <loc>https://www.mpwelectricalsecurity.com/quote.html</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 
 </urlset>
