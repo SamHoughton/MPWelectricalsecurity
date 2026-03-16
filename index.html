@@ -1,4 +1,22 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     MPW Electrical Security — Homepage (index.html)
+     ============================================================
+     This is the main single-page website for Matt's business.
+     It contains all sections: hero, stats, brands bar, about,
+     services, how-it-works, quote CTA, portfolio, testimonials,
+     FAQ, areas, and contact.
+
+     KEY DEPENDENCIES loaded in this file:
+     - Bootstrap 5.3.2 CSS (grid, accordion) — CDN
+     - Font Awesome 6.5.0 (all icons) — CDN
+     - Google Fonts: Inter (body) + Rajdhani (headings) — CDN
+     - Google Analytics 4 (G-H4FW36QNJ8) — inline script in <head>
+     - Bootstrap 5.3.2 JS (accordion) — CDN, before </body>
+     - css/style.css — all custom styles
+     - js/main.js — all custom interactivity
+     - Inline gate animation script — bottom of <body>
+     ============================================================ -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -11,15 +29,33 @@
   <meta name="author" content="MPW Electrical Security">
   <meta name="theme-color" content="#CC8400">
 
+  <!-- ── Canonical URL ──────────────────────────────────────────
+       Tells Google the definitive URL for this page, preventing
+       duplicate content issues if the page is ever accessed via
+       multiple URLs (e.g. with/without www, http/https).
+       ──────────────────────────────────────────────────────────── -->
   <!-- Canonical -->
   <link rel="canonical" href="https://www.mpwelectricalsecurity.com/">
 
+  <!-- ── Geo / Local SEO Meta Tags ──────────────────────────────
+       These geo tags hint to search engines that this business
+       is location-specific to Newton-le-Willows, North West England.
+       The coordinates (53.4533, -2.6215) are the business address
+       latitude and longitude. These help with local search rankings.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Geo / Local -->
   <meta name="geo.region" content="GB-ENG">
   <meta name="geo.placename" content="Newton-le-Willows, North West England">
   <meta name="geo.position" content="53.4533;-2.6215">
   <meta name="ICBM" content="53.4533, -2.6215">
 
+  <!-- ── Open Graph Tags ────────────────────────────────────────
+       These control how the page appears when shared on Facebook,
+       LinkedIn, WhatsApp, and other social platforms. The og:image
+       is the photo that appears as a preview thumbnail. It should
+       be at least 1200×630 pixels. If you update the main about
+       photo, also update og:image here and on all other pages.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Open Graph (Facebook / LinkedIn) -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MPW Electrical Security">
@@ -32,12 +68,22 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="MPW Electrical Security automatic gate installation">
 
+  <!-- ── Twitter / X Card Tags ─────────────────────────────────
+       "summary_large_image" shows a full-width image preview when
+       the URL is shared on Twitter/X. Uses the same image as OG.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Automated Gates Wigan | MPW Electrical Security | CCTV & Alarms North West">
   <meta name="twitter:description" content="MPW Electrical Security install bespoke automated gates, CCTV, alarms and access control in Wigan, Newton-le-Willows, St Helens & across the North West. 250+ installations. Free site visit.">
   <meta name="twitter:image" content="https://www.mpwelectricalsecurity.com/img/aboutusgate.jpg">
 
+  <!-- ── Favicons & App Icons ───────────────────────────────────
+       The favicon appears in browser tabs and bookmarks.
+       The apple-touch-icon is used on iPhone/iPad home screens.
+       The site.webmanifest file tells browsers about the app name,
+       theme colour, and icons for "Add to Home Screen" on Android.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Favicons & App Icons -->
   <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
@@ -47,20 +93,45 @@
   <meta name="apple-mobile-web-app-title" content="MPW Security">
   <link rel="manifest" href="site.webmanifest">
 
+  <!-- ── Preload Critical Assets ────────────────────────────────
+       Tells the browser to start downloading the hero image
+       immediately, before it processes the CSS. This reduces the
+       Largest Contentful Paint (LCP) time — an important Google
+       page speed metric. Only use preload for images that appear
+       above the fold (visible without scrolling).
+       ──────────────────────────────────────────────────────────── -->
   <!-- Preload critical assets -->
   <link rel="preload" as="image" href="img/edit.png" fetchpriority="high">
 
+  <!-- ── Google Fonts ───────────────────────────────────────────
+       Inter is used for all body text. Rajdhani is used for
+       headings, buttons, and nav. The preconnect hints tell the
+       browser to open connections to Google's font servers early,
+       reducing the time before fonts start loading.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Bootstrap 5 CSS — provides the 12-column grid system used for
+       layout throughout the site, and the accordion component used
+       for the FAQ section. Loaded from CDN for fast delivery. -->
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Font Awesome 6 — provides all the icons on the site (gate, camera,
+       phone, chevron arrows, etc.). Loaded from CDN. -->
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <!-- ── Google Analytics 4 ────────────────────────────────────
+       Tracks all page views and custom events. The 'async' attribute
+       means it loads without blocking the page from rendering.
+       Measurement ID: G-H4FW36QNJ8
+       To view reports: analytics.google.com (sign in with the
+       account linked to mpwelectricalsecurity.com)
+       ──────────────────────────────────────────────────────────── -->
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4FW36QNJ8"></script>
   <script>
@@ -70,9 +141,19 @@
     gtag('config', 'G-H4FW36QNJ8');
   </script>
 
+  <!-- All custom styles for the site — loaded last so they take
+       priority over Bootstrap defaults -->
   <!-- Custom Styles -->
   <link href="css/style.css" rel="stylesheet">
 
+  <!-- ── JSON-LD Structured Data: LocalBusiness ────────────────
+       This invisible block of data tells Google exactly what MPW
+       Electrical Security is: a local business, with an address,
+       phone number, email, opening hours, social profiles, and a
+       list of services. Google uses this to power rich results in
+       search (e.g. showing the phone number directly in the listing).
+       If any contact details change, update this block too.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Structured Data: LocalBusiness -->
   <script type="application/ld+json">
   {
@@ -144,6 +225,12 @@
   }
   </script>
 
+  <!-- ── JSON-LD Structured Data: FAQPage ─────────────────────
+       Marks up the FAQ section so Google can show questions and
+       answers directly in search results as "rich snippets".
+       Each Question and Answer here must match the visible FAQ
+       accordion content below. Keep them in sync if you edit FAQs.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Structured Data: FAQ -->
   <script type="application/ld+json">
   {
@@ -204,9 +291,32 @@
 </head>
 <body>
 
+  <!-- ── Skip Link (accessibility) ────────────────────────────
+       Hidden link visible only when focused via keyboard (Tab key).
+       Allows screen reader and keyboard users to jump past the
+       navigation directly to the main page content.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Skip to main content (accessibility) -->
   <a class="skip-link" href="#main">Skip to main content</a>
 
+  <!-- ======= Gate Opening Animation =======
+       This is the full-screen animation that plays on a visitor's
+       FIRST visit to the site (not on repeat visits in the same
+       browser session). It shows two iron gate panels opening to
+       reveal the page.
+
+       STRUCTURE:
+       - #gate-overlay        — the full-screen container (z-index: 99999)
+       - .gate-panel-left     — left gate panel (iron bar CSS background)
+       - .gate-panel-right    — right gate panel
+       - .gate-divider        — the thin centre post between the panels
+       - .gate-center-logo    — MPW logo shown centred during animation
+       - .gate-status-light   — small LED dot: red (waiting) → gold (opening)
+
+       The gate panels are drawn entirely with CSS gradients —
+       no images needed. The JavaScript controller (inline script
+       at the bottom of this file) handles the timing sequence.
+       ──────────────────────────────────────────────────────────── -->
   <!-- ======= Gate Opening Animation ======= -->
   <div id="gate-overlay">
     <div class="gate-panel-left"></div>
@@ -219,11 +329,27 @@
   </div>
   <!-- End Gate Animation -->
 
+  <!-- ── Preloader ─────────────────────────────────────────────
+       A simple spinner shown while the page loads. JavaScript
+       removes the 'preloader' div after the window load event
+       fires (all images loaded). Without this, users on slow
+       connections might see unstyled content briefly.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-spinner"></div>
   </div>
 
+  <!-- ======= Header / Navbar ═══════════════════════════════════
+       Fixed header that stays at the top as the user scrolls.
+       - The navbar-toggler (hamburger) is hidden on desktop,
+         visible on mobile — clicking it calls openNav() in main.js
+       - The .navbar-collapse-custom div slides in from the right
+         on mobile when class="open" is added
+       - The services dropdown (.nav-item-dropdown) opens on hover
+         on desktop, and on click on mobile
+       - The "Get a Quote" button links to quote.html
+       ──────────────────────────────────────────────────────────── -->
   <!-- ======= Header / Navbar ======= -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
@@ -264,6 +390,18 @@
     </nav>
   </header>
 
+  <!-- ======= Hero Section ═══════════════════════════════════════
+       Full viewport-height section with a dark brown/black gradient.
+       - #heroParticles: empty div — JavaScript fills it with
+         floating gold particle spans
+       - .reveal-hero elements start invisible and animate in after
+         the window load event (via JavaScript)
+       - The hero image (img/edit.png) is loaded with fetchpriority="high"
+         and loading="eager" because it's the largest visible element
+         on page load (LCP element for Google PageSpeed)
+       - The SVG wave at the bottom creates a smooth transition to
+         the stats bar below
+       ──────────────────────────────────────────────────────────── -->
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-particles" id="heroParticles"></div>
@@ -317,6 +455,13 @@
     </div>
   </section>
 
+  <!-- ======= Stats Bar ══════════════════════════════════════════
+       Gold-background strip showing four headline numbers.
+       Each .stat-number starts at 0 — JavaScript's counter
+       animation runs when this section scrolls into view.
+       data-target="250" tells the JS what number to count up to.
+       The + or % after the number is in a separate .stat-plus span.
+       ──────────────────────────────────────────────────────────── -->
   <!-- ======= Stats Bar ======= -->
   <section id="stats">
     <div class="container">
@@ -355,6 +500,15 @@
 
   <main id="main">
 
+    <!-- ======= Brands Bar ══════════════════════════════════════
+         Infinite-scroll strip of brand/supplier logos.
+         The logos are listed TWICE in the HTML — the second set
+         is an exact duplicate of the first. This is intentional:
+         the CSS animation scrolls both sets together to the left.
+         When the first set reaches the edge, the second set is
+         already in place, creating a seamless endless loop.
+         All logos use a white CSS filter to match the dark theme.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= Brands Bar ======= -->
     <section id="brands-bar">
       <p class="brands-label">Approved installers &amp; trusted brands</p>
@@ -382,6 +536,12 @@
       </div>
     </section>
 
+    <!-- ======= About Section ══════════════════════════════════
+         Two-column layout: feature list on the left, photo on right.
+         The reveal-left/reveal-right classes trigger scroll animations.
+         The .about-image-wrap has an offset gold border behind the
+         photo and a "10+ Years" badge overlaid at top-right.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= About Section ======= -->
     <section id="about">
       <div class="container">
@@ -446,6 +606,14 @@
       </div>
     </section>
 
+    <!-- ======= Services Section ══════════════════════════════
+         Six service cards plus a CTA card in a Bootstrap 3-column
+         grid (col-md-6 col-lg-4). Each card has style="--delay:Xs"
+         to stagger the reveal animations. The last card
+         (.service-cta-card) has a different dark styling and
+         encourages visitors to get in touch rather than listing
+         a specific service.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= Services Section ======= -->
     <section id="services">
       <div class="container">
@@ -521,6 +689,13 @@
       </div>
     </section>
 
+    <!-- ======= How It Works Section ══════════════════════════
+         Four numbered process cards explaining the customer journey:
+         1. Free site survey  2. Bespoke design
+         3. Expert installation  4. Aftercare & support
+         The process numbers (01–04) are shown in large faint text
+         behind each card's content via CSS.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= How It Works Section ======= -->
     <section id="how-it-works">
       <div class="container">
@@ -568,6 +743,12 @@
       </div>
     </section>
 
+    <!-- ======= Quote Tool CTA Banner ════════════════════════
+         A prominent call-to-action card prompting visitors to
+         use the price estimator tool. Links to quote.html.
+         Positioned between How It Works and Portfolio for
+         maximum visibility mid-scroll.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= Quote Tool CTA Banner ======= -->
     <section id="quote-cta-banner">
       <div class="container">
@@ -588,6 +769,26 @@
       </div>
     </section>
 
+    <!-- ======= Portfolio Section ══════════════════════════════
+         Gallery of past installation photos with a filter system
+         and custom lightbox.
+
+         FILTER BUTTONS: Each .filter-btn has data-filter="category".
+         JavaScript shows/hides .portfolio-item divs based on their
+         data-category attribute. Categories: all, gate, barrier,
+         lighting, security.
+
+         PORTFOLIO ITEMS: Each item needs:
+         - data-category="..." on the outer div (for filtering)
+         - An <img> with descriptive alt text (for Google Images SEO)
+         - A .portfolio-overlay with title and subtitle
+         - A .portfolio-zoom-btn with data-src and data-title
+           (JavaScript reads these to show the correct image
+           in the lightbox)
+
+         ADDING NEW PHOTOS: See README.md for step-by-step
+         instructions on adding new portfolio photos.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio">
       <div class="container">
@@ -850,6 +1051,14 @@
         </div>
       </div>
 
+      <!-- ── Custom Lightbox ──────────────────────────────────────
+           Full-screen image viewer. Starts hidden (aria-hidden="true").
+           JavaScript adds class="active" to show it when a zoom button
+           is clicked. The lightbox-body holds the actual image and caption.
+           Navigation: lightboxPrev / lightboxNext buttons, keyboard
+           arrow keys, and left/right swipe on mobile.
+           Closes on: X button, clicking the dark overlay, Escape key.
+           ──────────────────────────────────────────────────────────── -->
       <!-- Custom Lightbox -->
       <div class="lightbox" id="lightbox" aria-hidden="true">
         <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
@@ -862,6 +1071,13 @@
       </div>
     </section>
 
+    <!-- ======= Testimonials Section ══════════════════════════
+         Three customer review cards. These are hardcoded in HTML —
+         they are not pulled automatically from Google Reviews.
+         To add or change a review, edit the .testimonial-card
+         divs directly. Each card has the reviewer's initials as
+         an avatar (the .testimonial-avatar div).
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials">
       <div class="container">
@@ -927,6 +1143,16 @@
       </div>
     </section>
 
+    <!-- ======= FAQ Section ════════════════════════════════════
+         Bootstrap 5 accordion component. Each accordion-item has
+         a header button (data-bs-toggle="collapse") and a collapsible
+         body. Bootstrap JS handles the open/close animation.
+
+         IMPORTANT: The FAQ questions and answers here must stay in
+         sync with the JSON-LD FAQPage schema in the <head>. Both
+         are used by Google — one for the visible page, one for
+         rich search result snippets.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= FAQ Section ======= -->
     <section id="faq">
       <div class="container">
@@ -1025,6 +1251,14 @@
       </div>
     </section>
 
+    <!-- ======= Areas We Cover Section ════════════════════════
+         Six area cards showing where MPW covers. Each card has
+         an icon, area name, and postcode range/services.
+         To add a new area, copy an .area-card block and update
+         the icon, name, and description. The Bootstrap grid
+         handles responsive layout automatically.
+         To also add a dedicated area page, see README.md.
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= Areas We Cover Section ======= -->
     <section id="areas" class="areas-section">
       <div class="container">
@@ -1093,6 +1327,20 @@
       </div>
     </section>
 
+    <!-- ======= Contact Section ════════════════════════════════
+         Two-column layout: contact details on the left, form on right.
+
+         CONTACT INFO: Phone, email, address, social links, and an
+         embedded Google Maps iframe. To update contact details,
+         change both here AND in the footer AND in the JSON-LD schema.
+
+         NETLIFY FORM: The form uses data-netlify="true" to submit
+         to Netlify's form service without any server code.
+         The hidden input name="form-name" value="contact" is required
+         by Netlify to identify which form this is.
+         The bot-field (display:none) is a honeypot anti-spam trap.
+         JavaScript validates the form and POSTs it via fetch().
+         ──────────────────────────────────────────────────────── -->
     <!-- ======= Contact Section ======= -->
     <section id="contact">
       <div class="container">
@@ -1268,6 +1516,13 @@
     </div>
   </footer>
 
+  <!-- ── Mobile Sticky CTA Bar ──────────────────────────────────
+       Three fixed-bottom buttons shown on mobile only (≤991px).
+       JavaScript hides this bar when the contact section is
+       visible to avoid redundancy. The WhatsApp link uses the
+       international format: https://wa.me/447434001222
+       (no + or spaces — just the country code and number).
+       ──────────────────────────────────────────────────────────── -->
   <!-- Mobile Sticky CTA Bar (hidden on desktop) -->
   <div class="mobile-cta-bar" id="mobileCTABar" aria-label="Quick contact">
     <a href="tel:07434001222" class="mobile-cta-btn mobile-cta-call">
@@ -1284,22 +1539,66 @@
     </a>
   </div>
 
+  <!-- ── WhatsApp Float Button (desktop only) ─────────────────
+       Fixed green circle in the bottom-right corner on desktop.
+       Hidden on mobile (CSS hides it at ≤991px) because the
+       mobile CTA bar's WhatsApp button serves the same purpose.
+       ──────────────────────────────────────────────────────────── -->
   <!-- WhatsApp Floating Button (desktop only) -->
   <a href="https://wa.me/447434001222" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
+  <!-- ── Back to Top Button ────────────────────────────────────
+       Gold circle that appears after 400px of scroll. Has
+       class="scroll-link" so the smooth scroll JS handles it.
+       JavaScript adds/removes class="visible" based on scroll position.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Back to Top -->
   <a href="#hero" class="back-to-top scroll-link" id="backToTop" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </a>
 
+  <!-- ── Script Loading Order ──────────────────────────────────
+       Scripts are loaded at the bottom of <body> (not in <head>)
+       so the HTML is fully parsed before JS tries to find elements.
+
+       1. Bootstrap JS (bundle includes Popper.js) — required for
+          the FAQ accordion to open/close
+       2. js/main.js — all custom interactivity (nav, scroll,
+          portfolio, lightbox, contact form, etc.)
+       3. Inline gate animation script — must come AFTER main.js
+          because it accesses the DOM directly
+
+       The Google Analytics script in <head> has async="true" so
+       it loads in parallel without blocking any of this.
+       ──────────────────────────────────────────────────────────── -->
   <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Custom JS -->
   <script src="js/main.js"></script>
 
+  <!-- ── Gate Animation Controller ────────────────────────────
+       Inline script that controls the gate animation timing.
+       It's inline (not in a separate file) because it runs
+       immediately and is tightly coupled to this page only.
+
+       TIMING SEQUENCE:
+       - 0ms:     Gate visible, page scroll locked
+       - 1400ms:  Status light goes from red to gold (.go class)
+       - 1800ms:  Gate panels start opening (.gate-opening class
+                  triggers 2.8s CSS slide animation)
+       - 4600ms:  Overlay fades out (.gate-done class triggers
+                  0.8s fade)
+       - 5400ms:  Overlay hidden, scroll unlocked, session key set
+
+       SKIP CONDITIONS:
+       - prefers-reduced-motion: OS accessibility setting for
+         users who get motion sickness or seizures from animations
+       - sessionStorage 'mpw_gate_seen': so the animation only
+         plays once per browser session, not on every page refresh
+       ──────────────────────────────────────────────────────────── -->
   <!-- Gate Animation Controller -->
   <script>
     (function () {

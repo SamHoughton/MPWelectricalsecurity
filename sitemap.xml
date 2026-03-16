@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================
+  MPW Electrical Security — XML Sitemap
+  ============================================================
+  This file lists all pages on the site so search engines
+  (Google, Bing etc.) know exactly which URLs exist and how
+  important each one is relative to the others.
+
+  HOW TO UPDATE THIS FILE:
+  Whenever you add a new page, add a <url> block here.
+  When you significantly update a page's content, update
+  its <lastmod> date to today's date (YYYY-MM-DD format).
+
+  PRIORITY GUIDE:
+  1.0  = Homepage (most important)
+  0.8  = Service pages (core business content)
+  0.7  = Location/area pages (local SEO landing pages)
+  0.6  = Supporting tools (quote estimator)
+
+  CHANGEFREQ OPTIONS:
+  always, hourly, daily, weekly, monthly, yearly, never
+  "monthly" is appropriate for pages updated occasionally.
+
+  AFTER ADDING A PAGE:
+  Submit the updated sitemap to Google Search Console at
+  search.google.com/search-console by going to:
+  Sitemaps > Enter sitemap URL > Submit
+  ============================================================
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Homepage -->
