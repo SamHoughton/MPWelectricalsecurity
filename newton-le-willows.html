@@ -1,3 +1,22 @@
+<!--
+  ================================================================
+  MPW Electrical Security — Newton-le-Willows Location Page
+  ================================================================
+  Purpose:   Geographic landing page targeting Newton-le-Willows and
+             the WA12 postcode area. This is MPW's HOME territory —
+             the business is physically located at 198 Crow Lane East,
+             Newton-le-Willows, WA12 9UA.
+
+  Key differences from Wigan/St Helens pages:
+    - Emphasis on fastest possible response times (home base = same-day).
+    - FAQs confirm physical address, same-day availability, and full WA12
+      postcode coverage including Earlestown and surroundings.
+    - The "genuinely local" message is strongest here — MPW staff live and
+      work in this area.
+
+  Structure: identical to wigan.html — see that file for full template notes.
+  ================================================================
+-->
 <!DOCTYPE html>
 <!-- ============================================================
      MPW Electrical Security — Location Page: Newton-le-Willows
@@ -52,6 +71,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <!-- ── Service schema: WA12 postcode + specific towns (Earlestown etc.)
+       areaServed data helps surface MPW for hyper-local NlW searches. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -81,6 +102,8 @@
     ]
   }
   </script>
+  <!-- ── FAQPage schema: FAQs confirm physical address, same-day availability,
+       and full WA12 coverage. Questions mirror accordion HTML below. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -121,6 +144,7 @@
     ]
   }
   </script>
+  <!-- ── BreadcrumbList: 3-level — Home → Areas → Newton-le-Willows. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -150,7 +174,12 @@
 </head>
 <body>
 
+  <!-- Preloader: faded out by main.js after 600 ms -->
   <div id="preloader"><div class="preloader-spinner"></div></div>
+
+  <!-- ======= Header / Navigation =======
+       No nav link is .active — location pages don't correspond to a
+       specific top-level nav item. -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -187,7 +216,9 @@
     </nav>
   </header>
 
-  <!-- Page Hero -->
+  <!-- ======= Page Hero =======
+       Sub-headline emphasises same-day surveys — key advantage of being
+       literally based here. 3-level breadcrumb: Home → Areas → Newton-le-Willows. -->
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-content">
@@ -215,7 +246,10 @@
   </section>
 
   <main>
-    <!-- Introduction -->
+    <!-- ======= Introduction =======
+         7/5 col split. MPW's physical address is mentioned in copy
+         (198 Crow Lane East, WA12 9UA) to reinforce local credibility.
+         Same-day availability is emphasised — key advantage of home base. -->
     <section class="intro-section">
       <div class="container">
         <div class="row g-5 align-items-start">
@@ -267,7 +301,9 @@
       </div>
     </section>
 
-    <!-- Detail Cards -->
+    <!-- ======= Detail Cards (Services in Newton-le-Willows) =======
+         Each card = different service with NlW-specific copy and a link
+         to the full service page. Postcodes/towns named for local relevance. -->
     <section class="details-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -311,7 +347,9 @@
       </div>
     </section>
 
-    <!-- Why MPW -->
+    <!-- ======= Why MPW =======
+         "Based Here" card (with house icon) replaces generic "Local Specialists"
+         — strongest possible local credibility statement for home territory. -->
     <section class="why-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -352,7 +390,8 @@
       </div>
     </section>
 
-    <!-- Related Services bar -->
+    <!-- ======= Related pages bar =======
+         Links to Wigan and St Helens area pages + top service pages. -->
     <div class="related-pages">
       <div class="container">
         <div class="related-pages-inner">
@@ -368,7 +407,10 @@
       </div>
     </div>
 
-    <!-- FAQ -->
+    <!-- ======= FAQ =======
+         NlW-specific questions: confirms physical address, same-day
+         availability, postcode coverage, and residential vs commercial.
+         All mirror FAQPage schema in <head>. -->
     <section class="page-faq-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -433,7 +475,8 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- ======= Bottom CTA =======
+         "same-day" message front-and-centre — unique to the home territory page. -->
     <section class="page-cta-section">
       <div class="container">
         <h2>Talk to Your Local Security Specialists Today</h2>
@@ -450,6 +493,7 @@
     </section>
   </main>
 
+  <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -507,6 +551,7 @@
   <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </a>
+  <!-- Bootstrap JS for accordion. main.js for preloader, nav, scroll behaviours. -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>

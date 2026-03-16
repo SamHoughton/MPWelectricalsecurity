@@ -1,3 +1,25 @@
+<!--
+  ================================================================
+  MPW Electrical Security — CCTV Installation Service Page
+  ================================================================
+  Purpose:   Dedicated landing page for CCTV / security camera
+             installation. Targets queries like "CCTV installation
+             Wigan", "security cameras North West", "HD CCTV system",
+             "remote viewing CCTV", etc.
+
+  Structure (shared service page template):
+    1. <head>  — meta, Service/FAQPage/BreadcrumbList JSON-LD
+    2. Header  — "CCTV Installation" link marked .active
+    3. .page-hero — breadcrumb + H1 + CTA
+    4. .intro-section — intro copy + quick enquiry sidebar
+    5. .details-section — 3 CCTV system-type cards
+    6. .why-section — 4 "Why MPW" USP cards
+    7. .related-pages — cross-links to other services
+    8. .page-faq-section — Bootstrap accordion
+    9. .page-cta-section — final CTA
+   10. Footer, scripts
+  ================================================================
+-->
 <!DOCTYPE html>
 <!-- ============================================================
      MPW Electrical Security — Service Page: CCTV Installation
@@ -35,9 +57,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Title: "Wigan" front-loaded; pipe-separated keyword phrases for breadth -->
   <title>CCTV Installation Wigan | Security Camera Systems | MPW Electrical Security</title>
   <meta name="description" content="Professional CCTV installation in Wigan & the North West. HD cameras, night vision, remote viewing via app. MPW Electrical Security — free site visit & quote.">
   <meta name="robots" content="index, follow">
+  <!-- Canonical: prevents duplicate content issues if page is accessed via other paths -->
   <link rel="canonical" href="https://www.mpwelectricalsecurity.com/cctv-installation.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.mpwelectricalsecurity.com/cctv-installation.html">
@@ -52,6 +76,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <!-- ── Service schema: tells search engines this page represents a
+       specific service (CCTV installation) offered by a local business.
+       areaServed cities qualify MPW for local pack results in those areas. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -142,7 +169,12 @@
 </head>
 <body>
 
+  <!-- Preloader: faded out by main.js after 600 ms -->
   <div id="preloader"><div class="preloader-spinner"></div></div>
+
+  <!-- ======= Header / Navigation =======
+       "Services" parent + "CCTV Installation" dropdown item both carry
+       class="active" to highlight the current page in the nav. -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -162,6 +194,7 @@
               <a class="nav-link active" href="index.html#services">Services <i class="fas fa-chevron-down nav-caret"></i></a>
               <ul class="nav-dropdown">
                 <li><a href="automated-gates.html"><i class="fas fa-archway"></i> Automated Gates</a></li>
+                <!-- class="active" marks the current page in the dropdown -->
                 <li><a href="cctv-installation.html" class="active"><i class="fas fa-camera"></i> CCTV Installation</a></li>
                 <li><a href="alarm-systems.html"><i class="fas fa-bell"></i> Alarm Systems</a></li>
                 <li><a href="gate-servicing.html"><i class="fas fa-screwdriver-wrench"></i> Gate Servicing</a></li>
@@ -179,7 +212,9 @@
     </nav>
   </header>
 
-  <!-- Page Hero -->
+  <!-- ======= Page Hero =======
+       Dark inner-page hero with breadcrumb, H1, sub-headline and two CTAs.
+       The breadcrumb HTML matches the BreadcrumbList schema in <head>. -->
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-content">
@@ -205,7 +240,9 @@
   </section>
 
   <main>
-    <!-- Introduction -->
+    <!-- ======= Introduction =======
+         7/5 col split: copy (reveal-left) + quick enquiry card (reveal-right).
+         Stacks to single column on mobile. -->
     <section class="intro-section">
       <div class="container">
         <div class="row g-5 align-items-start">
@@ -258,7 +295,9 @@
       </div>
     </section>
 
-    <!-- Detail Cards -->
+    <!-- ======= Detail Cards =======
+         3 cards explaining the main types of CCTV system available.
+         --delay CSS custom property staggers the reveal animations. -->
     <section class="details-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -299,7 +338,8 @@
       </div>
     </section>
 
-    <!-- Why MPW -->
+    <!-- ======= Why MPW =======
+         4 half-width benefit cards (2×2 tablet, 4-across desktop). -->
     <section class="why-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -340,7 +380,8 @@
       </div>
     </section>
 
-    <!-- Related Services bar -->
+    <!-- ======= Related Services bar =======
+         Cross-links to related services; internal SEO + UX navigation. -->
     <div class="related-pages">
       <div class="container">
         <div class="related-pages-inner">
@@ -355,7 +396,9 @@
       </div>
     </div>
 
-    <!-- FAQ -->
+    <!-- ======= FAQ =======
+         Bootstrap accordion (single-open via data-bs-parent).
+         Question text mirrors FAQPage schema in <head> for rich result eligibility. -->
     <section class="page-faq-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -437,6 +480,9 @@
     </section>
   </main>
 
+  <!-- ======= Footer =======
+       4-column layout. Fourth column = "Our Services" links (vs payment icons
+       on the homepage) — better relevance on a service page. -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -494,6 +540,7 @@
   <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </a>
+  <!-- Bootstrap JS for FAQ accordion. main.js for preloader, nav, scroll behaviours. -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>

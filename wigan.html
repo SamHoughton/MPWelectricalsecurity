@@ -1,3 +1,38 @@
+<!--
+  ================================================================
+  MPW Electrical Security — Wigan Location Page
+  ================================================================
+  Purpose:   Geographic landing page targeting the Wigan area
+             (WN1–WN8 postcodes). Captures searches like "security
+             installation Wigan", "CCTV Wigan", "gates Wigan WN", etc.
+
+  Key difference from service pages:
+    - No single service is promoted — this page sells all services
+      as available specifically in the Wigan area.
+    - The detail cards link OUT to each individual service page
+      rather than explaining service subtypes.
+    - BreadcrumbList is 3-level: Home → Areas → Wigan.
+    - No nav link is marked .active (Areas is a homepage section,
+      not a separate nav item pointing to location pages).
+    - Service schema uses granular areaServed including all WN
+      postcodes and specific towns (Leigh, Standish, etc.) to
+      improve relevance for hyper-local searches.
+    - Related pages bar links to OTHER location pages (St Helens,
+      Newton-le-Willows) as well as top service pages.
+
+  Structure (same template as service pages):
+    1. <head>  — meta, Service/FAQPage/BreadcrumbList JSON-LD
+    2. Header  — no nav link marked .active for location pages
+    3. .page-hero — 3-level breadcrumb + H1 + CTA
+    4. .intro-section — area-specific copy + quick enquiry sidebar
+    5. .details-section — 3 service cards (linking to service pages)
+    6. .why-section — 4 USP cards
+    7. .related-pages — other areas + top service links
+    8. .page-faq-section — area-specific FAQ accordion
+    9. .page-cta-section — final CTA
+   10. Footer, scripts
+  ================================================================
+-->
 <!DOCTYPE html>
 <!-- ============================================================
      MPW Electrical Security — Location Page: Wigan
@@ -37,6 +72,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- "Wigan" is the primary keyword; pipe-separated for multiple keyword targets -->
   <title>Security Specialists Wigan | Automated Gates, CCTV & Alarms | MPW Electrical Security</title>
   <meta name="description" content="MPW Electrical Security install automated gates, CCTV, alarms and access control across Wigan. Local specialists covering WN1–WN8. Free site visit — call 07434 001222.">
   <meta name="robots" content="index, follow">
@@ -54,6 +90,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <!-- ── Service schema ─────────────────────────────────────────────────
+       areaServed includes all 8 WN postcodes AND specific town names.
+       This fine-grained coverage improves relevance in Google's local
+       pack for searches like "automated gates Standish" or "CCTV Leigh". -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -89,6 +129,10 @@
     ]
   }
   </script>
+  <!-- ── FAQPage schema ─────────────────────────────────────────────────
+       Location-specific FAQs address coverage scope, response times,
+       commercial work, and emergency callouts — common objections from
+       local visitors. Questions mirror the accordion HTML below. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -129,6 +173,9 @@
     ]
   }
   </script>
+  <!-- ── BreadcrumbList schema ────────────────────────────────────────
+       3-level path: Home → Areas (section) → Wigan.
+       Shown as "Home › Areas › Wigan" in Google snippets. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -158,7 +205,13 @@
 </head>
 <body>
 
+  <!-- Preloader: faded out by main.js after 600 ms -->
   <div id="preloader"><div class="preloader-spinner"></div></div>
+
+  <!-- ======= Header / Navigation =======
+       No nav link is marked .active for location pages — the Areas
+       section is a homepage anchor (#areas), not a separate nav item.
+       All service dropdown links remain un-highlighted. -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -195,10 +248,13 @@
     </nav>
   </header>
 
-  <!-- Page Hero -->
+  <!-- ======= Page Hero =======
+       Dark inner-page hero. Breadcrumb is 3-level (Home → Areas → Wigan)
+       matching the BreadcrumbList schema in <head>. -->
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-content">
+        <!-- 3-level breadcrumb: "Areas" links back to the homepage #areas section -->
         <nav class="breadcrumb-nav" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <i class="fas fa-chevron-right bc-sep"></i>
@@ -223,7 +279,10 @@
   </section>
 
   <main>
-    <!-- Introduction -->
+    <!-- ======= Introduction =======
+         7/5 col split. Left copy is area-specific (mentions specific
+         WN postcodes and towns by name for hyper-local relevance).
+         Right column = standard quick enquiry sidebar. -->
     <section class="intro-section">
       <div class="container">
         <div class="row g-5 align-items-start">
@@ -275,7 +334,12 @@
       </div>
     </section>
 
-    <!-- Detail Cards -->
+    <!-- ======= Detail Cards (Services in this area) =======
+         Unlike service pages where cards explain subtypes of one service,
+         location page cards each represent a DIFFERENT SERVICE available
+         in the Wigan area — with area-specific copy and links to the
+         full service pages (detail-card-link).
+         Each card mentions specific local postcodes/towns for relevance. -->
     <section class="details-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -319,7 +383,9 @@
       </div>
     </section>
 
-    <!-- Why MPW -->
+    <!-- ======= Why MPW =======
+         Identical 4-card block to service pages. USPs reinforce local
+         credibility (based nearby, 10+ years). -->
     <section class="why-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -360,7 +426,9 @@
       </div>
     </section>
 
-    <!-- Related Services bar -->
+    <!-- ======= Related pages bar =======
+         Location pages link to OTHER location pages AND top service pages.
+         Label is "Other Areas & Services:" (different from service pages). -->
     <div class="related-pages">
       <div class="container">
         <div class="related-pages-inner">
@@ -376,7 +444,10 @@
       </div>
     </div>
 
-    <!-- FAQ -->
+    <!-- ======= FAQ =======
+         Area-specific questions covering coverage scope, survey response
+         times, commercial security, and emergency callouts in Wigan.
+         Mirrors FAQPage schema in <head> for rich result eligibility. -->
     <section class="page-faq-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -441,7 +512,9 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- ======= Bottom CTA =======
+         Area-specific headline ("Get a Free Security Survey in Wigan")
+         drives local enquiries. Same two-button pattern as service pages. -->
     <section class="page-cta-section">
       <div class="container">
         <h2>Get a Free Security Survey in Wigan</h2>
@@ -458,6 +531,9 @@
     </section>
   </main>
 
+  <!-- ======= Footer =======
+       4-column layout with "Our Services" as the 4th column —
+       consistent with all other inner pages. -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -515,6 +591,7 @@
   <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </a>
+  <!-- Bootstrap JS for FAQ accordion. main.js for preloader, nav, scroll behaviours. -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>

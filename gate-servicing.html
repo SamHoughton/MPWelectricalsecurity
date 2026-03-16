@@ -1,3 +1,29 @@
+<!--
+  ================================================================
+  MPW Electrical Security — Gate Servicing & Repair Service Page
+  ================================================================
+  Purpose:   Dedicated landing page for automated gate servicing,
+             repairs and maintenance. Targets: "gate servicing Wigan",
+             "automatic gate repair North West", "gate maintenance
+             contract", "electric gate not working", etc.
+
+  Note: Unlike the other service pages (which focus on new installation),
+  this page targets the existing-gate-owner market — people whose gates
+  need a service, have broken down, or need ongoing maintenance.
+
+  Structure (shared service page template):
+    1. <head>  — meta, Service/FAQPage/BreadcrumbList JSON-LD
+    2. Header  — "Gate Servicing" link marked .active
+    3. .page-hero — breadcrumb + H1 + CTA
+    4. .intro-section — intro copy + quick enquiry sidebar
+    5. .details-section — 3 service type cards
+    6. .why-section — 4 "Why MPW" USP cards
+    7. .related-pages — cross-links to other services
+    8. .page-faq-section — Bootstrap accordion
+    9. .page-cta-section — final CTA
+   10. Footer, scripts
+  ================================================================
+-->
 <!DOCTYPE html>
 <!-- ============================================================
      MPW Electrical Security — Service Page: Gate Servicing
@@ -52,6 +78,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <!-- ── Service schema: identifies this page as Automated Gate Servicing and Repair offered by MPW.
+       areaServed entries qualify MPW for local search pack results. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,6 +107,8 @@
     ]
   }
   </script>
+  <!-- ── FAQPage schema: mirrors the accordion HTML below.
+       Google may show expandable FAQ rich results in search for these questions. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -119,6 +149,7 @@
     ]
   }
   </script>
+  <!-- ── BreadcrumbList schema: shows "Home › Gate Servicing" in Google snippets. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -142,7 +173,10 @@
 </head>
 <body>
 
+  <!-- Preloader: faded out by main.js after 600 ms -->
   <div id="preloader"><div class="preloader-spinner"></div></div>
+  <!-- ======= Header / Navigation =======
+       "Services" parent + "Gate Servicing" dropdown item both carry class="active". -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -164,6 +198,7 @@
                 <li><a href="automated-gates.html"><i class="fas fa-archway"></i> Automated Gates</a></li>
                 <li><a href="cctv-installation.html"><i class="fas fa-camera"></i> CCTV Installation</a></li>
                 <li><a href="alarm-systems.html"><i class="fas fa-bell"></i> Alarm Systems</a></li>
+                <!-- class="active" marks the current page in the dropdown -->
                 <li><a href="gate-servicing.html" class="active"><i class="fas fa-screwdriver-wrench"></i> Gate Servicing</a></li>
                 <li><a href="access-control.html"><i class="fas fa-fingerprint"></i> Access Control</a></li>
                 <li><a href="security-lighting.html"><i class="fas fa-lightbulb"></i> Security Lighting</a></li>
@@ -179,7 +214,8 @@
     </nav>
   </header>
 
-  <!-- Page Hero -->
+  <!-- ======= Page Hero =======
+       Dark inner-page hero with breadcrumb, H1, sub-headline and two CTAs. -->
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-content">
@@ -205,7 +241,8 @@
   </section>
 
   <main>
-    <!-- Introduction -->
+    <!-- ======= Introduction =======
+         7/5 col split: copy left + quick enquiry sidebar right. -->
     <section class="intro-section">
       <div class="container">
         <div class="row g-5 align-items-start">
@@ -258,7 +295,8 @@
       </div>
     </section>
 
-    <!-- Detail Cards -->
+    <!-- ======= Detail Cards =======
+         Three cards explaining the main gate servicing options available. -->
     <section class="details-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -299,7 +337,8 @@
       </div>
     </section>
 
-    <!-- Why MPW -->
+    <!-- ======= Why MPW =======
+         4 benefit cards (2×2 tablet, 4-across desktop). -->
     <section class="why-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -340,7 +379,8 @@
       </div>
     </section>
 
-    <!-- Related Services bar -->
+    <!-- ======= Related Services bar =======
+         Cross-links to related services; internal SEO + UX. -->
     <div class="related-pages">
       <div class="container">
         <div class="related-pages-inner">
@@ -355,7 +395,8 @@
       </div>
     </div>
 
-    <!-- FAQ -->
+    <!-- ======= FAQ =======
+         Bootstrap accordion. Questions mirror FAQPage schema above. -->
     <section class="page-faq-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -420,7 +461,8 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- ======= Bottom CTA =======
+         Full-width conversion section with form link + phone buttons. -->
     <section class="page-cta-section">
       <div class="container">
         <h2>Book a Gate Service or Report a Fault</h2>
@@ -437,6 +479,8 @@
     </section>
   </main>
 
+  <!-- ======= Footer =======
+       4-column layout. Fourth column = "Our Services" links. -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -494,6 +538,7 @@
   <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </a>
+  <!-- Bootstrap JS for FAQ accordion. main.js for nav, preloader, scroll behaviours. -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>
