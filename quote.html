@@ -1,36 +1,40 @@
+<!--
+  ================================================================
+  MPW Electrical Security — Quote / Cost Estimator Tool (quote.html)
+  ================================================================
+  Purpose:    A multi-step interactive cost estimator.
+              Visitors answer 5 questions to get a ballpark price
+              for their security installation, then submit their
+              contact details to request a free site visit.
+
+  How it works:
+    - 5 config-panel divs (steps 1–5) are all in the DOM at once;
+      only one is visible at a time (display:none / display:block).
+    - JavaScript reads selections and advances/retreats through steps.
+    - A progress bar and dot indicators show current step.
+    - On step 5 completion, a result panel calculates a price range
+      based on collected answers (gate type, camera count, extras).
+    - A contact form at the bottom of the result panel submits to
+      Netlify Forms for follow-up by the MPW team.
+
+  Inline <style>: All styles for the quote tool are written inline
+    in this page's <head>. This keeps the configurator styles
+    self-contained and avoids adding rarely-needed code to the
+    main style.css that every page loads.
+
+  Tech: HTML5 · Bootstrap 5 · Font Awesome 6 · vanilla JS (inline)
+  ================================================================
+-->
 <!DOCTYPE html>
-<!-- ============================================================
-     MPW Electrical Security — Quote / Price Estimator (quote.html)
-     ============================================================
-     This page contains a 5-step interactive pricing wizard that
-     gives visitors a ballpark price range before they commit to
-     booking a site survey. It does NOT give exact prices — just
-     a guide to set expectations.
-
-     HOW IT WORKS:
-     1. Visitor answers 5 questions (property type, system type,
-        size/camera count, access control, material/storage)
-     2. JavaScript calculates a price range from the PRICE table
-     3. Result is shown with a form to book a free site survey
-     4. Form submits to Netlify Forms
-
-     HOW TO UPDATE PRICES:
-     Find the PRICE object in the <script> block at the bottom
-     of this file (around line 815). Each entry is [low, high]
-     in pounds. Change the numbers, save and deploy.
-
-     NETLIFY FORM:
-     The result form uses name="quote-estimate" — this must match
-     the form-name hidden input. Submissions appear in the Netlify
-     dashboard under Forms > quote-estimate.
-     ============================================================ -->
-<html lang="en-GB">
+<html lang="en-GB"><!-- en-GB: British English (important for local search relevance) -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Title focuses on the tool's value proposition: "instant" + "under 2 minutes" -->
   <title>Instant Cost Estimator | MPW Electrical Security | Gates &amp; CCTV North West</title>
   <meta name="description" content="Get an instant ballpark price for your automated gate, CCTV or security system in under 2 minutes. Free site visit to confirm your exact quote.">
   <meta name="robots" content="index, follow">
+  <!-- Canonical: unique URL for this page prevents duplicate content issues -->
   <link rel="canonical" href="https://www.mpwelectricalsecurity.com/quote.html">
   <meta name="author" content="MPW Electrical Security">
   <meta name="theme-color" content="#CC8400">
@@ -73,9 +77,23 @@
   <!-- Site Styles -->
   <link href="css/style.css" rel="stylesheet">
 
+  <!-- Inline styles for the quote configurator. Kept here rather than in
+       style.css because these styles are only needed on this single page
+       and it avoids loading extra CSS on every other page of the site. -->
   <style>
     /* ============================================================
-       Quote Tool — Page Styles
+       Quote Tool — Page-Specific Styles
+       ============================================================
+       These styles extend the main style.css (loaded below) with
+       components unique to the quote/estimator tool:
+         - .quote-hero        Hero section for this page
+         - .configurator-card Container for the step-by-step wizard
+         - Progress bar       Visual step indicator (track + fill + dots)
+         - .config-panel      Individual step panels (show/hide via JS)
+         - .config-opt        Clickable option cards (like radio buttons)
+         - .config-nav        Back/Next navigation buttons
+         - .result-panel      Final screen showing the price estimate
+         - Contact form       Compact form below the price result
        ============================================================ */
 
     /* ── Page hero ───────────────────────────────────────────── */
@@ -139,7 +157,16 @@
       .configurator-card { padding: 26px 18px; border-radius: 14px; }
     }
 
-    /* ── Progress bar ────────────────────────────────────────── */
+    /* ── Progress bar ────────────────────────────────────────────
+         Thin gold bar at the top of the configurator card.
+         .config-progress-fill width is updated by JS as steps advance:
+           Step 1 = 20%, Step 2 = 40%, Step 3 = 60%, Step 4 = 80%, Step 5 = 100%
+         The CSS cubic-bezier transition gives it a smooth, non-linear fill.
+         Dot indicators (.cpd) below the bar change state:
+           - default: dim border
+           - .active:  gold border + gold number (current step)
+           - .done:    gold filled background (completed steps)
+         ──────────────────────────────────────────────────────── */
     .config-progress { margin-bottom: 38px; }
     .config-progress-track {
       height: 4px;
@@ -185,12 +212,21 @@
       text-transform: uppercase;
     }
 
-    /* ── Step panels ─────────────────────────────────────────── */
+    /* ── Step panels ──────────────────────────────────────────────
+         Each step is a .config-panel div. Only the active one is visible.
+         When navigating FORWARD: cfSlideIn — panel slides in from the right.
+         When navigating BACK: cfSlideBack — panel slides in from the left.
+         JS adds 'is-back' class before making a panel active when going back,
+         which switches from cfSlideIn to cfSlideBack animation.
+         min-height: 300px on the panels container prevents the card from
+         collapsing/jumping in height between steps.
+         ──────────────────────────────────────────────────────── */
     .config-panels { min-height: 300px; }
     .config-panel  { display: none; }
     .config-panel.active        { display: block; animation: cfSlideIn  .28s ease; }
     .config-panel.active.is-back{ animation: cfSlideBack .28s ease; }
 
+    /* Forward: slide in from right (+22px). Backward: slide in from left (-22px) */
     @keyframes cfSlideIn   { from { opacity:0; transform:translateX(22px);  } to { opacity:1; transform:none; } }
     @keyframes cfSlideBack { from { opacity:0; transform:translateX(-22px); } to { opacity:1; transform:none; } }
 
@@ -210,7 +246,19 @@
       margin-bottom: 1.6rem;
     }
 
-    /* ── Option cards ────────────────────────────────────────── */
+    /* ── Option cards ────────────────────────────────────────────
+         Each selectable option in the wizard is a <button> styled as a card.
+         Using <button> (not <div>) ensures keyboard accessibility out of the box
+         (Tab, Enter, Space all work correctly without extra JS).
+
+         Selected state (.config-opt.selected):
+           - Gold border + subtle gold background tint
+           - A Font Awesome check icon (fa-check / \f00c) appears in the top-right
+             via the ::after pseudo-element — no extra HTML element needed.
+
+         :focus-visible outlines: visible only for keyboard focus,
+         not when clicking with a mouse (same principle as the main buttons).
+         ──────────────────────────────────────────────────────── */
     .config-opts {
       display: grid;
       gap: 11px;
@@ -322,7 +370,13 @@
       font-style: italic;
     }
 
-    /* ── Result panel ────────────────────────────────────────── */
+    /* ── Result panel ────────────────────────────────────────────
+         Displayed after all 5 steps are completed.
+         .result-price-box shows the estimated price range in large gold text.
+         .result-tag pills summarise the user's selections (e.g. "Sliding Gate").
+         .result-cctv-tip conditionally shown if CCTV cameras were selected.
+         .result-divider separates the price display from the contact form below.
+         ──────────────────────────────────────────────────────── */
     .result-panel { text-align: center; }
     .result-icon {
       width: 64px;
@@ -517,12 +571,18 @@
 </head>
 <body>
 
+  <!-- WCAG 2.4.1 skip link — keyboard/screen-reader users jump straight
+       past the repeated nav to the main content area -->
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- Preloader -->
+  <!-- Preloader: same pattern as index.html. JS in main.js fades it out
+       after 600 ms so fonts/images have a chance to load. -->
   <div id="preloader"><div class="preloader-spinner"></div></div>
 
   <!-- ======= Header ======= -->
+  <!-- Identical to the homepage header so the site feels consistent.
+       The "Get a Quote" nav link has class btn-nav-contact + active
+       (line ~609) to highlight the current page in the nav. -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -562,6 +622,9 @@
   <main id="main">
 
     <!-- ======= Hero ======= -->
+    <!-- Dark angled hero sets context before the user enters the wizard.
+         trust-chip icons (no obligation / 2 min / free site visit) address
+         the three most common hesitations before filling in a form. -->
     <section class="quote-hero">
       <div class="container">
         <span class="section-tag"><i class="fas fa-calculator me-1"></i> Free Instant Estimate</span>
@@ -575,43 +638,26 @@
       </div>
     </section>
 
-    <!-- ======= Configurator ══════════════════════════════════════
-         The main wizard card. All 5 step panels and the result panel
-         live inside this single .configurator-card div.
-
-         HOW THE PANEL SYSTEM WORKS:
-         - Each .config-panel starts hidden (no class)
-         - JavaScript adds class="active" to the current step panel
-         - When navigating back, class="is-back" is also added for
-           a reverse slide animation
-         - The result panel has id="panelResult" and is shown when
-           JavaScript calls goToStep(6)
-
-         STEPS 3, 4, 5 ARE DYNAMIC:
-         The question title, hint text, and option buttons for steps
-         3–5 are different depending on what was chosen in step 2.
-         JavaScript's renderDynamicStep(n) function reads the STEPS
-         data object and builds the HTML on the fly.
-         ──────────────────────────────────────────────────────────── -->
     <!-- ======= Configurator ======= -->
+    <!-- Single-page wizard housed in a "configurator-card".
+         All five step panels plus the result panel live in the DOM
+         simultaneously — only one is visible at a time (display:none vs block).
+         JS (bottom of body) controls which panel is active. -->
     <section class="quote-section">
       <div class="container">
         <div class="configurator-card">
 
-          <!-- ── Progress Bar ─────────────────────────────────────────
-               Shows the user how far through the 5 steps they are.
-               - #progressFill: the gold bar — JS sets its width as a %
-               - #dot1–#dot5: circular step indicators
-                 - class="active" = current step (gold border)
-                 - class="done" = completed step (gold fill with checkmark)
-               - #stepCounter: text like "Step 2 of 5"
-               ──────────────────────────────────────────────────────── -->
-          <!-- Progress -->
+          <!-- Progress indicator
+               progressFill width is updated by JS: 20% → 40% → 60% → 80% → 100%.
+               dot1–5 cycle through three CSS states: default (dim) → active (gold
+               border, gold number) → done (solid gold background).
+               stepCounter text changes from "Step N of 5" to "Complete!" on finish. -->
           <div class="config-progress">
             <div class="config-progress-track">
               <div class="config-progress-fill" id="progressFill"></div>
             </div>
             <div class="config-progress-dots">
+              <!-- dot1 starts .active; all others are unstyled (default dim) -->
               <div class="cpd active" id="dot1">1</div>
               <div class="cpd"        id="dot2">2</div>
               <div class="cpd"        id="dot3">3</div>
@@ -621,15 +667,15 @@
             <div class="config-step-counter" id="stepCounter">Step 1 of 5</div>
           </div>
 
-          <!-- Step panels — JavaScript shows/hides these via class="active" -->
+          <!-- Step panels container
+               min-height: 300px (set in CSS) prevents the card from jumping
+               in height as the user moves between steps of varying lengths. -->
           <div class="config-panels" id="configPanels">
 
-            <!-- ── Step 1: Property Type ──────────────────────────────
-                 Residential or Commercial. This sets a multiplier:
-                 commercial jobs use PRICE.commercialMult (1.45) to
-                 add 45% to the total estimate.
-                 ──────────────────────────────────────────────────────── -->
-            <!-- Step 1: Property type -->
+            <!-- ── Step 1: Property type ──────────────────────────
+                 Determines whether the commercialMult (×1.45) is applied
+                 to the final price.  data-step="1" + data-value="residential|commercial"
+                 are read by onOptionClick() and stored in state.answers[1]. -->
             <div class="config-panel active" id="panel1">
               <h2 class="config-question">What type of property is this for?</h2>
               <p class="config-hint">This helps us apply the right pricing and product range.</p>
@@ -645,17 +691,13 @@
               </div>
             </div>
 
-            <!-- ── Step 2: System Type ────────────────────────────────
-                 The answer to this step determines which version of
-                 steps 3, 4, 5 the visitor sees:
-                 - swing/sliding/bifold/unsure → 'gate' path
-                   (width → access control → material)
-                 - barrier → 'barrier' path
-                   (entrance width → access control → CCTV add-on?)
-                 - cctv_only → 'cctv' path
-                   (camera count → coverage area → storage type)
-                 ──────────────────────────────────────────────────────── -->
-            <!-- Step 2: What do you need -->
+            <!-- ── Step 2: Product type ───────────────────────────
+                 The answer here (state.answers[2]) determines which branch
+                 of the STEPS object is used for steps 3–5:
+                   cctv_only → STEPS.cctv   (cameras / coverage / storage)
+                   barrier   → STEPS.barrier (width / access / add-cctv?)
+                   anything else → STEPS.gate (width / access / material)
+                 data-value strings match the keys in PRICE.base. -->
             <div class="config-panel" id="panel2">
               <h2 class="config-question">What are you looking to have installed?</h2>
               <p class="config-hint">Pick the option that best describes what you need. Not sure? Choose the last option.</p>
@@ -687,79 +729,95 @@
               </div>
             </div>
 
-            <!-- ── Steps 3, 4, 5: Dynamic panels ─────────────────────
-                 These panels have empty content in the HTML.
-                 JavaScript's renderDynamicStep(n) function fills in
-                 the title, hint, and option buttons at runtime based
-                 on what was selected in step 2.
-                 The STEPS data object (in the script at the bottom)
-                 contains the content for each path (gate/barrier/cctv).
-                 ──────────────────────────────────────────────────────── -->
-            <!-- Step 3: dynamic (width / camera count) -->
+            <!-- ── Steps 3–5: Dynamic panels ──────────────────────
+                 These three panels share a common skeleton — JS calls
+                 renderDynamicStep(n) to inject the appropriate question
+                 title, hint text, and option buttons based on the STEPS
+                 data object and the user's Step 2 selection.
+
+                 IDs q3title / q3hint / q3opts (and q4…, q5…) are the
+                 targets that renderDynamicStep() writes into. -->
+
+            <!-- Step 3: gate → opening width | cctv → camera count | barrier → lane width -->
             <div class="config-panel" id="panel3">
               <h2 class="config-question" id="q3title"></h2>
               <p class="config-hint" id="q3hint"></p>
               <div class="config-opts" id="q3opts"></div>
             </div>
 
-            <!-- Step 4: dynamic (access control / coverage) -->
+            <!-- Step 4: gate → access control | cctv → coverage area | barrier → access control -->
             <div class="config-panel" id="panel4">
               <h2 class="config-question" id="q4title"></h2>
               <p class="config-hint" id="q4hint"></p>
               <div class="config-opts" id="q4opts"></div>
             </div>
 
-            <!-- Step 5: dynamic (material / storage) -->
+            <!-- Step 5: gate → material preference | cctv → storage type | barrier → add CCTV? -->
             <div class="config-panel" id="panel5">
               <h2 class="config-question" id="q5title"></h2>
               <p class="config-hint" id="q5hint"></p>
               <div class="config-opts" id="q5opts"></div>
             </div>
 
-            <!-- ── Result Panel ───────────────────────────────────────
-                 Shown after step 5 is answered (step 6 = result).
-                 JavaScript's buildResult() function:
-                 1. Calls calcPrice() to get {low, high} price range
-                 2. Fills #resultPriceDisplay with formatted price string
-                 3. Fills #resultSummary with tag chips for each answer
-                 4. Shows/hides #cctvTip based on whether it's a gate job
-                 5. Pre-fills hidden inputs with the estimate and selections
-                 6. Fires a GA event 'quote_complete'
+            <!-- ── Result panel (step 6 / "done") ───────────────────
+                 Shown when goToStep(6) is called after the user completes step 5.
+                 buildResult() writes the calculated price into #resultPriceDisplay,
+                 builds the #resultSummary tag pills, and conditionally shows
+                 #cctvTip (only for gate installs, as an upsell reminder).
 
-                 The form below the price lets the visitor book a site visit.
-                 It submits to Netlify (name="quote-estimate").
-                 Hidden inputs pass the price estimate and full selections
-                 to Matt so he can see what the visitor was interested in.
-                 ──────────────────────────────────────────────────────── -->
-            <!-- Result panel -->
+                 The hidden inputs (#hiddenEstimate, #hiddenSelections) carry the
+                 calculated price string and human-readable selections into the
+                 Netlify form submission so the MPW team can see the full context
+                 of each enquiry in their Netlify inbox. -->
             <div class="config-panel" id="panelResult">
               <div class="result-panel">
+                <!-- Gold pound-sign icon centres visually above the price -->
                 <div class="result-icon"><i class="fas fa-sterling-sign"></i></div>
                 <h3>Your Instant Estimate</h3>
                 <p>Based on your selections below</p>
 
+                <!-- Price box: JS writes "£X,XXX – £X,XXX" into resultPriceDisplay -->
                 <div class="result-price-box">
                   <div class="result-price-label">Estimated Installation Cost</div>
                   <div class="result-price-value" id="resultPriceDisplay"></div>
                   <div class="result-price-note">Supply, installation &amp; commissioning included. Subject to free site survey.</div>
                 </div>
 
+                <!-- Summary tags: JS builds one pill per answered step using LABELS[] -->
                 <div class="result-summary" id="resultSummary"></div>
 
+                <!-- CCTV upsell tip — hidden by default, shown only for gate types
+                     (swing/sliding/bifold/unsure) to encourage combined fitting -->
                 <div class="result-cctv-tip" id="cctvTip" style="display:none">
                   <i class="fas fa-circle-info"></i>Adding CCTV alongside your gate installation can often be done at a reduced combined rate. Ask us when you book your survey.
                 </div>
 
                 <hr class="result-divider">
 
+                <!-- Contact form — Netlify-handled, same approach as the main site form.
+                     data-netlify="true": Netlify detects this at build time.
+                     data-netlify-honeypot="bot-field": bot trap (hidden field).
+                     novalidate: we run our own JS validation on submit.
+                     name="quote-estimate": used by Netlify to label submissions. -->
                 <p class="result-form-title">Book Your Free Site Visit</p>
                 <p class="result-form-sub">We'll come out to you, have a look and give you an exact price. No charge, no pressure.</p>
 
                 <form class="result-form" id="quoteForm" name="quote-estimate" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+                  <!-- Required by Netlify when submitting via fetch() rather than
+                       standard form POST — tells Netlify which form received the data -->
                   <input type="hidden" name="form-name" value="quote-estimate">
+
+                  <!-- Honeypot: visible to bots (they fill everything), hidden from
+                       real users with inline display:none. Netlify rejects any
+                       submission where bot-field is non-empty. -->
                   <p style="display:none"><label>Don't fill this in: <input name="bot-field"></label></p>
+
+                  <!-- Hidden context fields populated by buildResult() before display.
+                       These carry the price range and user selections into every
+                       Netlify notification email, so the team has full context. -->
                   <input type="hidden" name="estimate" id="hiddenEstimate">
                   <input type="hidden" name="selections" id="hiddenSelections">
+
                   <div class="row g-2">
                     <div class="col-sm-6">
                       <div class="form-field">
@@ -792,24 +850,34 @@
                       </button>
                     </div>
                   </div>
+
+                  <!-- Alternative contact routes below the main submit button.
+                       Gives users who prefer calling/WhatsApp a direct option. -->
                   <div class="result-alt-actions">
                     <a href="tel:07434001222" class="btn-call"><i class="fas fa-phone"></i> Call Now</a>
                     <a href="https://wa.me/447434001222" target="_blank" rel="noopener" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                   </div>
                 </form>
 
+                <!-- Success state: shown after successful Netlify fetch POST,
+                     replaces the form. Stays hidden (display:none) until then. -->
                 <div class="quote-success-msg" id="quoteSuccess" style="display:none">
                   <i class="fas fa-circle-check"></i>
                   <span><strong>Thanks, we'll be in touch!</strong> We get back to most enquiries the same working day.</span>
                 </div>
 
+                <!-- Restart: resets state.answers and calls goToStep(1, true)
+                     so the user can start the wizard again from the beginning -->
                 <button class="btn-restart" id="restartBtn">Start over</button>
               </div>
             </div>
 
           </div><!-- /config-panels -->
 
-          <!-- Bottom nav -->
+          <!-- Bottom navigation bar
+               backBtn: visibility:hidden (not display:none) on step 1 and the
+               result panel so the layout doesn't shift.  JS toggles visibility.
+               navHint: "Select an option to continue" prompt; cleared on result. -->
           <div class="config-nav">
             <button class="btn-config-back" id="backBtn" style="visibility:hidden">
               <i class="fas fa-arrow-left"></i> Back
@@ -892,54 +960,59 @@
   <!-- Site JS (header scroll, mobile nav, back-to-top, footer year) -->
   <script src="js/main.js"></script>
 
-  <!-- ── Quote Configurator ─────────────────────────────────────
-       All the pricing logic and wizard behaviour lives in this
-       self-contained IIFE (Immediately Invoked Function Expression).
-       It uses 'var' instead of 'const/let' for maximum browser
-       compatibility without needing a build step.
+  <!-- ── Quote Configurator JavaScript ────────────────────────────────────
+       Self-contained IIFE (Immediately Invoked Function Expression) that
+       drives the entire multi-step wizard.  'use strict' enables ES5 strict
+       mode — catches silent errors, prevents accidental globals.
 
-       KEY DATA STRUCTURES:
-       - PRICE      — all price ranges [low, high] in pounds
-       - STEPS      — question content for the 3 dynamic steps,
-                       keyed by path (gate/barrier/cctv)
-       - LABELS     — human-readable labels for result summary tags
-       - state      — tracks current step and all answers
-
-       KEY FUNCTIONS:
-       - typeCategory()       — returns 'gate', 'barrier', or 'cctv'
-                                 based on the step 2 answer
-       - renderDynamicStep(n) — builds steps 3–5 HTML based on
-                                 current category
-       - goToStep(n, isBack)  — shows the correct panel, updates
-                                 progress bar, triggers buildResult()
-                                 on step 6
-       - onOptionClick(e)     — handles button clicks, stores answer,
-                                 advances to next step after 200ms delay
-       - calcPrice()          — adds up base + step 3/4/5 additions,
-                                 applies commercial multiplier, rounds to £50
-       - buildResult()        — fills the result panel with the price,
-                                 summary tags, and fires GA event
-       ──────────────────────────────────────────────────────────── -->
-  <!-- ── Quote Configurator ──────────────────────────────────── -->
+       Overview of execution:
+         1. PRICE  — lookup tables: base prices + add-ons for each answer option
+         2. STEPS  — question text and option definitions for steps 3–5 (dynamic)
+         3. LABELS — human-readable strings for the summary tags in the result panel
+         4. state  — single mutable object holding current step + all answers
+         5. goToStep(n, isBack) — central function that shows the right panel,
+            updates progress bar/dots, and triggers dynamic rendering or result build
+         6. renderDynamicStep(n) — writes STEPS data into panels 3–5 at runtime
+         7. onOptionClick() — records the selection, triggers goToStep(step+1)
+         8. calcPrice()     — sums base + add-ons, applies commercial multiplier,
+            rounds to nearest £50
+         9. buildResult()   — writes price, summary tags, CCTV tip, hidden fields;
+            fires GA4 quote_complete event
+        10. Form submit     — Netlify fetch POST, shows success message, fires GA4
+        11. Back button     — goToStep(step-1, true) with backward slide animation
+        12. Restart button  — resets state.answers, goes back to step 1
+        13. Init            — goToStep(1, false) on page load
+       ──────────────────────────────────────────────────────────────────── -->
   <script>
   (function () {
     'use strict';
 
-    /* ── Pricing tables ─────────────────────────────────────────
-       All prices are in pounds sterling [low, high].
-       To update a price, change the two numbers in the array.
-       E.g. to raise the swing gate starting price: swing: [2000, 4000]
+    /* ── Pricing tables ───────────────────────────────────────────────────
+       All prices are stored as [low, high] tuples in pounds sterling.
+       The final estimate = base[type] + add-on for step3 + add-on for step4
+                          + add-on for step5, then × commercialMult if commercial,
+                          then rounded to the nearest £50.
 
-       PRICE.base        — starting price for each system type
-       PRICE.width       — added cost based on gate opening width
-       PRICE.cameras     — added cost based on number of CCTV cameras
-       PRICE.access      — added cost for access control type
-       PRICE.cctvCoverage— added cost for CCTV coverage area
-       PRICE.material    — added cost for gate material choice
-       PRICE.storage     — added cost for CCTV recording method
-       PRICE.commercialMult — multiplier for commercial jobs (1.45 = +45%)
-       ────────────────────────────────────────────────────────── */
-    /* ── Pricing tables ───────────────────────────────────────── */
+       base:          Starting price range for each product type.
+                        swing/bifold/unsure use the same "gate" path.
+                        cctv_only has its own path.  unsure uses swing prices.
+       width:         Gate/barrier opening width add-ons.
+                        Under 3m: no add-on (already in base).
+                        Larger openings need bigger motors + more materials.
+       cameras:       CCTV camera count add-ons.
+                        1–2 cameras: no add-on (in base cctv_only price).
+       access:        Access control type add-ons.
+                        Remote fob: no add-on (simplest, in base price).
+                        Video intercom: £420–780 extra (more hardware + labour).
+       cctvCoverage:  Indoor-only or outdoor-only: no add-on.
+                        Indoor+outdoor adds £200–480 (extra cable runs, positioning).
+       material:      Steel: no add-on (default material for gate estimates).
+                        Timber: £520–980 extra (material cost + longer install).
+       storage:       Local NVR: no add-on (standard hardware in base).
+                        Cloud: £100–320 extra (subscription setup).
+       commercialMult: 1.45 — commercial jobs use more robust hardware, require
+                        risk assessments, and typically take longer to install.
+       ──────────────────────────────────────────────────────────────────── */
     var PRICE = {
       base: {
         swing:     [1800, 3400],
@@ -985,10 +1058,28 @@
         s_both:  [160, 420],
         s_unsure:[0,   0  ]
       },
+      /* 45% commercial uplift — reflects higher-spec hardware and
+         extra labour involved in commercial/industrial installs */
       commercialMult: 1.45
     };
 
-    /* ── Step content definitions ─────────────────────────────── */
+    /* ── Step content definitions ─────────────────────────────────────────
+       STEPS maps a "category" (gate | barrier | cctv) to steps 3, 4, and 5.
+       The category is resolved from state.answers[2] by typeCategory().
+
+       Each step object contains:
+         title — question text (injected into q{n}title element)
+         hint  — sub-text below the question (null = hidden)
+         cols  — CSS class for the options grid ('cols-2' or 'cols-3')
+         opts  — array of option objects:
+                   v     — data-value string (must match a key in PRICE.*)
+                   icon  — Font Awesome class name (without 'fa-' prefix handled separately)
+                   label — bold option title
+                   sub   — dimmed descriptive sub-line
+
+       Note: Unicode escape sequences (\u2019 etc.) are used for special
+       characters to avoid any charset encoding issues in the HTML file.
+       ──────────────────────────────────────────────────────────────────── */
     var STEPS = {
       gate: {
         3: {
@@ -1095,7 +1186,10 @@
       }
     };
 
-    /* Human-readable labels for summary tags */
+    /* ── Human-readable labels for summary tags ──────────────────────────
+       Maps every data-value string to the display text used in the result
+       panel's pill tags (built by buildResult()).  Plain English so the
+       MPW team can read the selections in Netlify notification emails too. */
     var LABELS = {
       residential:'Residential', commercial:'Commercial',
       swing:'Swing Gates', sliding:'Sliding Gate', bifold:'Bi-fold Gates',
@@ -1109,9 +1203,20 @@
       s_nvr:'Local NVR', s_cloud:'Cloud Storage', s_both:'NVR + Cloud', s_unsure:'Storage TBC'
     };
 
-    /* ── State ────────────────────────────────────────────────── */
+    /* ── State ────────────────────────────────────────────────────────────
+       Single plain object holding all mutable wizard state.
+         step    — current active step number (1–5, then 6 = result)
+         answers — keyed by step number; stores the data-value of each
+                   selection (e.g. answers[1]="residential", answers[2]="swing")
+         back    — true when navigating backward (triggers cfSlideBack animation)
+       ──────────────────────────────────────────────────────────────────── */
     var state = { step: 1, answers: {}, back: false };
 
+    /* typeCategory() — determines which branch of STEPS/PRICE to use.
+       Called by renderDynamicStep() and calcPrice().
+         'cctv_only' → 'cctv' branch (camera count, coverage, storage questions)
+         'barrier'   → 'barrier' branch (lane width, access, add-CCTV? questions)
+         anything else (swing/sliding/bifold/unsure + undefined) → 'gate' branch */
     function typeCategory() {
       var t = state.answers[2];
       if (t === 'cctv_only') return 'cctv';
@@ -1119,14 +1224,33 @@
       return 'gate'; // swing/sliding/bifold/unsure/undefined
     }
 
-    /* ── DOM refs ─────────────────────────────────────────────── */
+    /* ── DOM refs ─────────────────────────────────────────────────────────
+       Cached once at startup for performance — avoids repeated getElementById
+       calls inside the frequently-called goToStep() function. */
     var progressFill = document.getElementById('progressFill');
     var stepCounter  = document.getElementById('stepCounter');
     var backBtn      = document.getElementById('backBtn');
     var navHint      = document.getElementById('navHint');
     var panels       = document.getElementById('configPanels');
 
-    /* ── Render dynamic step (3/4/5) ─────────────────────────── */
+    /* ── renderDynamicStep(n) ─────────────────────────────────────────────
+       Populates one of the three dynamic step panels (3, 4, or 5) with the
+       correct question and option buttons based on the current type category.
+
+       Steps 1 and 2 are static HTML; steps 3–5 must be generated at runtime
+       because the same panel skeleton is reused for different question sets
+       depending on whether the user chose a gate, barrier, or CCTV system.
+
+       Process:
+         1. Look up STEPS[category][n] for the data object
+         2. Set the question title; show or hide the hint paragraph
+         3. Set the grid class (cols-2 or cols-3) and inject button HTML
+            via innerHTML (safe — all content comes from the static STEPS object,
+            no user-supplied strings are concatenated here)
+         4. Re-apply .selected class if the user has already answered this step
+            (happens when navigating back then forward again)
+         5. Attach onOptionClick listener to each new button
+       ──────────────────────────────────────────────────────────────────── */
     function renderDynamicStep(n) {
       var cat  = typeCategory();
       var data = STEPS[cat][n];
@@ -1146,29 +1270,59 @@
           '</button>';
       }).join('');
 
-      /* Restore previous selection */
+      /* Restore previous selection — if the user answered this step earlier
+         then hit Back and came forward again, re-highlight their choice */
       var prev = state.answers[n];
       if (prev) {
         var prevBtn = optsEl.querySelector('[data-value="' + prev + '"]');
         if (prevBtn) prevBtn.classList.add('selected');
       }
 
-      /* Attach click listeners */
+      /* Attach click listeners to the freshly injected buttons */
       optsEl.querySelectorAll('.config-opt').forEach(function(b) {
         b.addEventListener('click', onOptionClick);
       });
     }
 
-    /* ── Navigate to step ─────────────────────────────────────── */
+    /* ── goToStep(n, isBack) ──────────────────────────────────────────────
+       Central navigation function — called for every step change (forward,
+       backward, restart, and initial load).
+
+       n      — target step number. Use 6 to show the result panel.
+       isBack — true when going backward; triggers .is-back class on the panel
+                so the CSS uses cfSlideBack (slides in from left) instead of
+                cfSlideIn (slides in from right).
+
+       What it does:
+         1. Updates state.step and state.back
+         2. Calculates progress bar percentage:
+              step 1 = 0 % filled (starting point looks cleaner)
+              Wait — actually: isDone?100 : ((n-1)/5)*100
+              So step 1 = 0%, step 2 = 20%, step 3 = 40%… step 5 = 80%, done = 100%
+         3. Updates stepCounter text
+         4. Loops through dots 1–5 and assigns .done / .active / (neither) classes
+         5. Removes .active from all panels, then adds .active (and optionally
+            .is-back) to the target panel — the CSS animation fires on the class add
+         6. Calls renderDynamicStep(n) for steps 3–5
+         7. Calls buildResult() when n === 6 (result panel)
+         8. Hides the Back button on step 1 and the result panel
+       ──────────────────────────────────────────────────────────────────── */
     function goToStep(n, isBack) {
       state.step = n;
       state.back = !!isBack;
 
       var isDone = (n === 6);
+      /* Progress percentage: step 1 starts at 20% (dot 1 is already active),
+         meaning we show some progress from the very beginning to encourage
+         completion (a common UX pattern for multi-step forms) */
       var pct    = isDone ? 100 : Math.round(((n - 1) / 5) * 100);
       progressFill.style.width = pct + '%';
       stepCounter.textContent  = isDone ? 'Complete!' : 'Step ' + n + ' of 5';
 
+      /* Update progress dots:
+           i < n (or isDone)  → .done  (solid gold background, checkmark feel)
+           i === n            → .active (gold outline + gold text, current step)
+           i > n              → no class (dim, future step) */
       for (var i = 1; i <= 5; i++) {
         var dot = document.getElementById('dot' + i);
         if (!dot) continue;
@@ -1177,7 +1331,8 @@
         else if (i === n)         dot.classList.add('active');
       }
 
-      /* Activate the right panel */
+      /* Deactivate all panels then activate the target.
+         Adding .active triggers the CSS animation (cfSlideIn or cfSlideBack). */
       var allPanels = panels.querySelectorAll('.config-panel');
       allPanels.forEach(function(p) { p.classList.remove('active', 'is-back'); });
 
@@ -1187,32 +1342,67 @@
 
       if (!target) return;
       target.classList.add('active');
-      if (isBack) target.classList.add('is-back');
+      if (isBack) target.classList.add('is-back'); // switches to cfSlideBack animation
 
+      /* Dynamic steps 3–5 need their content injected before display */
       if (n >= 3 && n <= 5) renderDynamicStep(n);
+      /* Result panel needs the price calculated and written in */
       if (isDone)           buildResult();
 
+      /* Back button: hidden on step 1 (nothing to go back to) and on the
+         result panel (the restart button serves that purpose instead) */
       backBtn.style.visibility = (n === 1 || isDone) ? 'hidden' : 'visible';
       navHint.textContent      = isDone ? '' : 'Select an option to continue';
     }
 
-    /* ── Option click handler ─────────────────────────────────── */
+    /* ── onOptionClick(e) ────────────────────────────────────────────────
+       Fired on every option button click (both static steps 1–2 and dynamically
+       generated steps 3–5).
+
+       Flow:
+         1. Read data-step and data-value from the clicked button
+         2. Remove .selected from all siblings in the same .config-opts group
+            (only one selection allowed per step)
+         3. Add .selected to the clicked button (shows gold border + checkmark)
+         4. Store the selection: state.answers[step] = value
+         5. Wait 200 ms (so the user can see their selection highlighted) then
+            advance to the next step via goToStep(step + 1, false)
+       ──────────────────────────────────────────────────────────────────── */
     function onOptionClick(e) {
       var btn   = e.currentTarget;
       var step  = parseInt(btn.dataset.step, 10);
       var value = btn.dataset.value;
 
+      /* Deselect all options in this step's group */
       btn.closest('.config-opts').querySelectorAll('.config-opt')
         .forEach(function(b) { b.classList.remove('selected'); });
       btn.classList.add('selected');
 
       state.answers[step] = value;
 
-      /* Slight delay for visual feedback */
+      /* 200 ms pause gives the user visual confirmation of their choice
+         before the panel slides away — feels intentional rather than abrupt */
       setTimeout(function() { goToStep(step + 1, false); }, 200);
     }
 
-    /* ── Calculate price ──────────────────────────────────────── */
+    /* ── calcPrice() ─────────────────────────────────────────────────────
+       Calculates the estimated price range based on all five answers stored
+       in state.answers.
+
+       Algorithm:
+         1. Start with the base [low, high] tuple for the chosen product type
+         2. Add the step 3 add-on (width for gate/barrier, camera count for CCTV)
+         3. Add the step 4 add-on (access control for gate/barrier, coverage for CCTV)
+         4. Add the step 5 add-on (material for gate/barrier, storage for CCTV)
+         5. If commercial property: multiply both values by 1.45
+         6. Round both values to the nearest £50 so the estimate looks clean
+            (e.g. £2,850 not £2,834.07)
+
+       All add-ons default to [0,0] if the key isn't found, so partial
+       completion (unlikely — JS forces completion) won't cause NaN.
+
+       Returns: { low: Number, high: Number }
+       ──────────────────────────────────────────────────────────────────── */
     function calcPrice() {
       var type = state.answers[2] || 'swing';
       var cat  = typeCategory();
@@ -1225,63 +1415,91 @@
       var s4 = state.answers[4];
       var s5 = state.answers[5];
 
-      /* Step 3 */
+      /* Step 3 add-on: camera count for CCTV, opening width for everything else */
       if (s3) {
         var add3 = (cat === 'cctv') ? (PRICE.cameras[s3] || [0,0]) : (PRICE.width[s3] || [0,0]);
         low += add3[0]; high += add3[1];
       }
 
-      /* Step 4 */
+      /* Step 4 add-on: coverage area for CCTV, access control for gates/barriers */
       if (s4) {
         var add4 = (cat === 'cctv') ? (PRICE.cctvCoverage[s4] || [0,0]) : (PRICE.access[s4] || [0,0]);
         low += add4[0]; high += add4[1];
       }
 
-      /* Step 5 */
+      /* Step 5 add-on: storage type for CCTV, gate material for gates/barriers */
       if (s5) {
         var add5 = (cat === 'cctv') ? (PRICE.storage[s5] || [0,0]) : (PRICE.material[s5] || [0,0]);
         low += add5[0]; high += add5[1];
       }
 
+      /* Apply commercial multiplier after summing all add-ons */
       if (isComm) {
         low  = Math.round(low  * PRICE.commercialMult);
         high = Math.round(high * PRICE.commercialMult);
       }
 
-      /* Round to nearest £50 */
+      /* Round to nearest £50 for a cleaner, more professional-looking estimate */
       low  = Math.round(low  / 50) * 50;
       high = Math.round(high / 50) * 50;
 
       return { low: low, high: high };
     }
 
-    /* ── Build result panel ───────────────────────────────────── */
+    /* ── buildResult() ───────────────────────────────────────────────────
+       Called by goToStep(6) to populate the result panel before it becomes
+       visible.  Does five things:
+
+         1. Calls calcPrice() and formats the range as "£X,XXX – £X,XXX"
+            using toLocaleString('en-GB') for correct UK comma separators.
+            Writes the string into both the visible display and the hidden
+            form field (hiddenEstimate) so it appears in Netlify submissions.
+
+         2. Builds the summary tag pills: maps answers[1]–answers[5] through
+            LABELS[], filters out undefined (unanswered steps — shouldn't happen
+            but guards against it), and injects HTML into resultSummary.
+
+         3. Decides whether to show the CCTV upsell tip — only relevant if the
+            user chose a gate product (cross-sell opportunity for adding cameras).
+
+         4. Populates the hiddenSelections field with a pipe-separated plain
+            English string so the MPW team can read selections in emails.
+
+         5. Fires a GA4 custom event "quote_complete" with the product type as
+            event_label and the mid-range price as value — useful for tracking
+            which products are most enquired about and average job values.
+       ──────────────────────────────────────────────────────────────────── */
     function buildResult() {
       var prices   = calcPrice();
+      /* \u00a3 = £, \u2013 = – (en dash, typographically correct for ranges) */
       var priceStr = '\u00a3' + prices.low.toLocaleString('en-GB') + ' \u2013 \u00a3' + prices.high.toLocaleString('en-GB');
 
       document.getElementById('resultPriceDisplay').textContent = priceStr;
       document.getElementById('hiddenEstimate').value           = priceStr;
 
-      /* Summary tags */
+      /* Build summary tag pills from all five answers */
       var tags = [1,2,3,4,5].map(function(n) {
         return LABELS[state.answers[n]];
-      }).filter(Boolean);
+      }).filter(Boolean); /* filter(Boolean) removes undefined/null for unanswered steps */
 
       document.getElementById('resultSummary').innerHTML = tags.map(function(t) {
         return '<span class="result-tag"><i class="fas fa-circle-dot"></i>' + t + '</span>';
       }).join('');
 
-      /* CCTV upsell tip: only show for gate types */
+      /* CCTV upsell tip: only show for gate installs (not CCTV-only or barrier)
+         as it's an upsell opportunity to add cameras to a gate job */
       var isGate = ['swing','sliding','bifold','unsure'].indexOf(state.answers[2]) !== -1;
       document.getElementById('cctvTip').style.display = isGate ? '' : 'none';
 
-      /* Pre-fill selections hidden field */
+      /* Build pipe-separated selection string for Netlify submission context
+         e.g. "Step 1: Residential | Step 2: Sliding Gate | Step 3: 3–5m | …" */
       document.getElementById('hiddenSelections').value = [1,2,3,4,5].map(function(n) {
         return 'Step ' + n + ': ' + (LABELS[state.answers[n]] || state.answers[n] || 'n/a');
       }).join(' | ');
 
-      /* GA event */
+      /* GA4 event: fired when the user reaches the result panel.
+         event_label = the product type (e.g. "sliding") for segmentation.
+         value = mid-range price (integer) for conversion value reporting. */
       if (typeof gtag === 'function') {
         gtag('event', 'quote_complete', {
           event_category: 'Quote Tool',
@@ -1291,51 +1509,82 @@
       }
     }
 
-    /* ── Form submit ──────────────────────────────────────────── */
+    /* ── Form submit handler ─────────────────────────────────────────────
+       Intercepts the quote form submission (e.preventDefault) to handle it
+       via fetch() rather than a full page reload.
+
+       Validation: name and phone are required (non-empty after trimming).
+       If either is blank, add .err (red border) and focus the first error.
+       Email is optional — if the user provides it the browser validates the
+       format via the type="email" attribute, but we don't block submission.
+
+       Netlify fetch POST:
+         URL: '/'  — Netlify's forms endpoint is always the site root
+         Content-Type: application/x-www-form-urlencoded
+         Body: URLSearchParams(FormData(form)) — serialises all named inputs
+               including the hidden form-name, estimate, and selections fields.
+
+       On success: hide the form, show the green success message, fire GA4 event.
+       On network error: alert with the phone number as a fallback contact method.
+       ──────────────────────────────────────────────────────────────────── */
     document.getElementById('quoteForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var nameEl  = document.getElementById('qName');
       var phoneEl = document.getElementById('qPhone');
       var valid   = true;
 
+      /* Mark empty required fields with .err (red border defined in inline CSS) */
       [nameEl, phoneEl].forEach(function(el) {
         if (!el.value.trim()) { el.classList.add('err'); valid = false; }
         else                   el.classList.remove('err');
       });
 
       if (!valid) {
+        /* Move keyboard focus to the first errored field for accessibility */
         nameEl.closest('.configurator-card').querySelector('.err').focus();
         return;
       }
 
+      /* Netlify serverless form submission via fetch.
+         FormData captures all named inputs including hidden fields. */
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(document.getElementById('quoteForm'))).toString()
       })
       .then(function() {
+        /* Success: swap form for the green confirmation message */
         document.getElementById('quoteForm').style.display = 'none';
         document.getElementById('quoteSuccess').style.display = '';
         if (typeof gtag === 'function') {
+          /* GA4 conversion event — track how many estimates become contact leads */
           gtag('event', 'quote_form_submit', { event_category: 'Quote Tool' });
         }
       })
       .catch(function() {
+        /* Fallback: phone number in the alert so the user always has a way to reach MPW */
         alert('Sorry, something went wrong. Please call us on 07434 001222.');
       });
     });
 
-    /* ── Static option listeners (steps 1 & 2) ───────────────── */
+    /* ── Event listeners: steps 1 & 2 (static buttons) ──────────────────
+       Steps 3–5 have their listeners attached inside renderDynamicStep()
+       after the buttons are injected.  Steps 1 and 2 are static HTML so
+       their listeners are added once here at startup. */
     document.querySelectorAll('.config-opt[data-step]').forEach(function(btn) {
       btn.addEventListener('click', onOptionClick);
     });
 
-    /* ── Back button ──────────────────────────────────────────── */
+    /* ── Back button ──────────────────────────────────────────────────────
+       isBack=true so goToStep uses cfSlideBack (slides panel in from the left,
+       giving the correct directional feel when going backwards). */
     backBtn.addEventListener('click', function() {
       if (state.step > 1) goToStep(state.step - 1, true);
     });
 
-    /* ── Restart ──────────────────────────────────────────────── */
+    /* ── Restart button ───────────────────────────────────────────────────
+       Wipes all answers, resets the form back to its initial state (hides
+       the success message, re-shows the form), then goes to step 1. */
     document.getElementById('restartBtn').addEventListener('click', function() {
       state.answers = {};
       document.getElementById('quoteForm').style.display = '';
@@ -1343,7 +1592,9 @@
       goToStep(1, true);
     });
 
-    /* ── Init ─────────────────────────────────────────────────── */
+    /* ── Initialise ───────────────────────────────────────────────────────
+       goToStep(1, false) on page load sets up the initial state:
+       activates panel1, sets progress to 20%, dot1 = .active, Back hidden. */
     goToStep(1, false);
 
   }());

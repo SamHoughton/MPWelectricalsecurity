@@ -1,3 +1,31 @@
+<!--
+  ================================================================
+  MPW Electrical Security — Automated Gates Service Page
+  ================================================================
+  Purpose:   Dedicated landing page for the automated gate installation
+             service.  Targets search queries like "automated gates Wigan",
+             "electric gate installation North West", etc.
+
+  Structure:
+    1. <head>  — SEO meta, three JSON-LD blocks (Service, FAQPage,
+                 BreadcrumbList), CDN assets, site CSS
+    2. Header  — shared nav; "Automated Gates" link has class="active"
+    3. .page-hero — breadcrumb + H1 + CTA buttons
+    4. .intro-section — long-form copy + quick enquiry sidebar
+    5. .details-section — 3 gate-type cards (Sliding, Swing, Bi-fold)
+    6. .why-section — 4 USP cards (Why MPW)
+    7. .related-pages — cross-links to other services
+    8. .page-faq-section — Bootstrap accordion (mirrors FAQPage schema)
+    9. .page-cta-section — final conversion CTA
+   10. Footer — 4-column with "Our Services" links column
+   11. Scripts — Bootstrap JS bundle + site main.js
+
+  Schema.org:
+    - Service schema: serviceType, provider (LocalBusiness), areaServed
+    - FAQPage schema: 4 questions (mirrors the accordion HTML below)
+    - BreadcrumbList: Home → Automated Gates (2-level)
+  ================================================================
+-->
 <!DOCTYPE html>
 <!-- ============================================================
      MPW Electrical Security — Service Page: Automated Gates
@@ -40,6 +68,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Title: city name front-loaded ("Wigan") for local keyword relevance -->
   <title>Automated Gates Wigan | Electric Gate Installation | MPW Electrical Security</title>
   <meta name="description" content="Expert automated gate installation in Wigan & the North West. Sliding, swing & bi-folding gates designed and installed by MPW Electrical Security. Free site visit.">
   <meta name="robots" content="index, follow">
@@ -57,6 +86,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <!-- ── Service schema ────────────────────────────────────────────────
+       Tells Google what service this page represents, who provides it,
+       and which geographic areas it serves. Eligible for rich results
+       in Google's Knowledge Panel and local search cards. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -84,6 +117,10 @@
     ]
   }
   </script>
+  <!-- ── FAQPage schema ────────────────────────────────────────────────
+       Questions here must match the accordion HTML below (same text).
+       Google may show these as expandable FAQ rich results in search,
+       which can double the visual footprint of this page in SERPs. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -124,6 +161,9 @@
     ]
   }
   </script>
+  <!-- ── BreadcrumbList schema ─────────────────────────────────────────
+       Displays as "Home › Automated Gates" in Google search snippets.
+       Helps users understand site structure before clicking through. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -147,7 +187,14 @@
 </head>
 <body>
 
+  <!-- Preloader: JS in main.js fades this out after 600 ms -->
   <div id="preloader"><div class="preloader-spinner"></div></div>
+
+  <!-- ======= Header / Navigation ======= -->
+  <!-- Shared nav structure across all pages.
+       "Services" parent link has class="active" (current section),
+       and "Automated Gates" inside the dropdown also has class="active"
+       to highlight the current page in the sub-menu. -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -164,8 +211,11 @@
             <li><a class="nav-link" href="index.html">Home</a></li>
             <li><a class="nav-link" href="index.html#about">About Us</a></li>
             <li class="nav-item-dropdown">
+              <!-- class="active" on the Services link highlights the parent
+                   item even when a child page (like this one) is active -->
               <a class="nav-link active" href="index.html#services">Services <i class="fas fa-chevron-down nav-caret"></i></a>
               <ul class="nav-dropdown">
+                <!-- class="active" on this specific item highlights the current page -->
                 <li><a href="automated-gates.html" class="active"><i class="fas fa-archway"></i> Automated Gates</a></li>
                 <li><a href="cctv-installation.html"><i class="fas fa-camera"></i> CCTV Installation</a></li>
                 <li><a href="alarm-systems.html"><i class="fas fa-bell"></i> Alarm Systems</a></li>
@@ -184,10 +234,15 @@
     </nav>
   </header>
 
-  <!-- Page Hero -->
+  <!-- ======= Page Hero ======= -->
+  <!-- .page-hero is a stripped-down dark hero for inner pages (defined in
+       style.css). No particles or wave dividers — just a clear H1, breadcrumb
+       navigation, and two CTA buttons (quote form + phone number). -->
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-content">
+        <!-- Breadcrumb: visible HTML path for UX + matches BreadcrumbList schema above.
+             aria-label="Breadcrumb" ensures screen readers announce it correctly. -->
         <nav class="breadcrumb-nav" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <i class="fas fa-chevron-right bc-sep"></i>
@@ -210,7 +265,13 @@
   </section>
 
   <main>
-    <!-- Introduction -->
+    <!-- ======= Introduction ======= -->
+    <!-- Two-column layout: 7/5 split on large screens, stacks on mobile.
+         Left column (reveal-left): long-form copy + check-list of key features.
+         Right column (reveal-right): compact "Quick Enquiry" card with phone,
+         email, address and a CTA button — always visible as users scroll.
+         reveal-left / reveal-right trigger CSS slide-in animations via
+         the IntersectionObserver in main.js. -->
     <section class="intro-section">
       <div class="container">
         <div class="row g-5 align-items-start">
@@ -263,7 +324,12 @@
       </div>
     </section>
 
-    <!-- Detail Cards -->
+    <!-- ======= Detail Cards ======= -->
+    <!-- Three equal-width cards explaining each gate type available.
+         Each card gets a stagger delay via CSS custom property --delay
+         (0s, .1s, .2s) so they animate in sequentially as they enter
+         the viewport. The detail-card-icon uses Font Awesome icons
+         inside a gold-tinted circle for visual consistency. -->
     <section class="details-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -304,7 +370,11 @@
       </div>
     </section>
 
-    <!-- Why MPW -->
+    <!-- ======= Why MPW ======= -->
+    <!-- Four half-width (col-6 col-lg-3) benefit cards — 2×2 on tablet,
+         4-across on desktop.  Same stagger pattern as detail cards above.
+         Content: key differentiators that address common objections
+         (experience, locality, bespoke work, aftercare). -->
     <section class="why-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -345,7 +415,10 @@
       </div>
     </section>
 
-    <!-- Related Services bar -->
+    <!-- ======= Related Services bar ======= -->
+    <!-- A simple horizontal link bar that appears between the Why section and
+         the FAQ.  Helps users navigate to related services without scrolling
+         back to the homepage, and adds internal link equity between service pages. -->
     <div class="related-pages">
       <div class="container">
         <div class="related-pages-inner">
@@ -360,7 +433,14 @@
       </div>
     </div>
 
-    <!-- FAQ -->
+    <!-- ======= FAQ ======= -->
+    <!-- Bootstrap accordion with data-bs-parent="#pageFaqAccordion" so only
+         one answer is open at a time (single-open behaviour).
+         The first item starts open (accordion-button — no "collapsed" class,
+         accordion-collapse has "show" class).
+         IMPORTANT: the question text here must exactly match the FAQPage
+         schema JSON-LD in <head> — Google cross-references both to validate
+         FAQ rich results eligibility. -->
     <section class="page-faq-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -425,7 +505,11 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- ======= Bottom CTA ======= -->
+    <!-- Full-width dark-gold gradient section.  Two buttons: primary
+         (email/form) and secondary (phone).  btn-cta-white and
+         btn-cta-outline are defined in style.css specifically for
+         this section where the background is gold/dark. -->
     <section class="page-cta-section">
       <div class="container">
         <h2>Ready to Secure Your Property with Automated Gates?</h2>
@@ -442,6 +526,11 @@
     </section>
   </main>
 
+  <!-- ======= Footer ======= -->
+  <!-- Same 4-column layout as the homepage footer.
+       Fourth column here uses "Our Services" links instead of
+       "Payment Methods" — more relevant on service pages and
+       helps internal link distribution across service pages. -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -499,7 +588,11 @@
   <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </a>
+  <!-- Bootstrap JS: required for the FAQ accordion collapse behaviour.
+       Loaded at end of body so it doesn't block page rendering. -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Site JS: handles preloader fade, sticky header, mobile nav,
+       scroll-reveal animations, back-to-top, footer year. -->
   <script src="js/main.js"></script>
 </body>
 </html>

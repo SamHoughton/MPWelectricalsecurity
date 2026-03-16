@@ -1,62 +1,74 @@
+<!--
+  ================================================================
+  MPW Electrical Security — Homepage (index.html)
+  ================================================================
+  Purpose:    Primary landing page and lead-generation hub.
+  Sections:   Hero → Stats → Brands → About → Services → How It Works
+              → Portfolio → Testimonials → FAQ → Areas → Contact → Footer
+  Tech stack: HTML5 · Bootstrap 5.3.2 · Font Awesome 6.5 · Vanilla JS
+  Forms:      Netlify Forms (data-netlify="true")
+  Analytics:  Google Analytics 4 (ID: G-H4FW36QNJ8)
+  Author:     MPW Electrical Security
+  ================================================================
+-->
 <!DOCTYPE html>
-<!-- ============================================================
-     MPW Electrical Security — Homepage (index.html)
-     ============================================================
-     This is the main single-page website for Matt's business.
-     It contains all sections: hero, stats, brands bar, about,
-     services, how-it-works, quote CTA, portfolio, testimonials,
-     FAQ, areas, and contact.
-
-     KEY DEPENDENCIES loaded in this file:
-     - Bootstrap 5.3.2 CSS (grid, accordion) — CDN
-     - Font Awesome 6.5.0 (all icons) — CDN
-     - Google Fonts: Inter (body) + Rajdhani (headings) — CDN
-     - Google Analytics 4 (G-H4FW36QNJ8) — inline script in <head>
-     - Bootstrap 5.3.2 JS (accordion) — CDN, before </body>
-     - css/style.css — all custom styles
-     - js/main.js — all custom interactivity
-     - Inline gate animation script — bottom of <body>
-     ============================================================ -->
-<html lang="en">
+<html lang="en"><!-- lang="en" helps screen readers and search engines identify the language -->
 <head>
+  <!-- Character encoding must be first in <head> so the browser
+       knows how to decode the document before reading any other tags -->
   <meta charset="utf-8">
+
+  <!-- Responsive viewport: width=device-width prevents mobile browsers from
+       rendering at desktop width and then scaling down (which looks tiny).
+       initial-scale=1 sets the zoom level to 1:1 on load. -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Page title: appears in the browser tab, search engine results (SERPs),
+       and bookmarks. Format: Primary keyword | Brand | Secondary keyword
+       Kept under 60 characters to avoid truncation in Google results. -->
   <title>Automated Gates Wigan | MPW Electrical Security | CCTV & Alarms North West</title>
+
+  <!-- Meta description: the grey text shown under the page title in Google.
+       Does not directly affect ranking but strongly affects click-through rate.
+       Aim for 150-160 characters — this one mentions key services + USPs. -->
   <meta name="description" content="MPW Electrical Security install bespoke automated gates, CCTV, alarms and access control in Wigan, Newton-le-Willows, St Helens & across the North West. 250+ installations. Free site visit.">
+
+  <!-- Keywords: largely ignored by modern search engines but still parsed
+       by some directory scrapers and alternative search tools. -->
   <meta name="keywords" content="automated gates, electric gate installer, CCTV installation, alarm systems, security cameras, access control, driveway gates, security solutions North West, gate servicing Wigan, Newton-le-Willows">
+
+  <!-- Robots: explicitly allow crawlers to index this page and follow links.
+       Default behaviour if omitted, but stating it explicitly avoids any
+       ambiguity from CDN or hosting-level robots headers. -->
   <meta name="robots" content="index, follow">
+
+  <!-- Google Search Console domain ownership verification token.
+       Alternatively the HTML file google03b767954523f455.html in the root
+       also provides ownership verification. -->
   <meta name="google-site-verification" content="CND0w58KtKLIsKz_QpVhemTCi6cLOlVo6p4qT451OD8" />
   <meta name="author" content="MPW Electrical Security">
+
+  <!-- Theme colour: used by Chrome on Android for the browser UI bar colour,
+       and by some PWA launchers. Matches the brand gold. -->
   <meta name="theme-color" content="#CC8400">
 
-  <!-- ── Canonical URL ──────────────────────────────────────────
-       Tells Google the definitive URL for this page, preventing
-       duplicate content issues if the page is ever accessed via
-       multiple URLs (e.g. with/without www, http/https).
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Canonical -->
+  <!-- Canonical: tells Google the "official" URL for this page to prevent
+       duplicate content issues if the page is accessible at multiple URLs
+       (e.g. with/without trailing slash, www vs non-www). -->
   <link rel="canonical" href="https://www.mpwelectricalsecurity.com/">
 
-  <!-- ── Geo / Local SEO Meta Tags ──────────────────────────────
-       These geo tags hint to search engines that this business
-       is location-specific to Newton-le-Willows, North West England.
-       The coordinates (53.4533, -2.6215) are the business address
-       latitude and longitude. These help with local search rankings.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Geo / Local -->
+  <!-- Geo / Local tags: used by some search engines (especially Yandex, Bing)
+       and mapping services for local search relevance.
+       geo.position and ICBM both express latitude/longitude in different formats. -->
   <meta name="geo.region" content="GB-ENG">
   <meta name="geo.placename" content="Newton-le-Willows, North West England">
   <meta name="geo.position" content="53.4533;-2.6215">
   <meta name="ICBM" content="53.4533, -2.6215">
 
-  <!-- ── Open Graph Tags ────────────────────────────────────────
-       These control how the page appears when shared on Facebook,
-       LinkedIn, WhatsApp, and other social platforms. The og:image
-       is the photo that appears as a preview thumbnail. It should
-       be at least 1200×630 pixels. If you update the main about
-       photo, also update og:image here and on all other pages.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Open Graph (Facebook / LinkedIn) -->
+  <!-- Open Graph (Facebook / LinkedIn / WhatsApp / Slack etc.)
+       Controls how the page appears when shared as a link on social platforms.
+       og:image should ideally be 1200×630px — this gives the "large card" look.
+       og:locale en_GB tells platforms this is British English content. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MPW Electrical Security">
   <meta property="og:locale" content="en_GB">
@@ -64,27 +76,30 @@
   <meta property="og:title" content="Automated Gates Wigan | MPW Electrical Security | CCTV & Alarms North West">
   <meta property="og:description" content="MPW Electrical Security install bespoke automated gates, CCTV, alarms and access control in Wigan, Newton-le-Willows, St Helens & across the North West. 250+ installations. Free site visit.">
   <meta property="og:image" content="https://www.mpwelectricalsecurity.com/img/aboutusgate.jpg">
-  <meta property="og:image:width" content="1200">
+  <meta property="og:image:width" content="1200"><!-- 1200×630 is the recommended og:image size -->
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="MPW Electrical Security automatic gate installation">
 
-  <!-- ── Twitter / X Card Tags ─────────────────────────────────
-       "summary_large_image" shows a full-width image preview when
-       the URL is shared on Twitter/X. Uses the same image as OG.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Twitter / X Card -->
+  <!-- Twitter / X Card: controls how the link looks when shared on Twitter/X.
+       "summary_large_image" shows a full-width image preview — more eye-catching
+       than the default small thumbnail. -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Automated Gates Wigan | MPW Electrical Security | CCTV & Alarms North West">
   <meta name="twitter:description" content="MPW Electrical Security install bespoke automated gates, CCTV, alarms and access control in Wigan, Newton-le-Willows, St Helens & across the North West. 250+ installations. Free site visit.">
   <meta name="twitter:image" content="https://www.mpwelectricalsecurity.com/img/aboutusgate.jpg">
 
-  <!-- ── Favicons & App Icons ───────────────────────────────────
-       The favicon appears in browser tabs and bookmarks.
-       The apple-touch-icon is used on iPhone/iPad home screens.
-       The site.webmanifest file tells browsers about the app name,
-       theme colour, and icons for "Add to Home Screen" on Android.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Favicons & App Icons -->
+  <!-- Favicons & App Icons ───────────────────────────────────
+       Multiple sizes are provided because different contexts use different sizes:
+         32×32  — standard browser tab favicon
+         16×16  — small browser tab / bookmark
+         logo.png — apple-touch-icon used when user adds site to iOS home screen
+
+       apple-mobile-web-app-capable: enables "standalone" mode when launched
+         from the iOS home screen (hides Safari browser chrome).
+       apple-mobile-web-app-status-bar-style: "black-translucent" makes the
+         iOS status bar transparent, matching the dark site theme.
+       site.webmanifest: Progressive Web App manifest — enables "Add to Home
+         Screen" on Android and defines app name, icons, theme colour. -->
   <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="img/logo.png">
@@ -93,46 +108,46 @@
   <meta name="apple-mobile-web-app-title" content="MPW Security">
   <link rel="manifest" href="site.webmanifest">
 
-  <!-- ── Preload Critical Assets ────────────────────────────────
-       Tells the browser to start downloading the hero image
-       immediately, before it processes the CSS. This reduces the
-       Largest Contentful Paint (LCP) time — an important Google
-       page speed metric. Only use preload for images that appear
-       above the fold (visible without scrolling).
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Preload critical assets -->
+  <!-- Preload critical assets ─────────────────────────────────
+       rel="preload" tells the browser to fetch this resource immediately,
+       before it encounters it in the HTML body. The hero gate image (edit.png)
+       is above the fold and visible as soon as the page loads, so preloading it
+       prevents a delayed flash of the page layout while waiting for the image.
+       fetchpriority="high" additionally marks it as high priority in the
+       browser's resource loading queue (Fetch Priority API). -->
   <link rel="preload" as="image" href="img/edit.png" fetchpriority="high">
 
-  <!-- ── Google Fonts ───────────────────────────────────────────
-       Inter is used for all body text. Rajdhani is used for
-       headings, buttons, and nav. The preconnect hints tell the
-       browser to open connections to Google's font servers early,
-       reducing the time before fonts start loading.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Google Fonts -->
+  <!-- Google Fonts ─────────────────────────────────────────────
+       Two fonts are loaded:
+         Inter      — body text. Clean, legible at all sizes, widely used in tech/UI
+         Rajdhani   — headings and buttons. Condensed, bold, slightly industrial feel
+                      — suits the security/gates theme well
+       Only the specific weights used on the site are requested to minimise
+       file size (e.g. Inter 300/400/500/600/700, Rajdhani 400/500/600/700).
+       display=swap: text renders in a fallback font immediately and swaps to
+         the web font once it loads, avoiding invisible text during font loading. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap 5 CSS — provides the 12-column grid system used for
-       layout throughout the site, and the accordion component used
-       for the FAQ section. Loaded from CDN for fast delivery. -->
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap 5.3.2 ─────────────────────────────────────────
+       Loaded via CDN for the grid system (rows/cols) and the accordion
+       component (FAQ section). Only the CSS is needed — the JS bundle
+       is not loaded since we don't use Bootstrap JS components (modals,
+       dropdowns, toasts etc.) — all interactive behaviour is custom. -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Font Awesome 6 — provides all the icons on the site (gate, camera,
-       phone, chevron arrows, etc.). Loaded from CDN. -->
-  <!-- Font Awesome 6 -->
+  <!-- Font Awesome 6.5.0 ──────────────────────────────────────
+       Icon library used throughout for service icons, nav icons, form icons,
+       social links etc. Loaded from Cloudflare CDN. Only the CSS is needed
+       (FA uses CSS classes that reference SVG/web-font files). -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- ── Google Analytics 4 ────────────────────────────────────
-       Tracks all page views and custom events. The 'async' attribute
-       means it loads without blocking the page from rendering.
-       Measurement ID: G-H4FW36QNJ8
-       To view reports: analytics.google.com (sign in with the
-       account linked to mpwelectricalsecurity.com)
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Google Analytics -->
+  <!-- Google Analytics 4 ──────────────────────────────────────
+       Tracks page views, session data, and conversion events (form submissions).
+       Property ID: G-H4FW36QNJ8
+       async: loads the GA script without blocking page rendering.
+       The gtag() function sends events; 'config' initialises the property. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4FW36QNJ8"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -141,20 +156,29 @@
     gtag('config', 'G-H4FW36QNJ8');
   </script>
 
-  <!-- All custom styles for the site — loaded last so they take
-       priority over Bootstrap defaults -->
-  <!-- Custom Styles -->
+  <!-- Custom Styles — loaded AFTER CDN stylesheets so our rules
+       can override Bootstrap defaults without needing !important everywhere -->
   <link href="css/style.css" rel="stylesheet">
 
-  <!-- ── JSON-LD Structured Data: LocalBusiness ────────────────
-       This invisible block of data tells Google exactly what MPW
-       Electrical Security is: a local business, with an address,
-       phone number, email, opening hours, social profiles, and a
-       list of services. Google uses this to power rich results in
-       search (e.g. showing the phone number directly in the listing).
-       If any contact details change, update this block too.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Structured Data: LocalBusiness -->
+  <!-- Structured Data: LocalBusiness (Schema.org JSON-LD) ─────────
+       JSON-LD is the recommended format for Google structured data.
+       It's injected as a <script> tag so it doesn't affect page layout,
+       and can be updated without touching the visible HTML.
+
+       This LocalBusiness schema tells Google:
+         - What type of business this is
+         - The physical address and GPS coordinates
+         - Phone number and email
+         - What cities/regions are served (areaServed)
+         - Opening hours
+         - Social media profiles (sameAs)
+         - Aggregate review rating
+         - What services are offered (hasOfferCatalog)
+
+       When Google trusts the structured data, it may show rich results in
+       search: star ratings, address, phone number, opening hours — all
+       visible in the search result without clicking the link.
+       ─────────────────────────────────────────────────────────────── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -225,13 +249,13 @@
   }
   </script>
 
-  <!-- ── JSON-LD Structured Data: FAQPage ─────────────────────
-       Marks up the FAQ section so Google can show questions and
-       answers directly in search results as "rich snippets".
-       Each Question and Answer here must match the visible FAQ
-       accordion content below. Keep them in sync if you edit FAQs.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Structured Data: FAQ -->
+  <!-- Structured Data: FAQPage ────────────────────────────────
+       Google can display FAQ results directly in the SERP as expandable
+       accordions below the main search result (FAQ rich results).
+       Each Question has a "name" (the question text) and an "acceptedAnswer"
+       with the answer text. These must match the visible FAQ content on the page.
+       Google validates that the structured data matches the actual page content.
+       ─────────────────────────────────────────────────────────────── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -291,85 +315,80 @@
 </head>
 <body>
 
-  <!-- ── Skip Link (accessibility) ────────────────────────────
-       Hidden link visible only when focused via keyboard (Tab key).
-       Allows screen reader and keyboard users to jump past the
-       navigation directly to the main page content.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Skip to main content (accessibility) -->
+  <!-- Skip to main content: an accessibility link that becomes visible
+       on keyboard focus (Tab key). Allows keyboard and screen reader users
+       to jump past the navigation to the main content, avoiding the need
+       to tab through every nav link on every page load. WCAG 2.4.1 compliant. -->
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- ======= Gate Opening Animation =======
-       This is the full-screen animation that plays on a visitor's
-       FIRST visit to the site (not on repeat visits in the same
-       browser session). It shows two iron gate panels opening to
-       reveal the page.
-
-       STRUCTURE:
-       - #gate-overlay        — the full-screen container (z-index: 99999)
-       - .gate-panel-left     — left gate panel (iron bar CSS background)
-       - .gate-panel-right    — right gate panel
-       - .gate-divider        — the thin centre post between the panels
-       - .gate-center-logo    — MPW logo shown centred during animation
-       - .gate-status-light   — small LED dot: red (waiting) → gold (opening)
-
-       The gate panels are drawn entirely with CSS gradients —
-       no images needed. The JavaScript controller (inline script
-       at the bottom of this file) handles the timing sequence.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- ======= Gate Opening Animation ======= -->
+       A pure-CSS animated gate that plays on first page load.
+       Two panels (left/right) fill the screen, then slide apart to reveal the page.
+       The gate texture (iron bars, rails, finial spikes) is created entirely with
+       CSS repeating-linear-gradient values — no images required.
+       The center logo sits on top of both panels; the status light blinks red
+       then switches to gold when the animation starts.
+       JavaScript controls the timing (adds gate-opening and gate-done classes).
+       See css/style.css — "Gate Opening Animation" section for full detail.
+       ======================================= -->
   <div id="gate-overlay">
-    <div class="gate-panel-left"></div>
-    <div class="gate-panel-right"></div>
-    <div class="gate-divider"></div>
+    <div class="gate-panel-left"></div>   <!-- Left gate panel — slides left -->
+    <div class="gate-panel-right"></div>  <!-- Right gate panel — slides right -->
+    <div class="gate-divider"></div>      <!-- Centre post between the two panels -->
   </div>
+  <!-- Logo and blinking status light shown in the centre during the gate animation -->
   <div class="gate-center-logo">
     <img src="img/logo.png" alt="MPW Electrical Security">
-    <div class="gate-status-light" id="gate-status-light"></div>
+    <div class="gate-status-light" id="gate-status-light"></div><!-- Blinks red → turns gold -->
   </div>
   <!-- End Gate Animation -->
 
-  <!-- ── Preloader ─────────────────────────────────────────────
-       A simple spinner shown while the page loads. JavaScript
-       removes the 'preloader' div after the window load event
-       fires (all images loaded). Without this, users on slow
-       connections might see unstyled content briefly.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Preloader -->
+  <!-- Preloader: full-screen spinner shown while the page and assets load.
+       JavaScript fades this out and removes it from the DOM on window 'load'. -->
   <div id="preloader">
     <div class="preloader-spinner"></div>
   </div>
 
-  <!-- ======= Header / Navbar ═══════════════════════════════════
-       Fixed header that stays at the top as the user scrolls.
-       - The navbar-toggler (hamburger) is hidden on desktop,
-         visible on mobile — clicking it calls openNav() in main.js
-       - The .navbar-collapse-custom div slides in from the right
-         on mobile when class="open" is added
-       - The services dropdown (.nav-item-dropdown) opens on hover
-         on desktop, and on click on mobile
-       - The "Get a Quote" button links to quote.html
-       ──────────────────────────────────────────────────────────── -->
-  <!-- ======= Header / Navbar ======= -->
+  <!-- ======= Header / Navbar =======
+       Fixed header that stays visible as the user scrolls.
+       JavaScript adds the 'scrolled' class when scrollY > 80px, which
+       compacts the padding and increases background opacity.
+
+       Accessibility:
+         - aria-label on the toggle button describes it for screen readers
+         - aria-haspopup on "Services" link tells screen readers there's a submenu
+         - aria-expanded is toggled by JS as the dropdown opens/closes
+         - The active class on "Home" is set by JS as sections scroll into view
+
+       The Services nav item (.nav-item-dropdown) shows a dropdown on desktop
+       (CSS :hover) and a slide-down submenu on mobile (JS click toggle).
+       ======================================= -->
   <header id="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
+        <!-- Logo: clicking it scrolls back to the hero section (scroll-link class) -->
         <a class="navbar-brand scroll-link" href="#hero">
           <img src="img/logo.png" alt="MPW Electrical Security" class="logo-img">
         </a>
 
+        <!-- Hamburger button: only visible on screens ≤ 991px (CSS display:none on desktop).
+             Three .hamburger-line spans animate to an X shape when 'open' class is added. -->
         <button class="navbar-toggler" type="button" aria-label="Toggle navigation" id="navToggle">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
         </button>
 
+        <!-- Navigation panel: slides in from the right on mobile (CSS transition),
+             always visible as a flex row on desktop. -->
         <div class="navbar-collapse-custom" id="navMenu">
           <ul class="nav-links">
             <li><a class="nav-link active" href="#hero">Home</a></li>
             <li><a class="nav-link" href="#about">About Us</a></li>
+            <!-- Services item with dropdown — aria-haspopup signals a submenu to assistive tech -->
             <li class="nav-item-dropdown">
               <a class="nav-link" href="#services" aria-haspopup="true" aria-expanded="false">Services <i class="fas fa-chevron-down nav-caret"></i></a>
+              <!-- Dropdown links to individual service pages -->
               <ul class="nav-dropdown">
                 <li><a href="automated-gates.html"><i class="fas fa-archway"></i> Automated Gates</a></li>
                 <li><a href="cctv-installation.html"><i class="fas fa-camera"></i> CCTV Installation</a></li>
@@ -383,6 +402,7 @@
             <li><a class="nav-link" href="#faq">FAQ</a></li>
             <li><a class="nav-link" href="#areas">Areas</a></li>
             <li><a class="nav-link" href="#contact">Contact Us</a></li>
+            <!-- CTA button styled differently from regular nav links (btn-nav-contact class → gold background) -->
             <li><a class="nav-link btn-nav-contact" href="quote.html"><i class="fas fa-calculator me-1"></i>Get a Quote</a></li>
           </ul>
         </div>
@@ -390,29 +410,41 @@
     </nav>
   </header>
 
-  <!-- ======= Hero Section ═══════════════════════════════════════
-       Full viewport-height section with a dark brown/black gradient.
-       - #heroParticles: empty div — JavaScript fills it with
-         floating gold particle spans
-       - .reveal-hero elements start invisible and animate in after
-         the window load event (via JavaScript)
-       - The hero image (img/edit.png) is loaded with fetchpriority="high"
-         and loading="eager" because it's the largest visible element
-         on page load (LCP element for Google PageSpeed)
-       - The SVG wave at the bottom creates a smooth transition to
-         the stats bar below
-       ──────────────────────────────────────────────────────────── -->
-  <!-- ======= Hero Section ======= -->
+  <!-- ======= Hero Section =======
+       Full-viewport-height section (min-height: 100vh) that is the first
+       thing visitors see. Content:
+         - Gold badge (trust signal)
+         - H1 headline (primary keyword + value proposition)
+         - Description paragraph
+         - Two CTA buttons (primary: services, secondary: free quote)
+         - Phone number (immediate contact option)
+         - Gate image (on desktop only — hidden on mobile via d-none d-lg-flex)
+
+       reveal-hero / reveal-delay-* classes: elements start invisible and animate
+       in after the preloader disappears (JS adds 'show' class on window 'load').
+       The staggered delays create a cascade: badge first, then headline,
+       description, then buttons — guides the user's eye down the page.
+
+       The hero image (edit.png) uses fetchpriority="high" and loading="eager"
+       to ensure it loads as fast as possible (it's above the fold, so lazy
+       loading would cause a visible delay).
+       ======================================= -->
   <section id="hero">
+    <!-- Particle container: empty div populated by JS (initParticles() in main.js).
+         pointer-events: none in CSS so particles don't block clicks on content. -->
     <div class="hero-particles" id="heroParticles"></div>
     <div class="hero-content">
       <div class="container">
         <div class="row align-items-center">
+          <!-- Text column: 7/12 width on large screens, full width on smaller -->
           <div class="col-lg-7 hero-text-col">
+            <!-- Trust badge: small pill above headline to establish credibility -->
             <div class="hero-badge reveal-hero">
               <i class="fas fa-shield-halved"></i>
               North West's Trusted Security Specialists
             </div>
+            <!-- H1: must include primary SEO keywords. Only one H1 per page.
+                 text-accent applies the gold brand colour to "Bespoke Security" -->
             <h1 class="reveal-hero reveal-delay-1">
               <span class="text-accent">Bespoke Security</span> for Your Home or Business, Built Around You
             </h1>
@@ -420,19 +452,25 @@
               MPW design and install automated gates, CCTV, alarm systems and security lighting for homes and businesses throughout the North West. Ten years of local experience, just one call away.
             </p>
             <div class="hero-buttons reveal-hero reveal-delay-3">
+              <!-- Primary CTA: scroll-link class triggers smooth scroll to #services -->
               <a href="#services" class="btn btn-gold scroll-link">
                 <span>Our Services</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
+              <!-- Secondary CTA: outline style, less prominent than primary -->
               <a href="#contact" class="btn btn-outline-hero scroll-link">
                 <span>Get a Free Quote</span>
               </a>
             </div>
+            <!-- Inline trust signals alongside phone number (free visit + response time) -->
             <p class="hero-phone reveal-hero reveal-delay-3">
               <i class="fas fa-phone-alt"></i>
               <a href="tel:07434001222">07434 001222</a> &nbsp;&middot;&nbsp; Free site visit &nbsp;&middot;&nbsp; Same-week response
             </p>
           </div>
+          <!-- Gate image: only shown on large screens (d-none d-lg-flex).
+               Hidden on mobile to save space and focus attention on the text/CTAs.
+               fetchpriority="high" + loading="eager" ensures it loads immediately. -->
           <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center">
             <div class="hero-image-wrap reveal-hero reveal-delay-2">
               <img src="img/edit.png" alt="MPW Electrical Security — automated gate installation North West" class="hero-image" fetchpriority="high" loading="eager">
@@ -442,30 +480,39 @@
       </div>
     </div>
 
-    <!-- Animated Wave Divider -->
+    <!-- Animated SVG Wave Divider ─────────────────────────────────────
+         Three wave layers at different speeds and directions create a
+         natural, fluid transition from the hero gradient to the next section.
+         The wave path is defined once in <defs> then reused three times.
+         wave1/wave2/wave3 CSS classes control animation speed and direction.
+         preserveAspectRatio="none" stretches the SVG to full width.
+         ─────────────────────────────────────────────────────────────── -->
     <div class="hero-wave-container">
       <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
         <defs>
+          <!-- Reusable wave path: a sinusoidal curve that tiles horizontally -->
           <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
         </defs>
-        <g class="wave1"><use href="#wave-path" x="50" y="3" fill="rgba(204,132,0,.1)"/></g>
-        <g class="wave2"><use href="#wave-path" x="50" y="0" fill="rgba(204,132,0,.15)"/></g>
-        <g class="wave3"><use href="#wave-path" x="50" y="9" fill="#0a0a0a"/></g>
+        <g class="wave1"><use href="#wave-path" x="50" y="3" fill="rgba(204,132,0,.1)"/></g>   <!-- Slowest, gold tint -->
+        <g class="wave2"><use href="#wave-path" x="50" y="0" fill="rgba(204,132,0,.15)"/></g>  <!-- Medium speed, slightly stronger gold -->
+        <g class="wave3"><use href="#wave-path" x="50" y="9" fill="#0a0a0a"/></g>              <!-- Fastest, page background colour — creates solid bottom edge -->
       </svg>
     </div>
   </section>
 
-  <!-- ======= Stats Bar ══════════════════════════════════════════
-       Gold-background strip showing four headline numbers.
-       Each .stat-number starts at 0 — JavaScript's counter
-       animation runs when this section scrolls into view.
-       data-target="250" tells the JS what number to count up to.
-       The + or % after the number is in a separate .stat-plus span.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- ======= Stats Bar ======= -->
+  <!-- ======= Stats Bar =======
+       A full-width gold band immediately below the hero.
+       Four trust-building statistics displayed in a 4-column grid.
+       Each .stat-number element starts at 0 and counts up to its data-target
+       value when scrolled into view (counterObserver in main.js).
+       The --delay CSS custom property on each item creates a staggered
+       animation effect (0s, 0.1s, 0.2s, 0.3s delays).
+       Grid collapses to 2 columns on tablets, 1 column on very small screens.
+       ======================================= -->
   <section id="stats">
     <div class="container">
       <div class="stats-grid">
+        <!-- data-target: the final number the counter animates to (read by JS) -->
         <div class="stat-item reveal-up">
           <div class="stat-icon"><i class="fas fa-award"></i></div>
           <div class="stat-body">
@@ -473,7 +520,7 @@
             <div class="stat-label">Years Experience</div>
           </div>
         </div>
-        <div class="stat-item reveal-up" style="--delay:0.1s">
+        <div class="stat-item reveal-up" style="--delay:0.1s"><!-- --delay used by reveal-up CSS transition-delay -->
           <div class="stat-icon"><i class="fas fa-users"></i></div>
           <div class="stat-body">
             <div class="stat-number" data-target="250">0</div><span class="stat-plus">+</span>
@@ -490,7 +537,7 @@
         <div class="stat-item reveal-up" style="--delay:0.3s">
           <div class="stat-icon"><i class="fas fa-star"></i></div>
           <div class="stat-body">
-            <div class="stat-number" data-target="100">0</div><span class="stat-plus">%</span>
+            <div class="stat-number" data-target="100">0</div><span class="stat-plus">%</span><!-- Note: % suffix not + -->
             <div class="stat-label">Satisfaction Rate</div>
           </div>
         </div>
@@ -500,21 +547,23 @@
 
   <main id="main">
 
-    <!-- ======= Brands Bar ══════════════════════════════════════
-         Infinite-scroll strip of brand/supplier logos.
-         The logos are listed TWICE in the HTML — the second set
-         is an exact duplicate of the first. This is intentional:
-         the CSS animation scrolls both sets together to the left.
-         When the first set reaches the edge, the second set is
-         already in place, creating a seamless endless loop.
-         All logos use a white CSS filter to match the dark theme.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= Brands Bar ======= -->
+    <!-- ======= Brands Bar =======
+         Scrolling strip of security brand partner logos.
+         IMPORTANT: The brand logos are intentionally duplicated (Set 1 + Set 2).
+         The CSS animation translates the .brands-track by -50% (one full set width).
+         When set-2 lines up with where set-1 started, the animation loops back to 0%
+         seamlessly — the viewer never sees a gap. Without the duplicate, the strip
+         would jump at the end of each loop.
+         The .brands-overflow wrapper applies a CSS mask to fade logos in/out at
+         the left and right edges, creating a smooth fade-in/fade-out effect.
+         loading="lazy" on all images: these brand logos are below the fold and
+         don't need to load eagerly.
+         ======================================= -->
     <section id="brands-bar">
       <p class="brands-label">Approved installers &amp; trusted brands</p>
       <div class="brands-overflow">
         <div class="brands-track">
-          <!-- Set 1 -->
+          <!-- Set 1 — original logos -->
           <div class="brand-item"><img src="img/brands/came.svg" alt="CAME" loading="lazy"></div>
           <div class="brand-item"><img src="img/brands/bft.svg" alt="BFT" loading="lazy"></div>
           <div class="brand-item"><img src="img/brands/faac.svg" alt="FAAC" loading="lazy"></div>
@@ -523,7 +572,9 @@
           <div class="brand-item"><img src="img/brands/texecom.svg" alt="Texecom" loading="lazy"></div>
           <div class="brand-item"><img src="img/brands/paxton.svg" alt="Paxton" loading="lazy"></div>
           <div class="brand-item"><img src="img/brands/videx.svg" alt="Videx" loading="lazy"></div>
-          <!-- Set 2 — exact duplicate for seamless loop -->
+          <!-- Set 2 — exact duplicate required for the seamless loop animation.
+               The CSS animation shifts the track by exactly one set width (-50%),
+               making Set-2's end align perfectly with Set-1's beginning. -->
           <div class="brand-item"><img src="img/brands/came.svg" alt="CAME" loading="lazy"></div>
           <div class="brand-item"><img src="img/brands/bft.svg" alt="BFT" loading="lazy"></div>
           <div class="brand-item"><img src="img/brands/faac.svg" alt="FAAC" loading="lazy"></div>
@@ -536,13 +587,13 @@
       </div>
     </section>
 
-    <!-- ======= About Section ══════════════════════════════════
-         Two-column layout: feature list on the left, photo on right.
-         The reveal-left/reveal-right classes trigger scroll animations.
-         The .about-image-wrap has an offset gold border behind the
-         photo and a "10+ Years" badge overlaid at top-right.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= About Section ======= -->
+    <!-- ======= About Section =======
+         Company story and key features section.
+         Two-column layout: text (left, reveal-left) + image (right, reveal-right)
+         so content appears to slide in from opposite sides as it scrolls into view.
+         The .about-image-wrap has a decorative gold border accent (.about-image-accent)
+         positioned slightly offset behind the photo, and a floating badge showing "10+".
+         ======================================= -->
     <section id="about">
       <div class="container">
         <div class="section-header reveal-up">
@@ -606,15 +657,13 @@
       </div>
     </section>
 
-    <!-- ======= Services Section ══════════════════════════════
-         Six service cards plus a CTA card in a Bootstrap 3-column
-         grid (col-md-6 col-lg-4). Each card has style="--delay:Xs"
-         to stagger the reveal animations. The last card
-         (.service-cta-card) has a different dark styling and
-         encourages visitors to get in touch rather than listing
-         a specific service.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= Services Section ======= -->
+    <!-- ======= Services Section =======
+         Overview grid of the 6 main services MPW offers.
+         5 regular service cards + 1 "Not Sure?" CTA card (service-cta-card class).
+         The service-card::before pseudo-element adds a gold top border that
+         scales in from the left on hover — JS doesn't control this, it's pure CSS.
+         Cards link to their individual service pages from the navbar dropdown.
+         ======================================= -->
     <section id="services">
       <div class="container">
         <div class="section-header reveal-up">
@@ -689,14 +738,12 @@
       </div>
     </section>
 
-    <!-- ======= How It Works Section ══════════════════════════
-         Four numbered process cards explaining the customer journey:
-         1. Free site survey  2. Bespoke design
-         3. Expert installation  4. Aftercare & support
-         The process numbers (01–04) are shown in large faint text
-         behind each card's content via CSS.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= How It Works Section ======= -->
+    <!-- ======= How It Works Section =======
+         4-step process: Free Survey → Bespoke Design → Installation → Aftercare.
+         Each step is a .process-card with a large faded number (01–04),
+         a gold icon, and a description. The numbers are decorative (opacity 0.4)
+         to add visual weight without competing with the actual content.
+         ======================================= -->
     <section id="how-it-works">
       <div class="container">
         <div class="section-header reveal-up">
@@ -743,13 +790,12 @@
       </div>
     </section>
 
-    <!-- ======= Quote Tool CTA Banner ════════════════════════
-         A prominent call-to-action card prompting visitors to
-         use the price estimator tool. Links to quote.html.
-         Positioned between How It Works and Portfolio for
-         maximum visibility mid-scroll.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= Quote Tool CTA Banner ======= -->
+    <!-- ======= Quote Tool CTA Banner =======
+         A call-to-action banner between the How It Works and Portfolio sections.
+         Links to quote.html (the interactive cost estimator tool).
+         The ::after pseudo-element on .quote-banner-inner renders a large
+         faded gear icon (fa-gear) as a decorative background element.
+         ======================================= -->
     <section id="quote-cta-banner">
       <div class="container">
         <div class="quote-banner-inner reveal-up">
@@ -769,27 +815,23 @@
       </div>
     </section>
 
-    <!-- ======= Portfolio Section ══════════════════════════════
-         Gallery of past installation photos with a filter system
-         and custom lightbox.
+    <!-- ======= Portfolio Section =======
+         A filterable CSS grid of completed installation photos.
 
-         FILTER BUTTONS: Each .filter-btn has data-filter="category".
-         JavaScript shows/hides .portfolio-item divs based on their
-         data-category attribute. Categories: all, gate, barrier,
-         lighting, security.
+         Filter buttons (.filter-btn): clicking sets data-filter and JS toggles
+         .hidden on portfolio items whose data-category doesn't match.
+         The active filter button gets the 'active' class for the gold background.
 
-         PORTFOLIO ITEMS: Each item needs:
-         - data-category="..." on the outer div (for filtering)
-         - An <img> with descriptive alt text (for Google Images SEO)
-         - A .portfolio-overlay with title and subtitle
-         - A .portfolio-zoom-btn with data-src and data-title
-           (JavaScript reads these to show the correct image
-           in the lightbox)
+         Portfolio items (.portfolio-item):
+           - data-category: used by the JS filter ("gate", "barrier", "lighting", "security")
+           - .portfolio-wrap: the image container with hover effects (scale + darken)
+           - .portfolio-overlay: always-visible bottom caption (gradient overlay)
+           - .portfolio-zoom-btn: the expand icon, only visible on hover via CSS
+             data-src and data-title are read by JS to populate the lightbox
 
-         ADDING NEW PHOTOS: See README.md for step-by-step
-         instructions on adding new portfolio photos.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= Portfolio Section ======= -->
+         Lightbox: clicking .portfolio-zoom-btn opens the full-screen lightbox
+         (defined at the bottom of the page, outside the section).
+         ======================================= -->
     <section id="portfolio">
       <div class="container">
         <div class="section-header reveal-up">
@@ -799,6 +841,7 @@
           <p>Every job is different. Browse a selection of the gates, barriers and security systems we've fitted for customers across the North West.</p>
         </div>
 
+        <!-- Filter buttons: data-filter="all" shows all items, others filter by category -->
         <div class="portfolio-filters reveal-up">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="gate">Gates</button>
@@ -1051,34 +1094,47 @@
         </div>
       </div>
 
-      <!-- ── Custom Lightbox ──────────────────────────────────────
-           Full-screen image viewer. Starts hidden (aria-hidden="true").
-           JavaScript adds class="active" to show it when a zoom button
-           is clicked. The lightbox-body holds the actual image and caption.
-           Navigation: lightboxPrev / lightboxNext buttons, keyboard
-           arrow keys, and left/right swipe on mobile.
-           Closes on: X button, clicking the dark overlay, Escape key.
-           ──────────────────────────────────────────────────────────── -->
-      <!-- Custom Lightbox -->
+      <!-- Custom Lightbox ─────────────────────────────────────────────────
+           Full-screen image overlay opened when a portfolio zoom button is clicked.
+           JavaScript (lightbox section in main.js) handles all interaction:
+             - Opening (fills img src + alt, sets aria-hidden="false")
+             - Prev/Next navigation (only navigates visible/filtered items)
+             - Close: button click, backdrop click, Esc key
+             - Keyboard: Arrow Left / Right / Escape
+             - Touch swipe: left = next, right = previous
+
+           aria-hidden="true" by default: hidden from screen readers until open.
+           JS sets aria-hidden="false" when opened so screen readers announce it.
+
+           The img src starts empty and is populated by JS when opening to avoid
+           loading all portfolio images upfront. The src is cleared on close
+           (after a 350ms delay matching the CSS transition) to free memory.
+
+           Placed inside the portfolio section but positioned fixed in CSS so it
+           covers the entire viewport regardless of scroll position.
+           ─────────────────────────────────────────────────────────────── -->
       <div class="lightbox" id="lightbox" aria-hidden="true">
         <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
         <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
         <button class="lightbox-next" id="lightboxNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
         <div class="lightbox-body">
+          <!-- src is empty on load; JS populates it when lightbox opens -->
           <img src="" alt="" id="lightboxImg">
-          <p id="lightboxCaption"></p>
+          <p id="lightboxCaption"></p><!-- Populated by JS from data-title attribute -->
         </div>
       </div>
     </section>
 
-    <!-- ======= Testimonials Section ══════════════════════════
-         Three customer review cards. These are hardcoded in HTML —
-         they are not pulled automatically from Google Reviews.
-         To add or change a review, edit the .testimonial-card
-         divs directly. Each card has the reviewer's initials as
-         an avatar (the .testimonial-avatar div).
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= Testimonials Section ======= -->
+    <!-- ======= Testimonials Section =======
+         Three customer review cards with star ratings, quote text, and
+         author initials (avatar is just initials in a gold circle — no photos
+         needed, avoids privacy/consent issues with customer photos).
+         The CSS ::before/::after on .testimonial-card > p add curly quote marks
+         around the review text automatically without extra HTML.
+         The "See All Reviews on Google" link opens in a new tab (target="_blank")
+         with rel="noopener noreferrer" to prevent the new tab from being able to
+         access the opener page (security best practice).
+         ======================================= -->
     <section id="testimonials">
       <div class="container">
         <div class="section-header reveal-up">
@@ -1143,17 +1199,14 @@
       </div>
     </section>
 
-    <!-- ======= FAQ Section ════════════════════════════════════
-         Bootstrap 5 accordion component. Each accordion-item has
-         a header button (data-bs-toggle="collapse") and a collapsible
-         body. Bootstrap JS handles the open/close animation.
-
-         IMPORTANT: The FAQ questions and answers here must stay in
-         sync with the JSON-LD FAQPage schema in the <head>. Both
-         are used by Google — one for the visible page, one for
-         rich search result snippets.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= FAQ Section ======= -->
+    <!-- ======= FAQ Section =======
+         Bootstrap 5 accordion component. Each item has:
+           - data-bs-toggle="collapse" — Bootstrap JS handles open/close
+           - data-bs-parent="#faqAccordion" — only one item can be open at a time
+           - aria-expanded / aria-controls — accessibility for screen readers
+         The FAQ content matches the FAQPage schema.org JSON-LD in the <head>,
+         which is a Google requirement for FAQ rich results in search.
+         ======================================= -->
     <section id="faq">
       <div class="container">
         <div class="section-header reveal-up">
@@ -1251,15 +1304,13 @@
       </div>
     </section>
 
-    <!-- ======= Areas We Cover Section ════════════════════════
-         Six area cards showing where MPW covers. Each card has
-         an icon, area name, and postcode range/services.
-         To add a new area, copy an .area-card block and update
-         the icon, name, and description. The Bootstrap grid
-         handles responsive layout automatically.
-         To also add a dedicated area page, see README.md.
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= Areas We Cover Section ======= -->
+    <!-- ======= Areas We Cover Section =======
+         A grid of location cards showing the main coverage areas.
+         Each card has a location name, postcode range, and brief description.
+         These link to the dedicated location pages (wigan.html, st-helens.html,
+         newton-le-willows.html) for deeper local SEO coverage.
+         The 6-column layout (col-lg-2) shows all areas in a single row on desktop.
+         ======================================= -->
     <section id="areas" class="areas-section">
       <div class="container">
         <div class="section-header reveal-up">
@@ -1327,21 +1378,24 @@
       </div>
     </section>
 
-    <!-- ======= Contact Section ════════════════════════════════
-         Two-column layout: contact details on the left, form on right.
+    <!-- ======= Contact Section =======
+         Two-column layout:
+           Left (5/12):  Contact information panel — address, phone, email, social links, Google Maps embed
+           Right (7/12): Enquiry form
 
-         CONTACT INFO: Phone, email, address, social links, and an
-         embedded Google Maps iframe. To update contact details,
-         change both here AND in the footer AND in the JSON-LD schema.
+         Google Maps embed: loading="lazy" defers the map iframe until it scrolls near
+         the viewport, improving initial page load performance. referrerpolicy prevents
+         the user's URL from being sent to Google in the iframe request.
 
-         NETLIFY FORM: The form uses data-netlify="true" to submit
-         to Netlify's form service without any server code.
-         The hidden input name="form-name" value="contact" is required
-         by Netlify to identify which form this is.
-         The bot-field (display:none) is a honeypot anti-spam trap.
-         JavaScript validates the form and POSTs it via fetch().
-         ──────────────────────────────────────────────────────── -->
-    <!-- ======= Contact Section ======= -->
+         Contact Form details:
+           - data-netlify="true" — Netlify intercepts this on their CDN for form handling
+           - name="contact" — Netlify uses this to identify the form in the dashboard
+           - data-netlify-honeypot="bot-field" — spam prevention: bots fill hidden fields,
+             Netlify rejects submissions where bot-field has a value
+           - novalidate — disables browser native validation so our custom JS validation runs
+           - hidden input name="form-name" — required by Netlify for static form detection
+           - bot-field p (display:none) — the honeypot spam trap field
+         ======================================= -->
     <section id="contact">
       <div class="container">
         <div class="section-header reveal-up">
@@ -1394,8 +1448,16 @@
           </div>
 
           <div class="col-lg-7 reveal-right">
+            <!-- Netlify Forms attributes:
+                 data-netlify="true" — enables Netlify form processing on this form
+                 data-netlify-honeypot="bot-field" — references the hidden spam-trap field below
+                 novalidate — tells browser not to validate; JS does custom validation instead
+                 name="contact" — identifies this form in Netlify dashboard -->
             <form class="contact-form" id="contactForm" name="contact" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+              <!-- Required by Netlify when submitting via JavaScript fetch() instead of native form POST -->
               <input type="hidden" name="form-name" value="contact">
+              <!-- Spam honeypot: hidden from real users; bots fill it in.
+                   Netlify rejects submissions where this field is not empty. -->
               <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
               <div class="row g-3">
                 <div class="col-md-6">
@@ -1459,7 +1521,20 @@
 
   </main>
 
-  <!-- ======= Footer ======= -->
+  <!-- ======= Footer =======
+       Four-column footer (on desktop):
+         Col 1 (4/12): Company brand, description, social links
+         Col 2 (2/12): Quick internal page links (scroll-link anchors)
+         Col 3 (3/12): Contact information (address, phone, email)
+         Col 4 (3/12): Payment methods and accepted cards
+
+       target="_blank" on external links (Facebook, Instagram) with
+       rel="noopener" prevents tab-nabbing attacks where the new tab
+       could redirect the original page via window.opener.
+
+       #year span is populated by JS: document.getElementById('year').textContent
+       = new Date().getFullYear() — keeps copyright year current automatically.
+       ======================================= -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -1516,19 +1591,22 @@
     </div>
   </footer>
 
-  <!-- ── Mobile Sticky CTA Bar ──────────────────────────────────
-       Three fixed-bottom buttons shown on mobile only (≤991px).
-       JavaScript hides this bar when the contact section is
-       visible to avoid redundancy. The WhatsApp link uses the
-       international format: https://wa.me/447434001222
-       (no + or spaces — just the country code and number).
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Mobile Sticky CTA Bar (hidden on desktop) -->
+  <!-- Mobile Sticky CTA Bar ──────────────────────────────────────
+       Fixed bottom bar with 3 quick-action buttons, ONLY visible on mobile (≤991px).
+       Three actions:
+         1. tel: link — opens native phone dialler
+         2. wa.me link — opens WhatsApp chat (international format +44...)
+         3. #contact scroll-link — smooth-scrolls to the contact form
+
+       JavaScript (mobileCTABar in main.js) hides this bar when the #contact
+       section is 20% visible, preventing it from overlapping the form.
+       aria-label="Quick contact" describes the landmark to screen readers. -->
   <div class="mobile-cta-bar" id="mobileCTABar" aria-label="Quick contact">
     <a href="tel:07434001222" class="mobile-cta-btn mobile-cta-call">
       <i class="fas fa-phone"></i>
       <span>Call Us</span>
     </a>
+    <!-- WhatsApp: wa.me uses international format (447434001222 = +44 7434 001222) -->
     <a href="https://wa.me/447434001222" class="mobile-cta-btn mobile-cta-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
       <i class="fab fa-whatsapp"></i>
       <span>WhatsApp</span>
@@ -1539,67 +1617,44 @@
     </a>
   </div>
 
-  <!-- ── WhatsApp Float Button (desktop only) ─────────────────
-       Fixed green circle in the bottom-right corner on desktop.
-       Hidden on mobile (CSS hides it at ≤991px) because the
-       mobile CTA bar's WhatsApp button serves the same purpose.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- WhatsApp Floating Button (desktop only) -->
+  <!-- WhatsApp Floating Button: shown on DESKTOP only (hidden on mobile via CSS,
+       replaced by the mobile CTA bar). rel="noopener" prevents tab-nabbing. -->
   <a href="https://wa.me/447434001222" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- ── Back to Top Button ────────────────────────────────────
-       Gold circle that appears after 400px of scroll. Has
-       class="scroll-link" so the smooth scroll JS handles it.
-       JavaScript adds/removes class="visible" based on scroll position.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Back to Top -->
+  <!-- Back to Top button: becomes visible after scrolling 400px down (JS toggles
+       'visible' class). scroll-link makes it smooth-scroll to #hero. -->
   <a href="#hero" class="back-to-top scroll-link" id="backToTop" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </a>
 
-  <!-- ── Script Loading Order ──────────────────────────────────
-       Scripts are loaded at the bottom of <body> (not in <head>)
-       so the HTML is fully parsed before JS tries to find elements.
-
-       1. Bootstrap JS (bundle includes Popper.js) — required for
-          the FAQ accordion to open/close
-       2. js/main.js — all custom interactivity (nav, scroll,
-          portfolio, lightbox, contact form, etc.)
-       3. Inline gate animation script — must come AFTER main.js
-          because it accesses the DOM directly
-
-       The Google Analytics script in <head> has async="true" so
-       it loads in parallel without blocking any of this.
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Bootstrap 5 JS -->
+  <!-- Bootstrap 5 JS bundle (includes Popper.js): loaded at end of body for performance.
+       Required for the FAQ accordion component (data-bs-toggle="collapse"). -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Custom JS -->
+  <!-- Custom site JS: loaded after Bootstrap so it can rely on Bootstrap being available -->
   <script src="js/main.js"></script>
 
-  <!-- ── Gate Animation Controller ────────────────────────────
-       Inline script that controls the gate animation timing.
-       It's inline (not in a separate file) because it runs
-       immediately and is tightly coupled to this page only.
+  <!-- Gate Animation Controller ─────────────────────────────────────────────
+       An IIFE (Immediately Invoked Function Expression) that controls the timing
+       of the gate opening animation. Uses var (not let/const) for maximum
+       browser compatibility.
 
-       TIMING SEQUENCE:
-       - 0ms:     Gate visible, page scroll locked
-       - 1400ms:  Status light goes from red to gold (.go class)
-       - 1800ms:  Gate panels start opening (.gate-opening class
-                  triggers 2.8s CSS slide animation)
-       - 4600ms:  Overlay fades out (.gate-done class triggers
-                  0.8s fade)
-       - 5400ms:  Overlay hidden, scroll unlocked, session key set
+       Two cases where the animation is SKIPPED immediately:
+         1. prefers-reduced-motion: respects user's OS-level accessibility setting
+            that requests less animation (motion sickness / vestibular disorders)
+         2. sessionStorage has 'mpw_gate_seen': animation only plays once per
+            browser session — repeat visitors within the same tab session see it
+            immediately without waiting 5.4 seconds
 
-       SKIP CONDITIONS:
-       - prefers-reduced-motion: OS accessibility setting for
-         users who get motion sickness or seizures from animations
-       - sessionStorage 'mpw_gate_seen': so the animation only
-         plays once per browser session, not on every page refresh
-       ──────────────────────────────────────────────────────────── -->
-  <!-- Gate Animation Controller -->
+       Timeline of classes/actions:
+         0ms    — page loads, overlay is visible, scroll is locked
+         1400ms — status light switches red → gold (.go class)
+         1800ms — gate panels start sliding (gate-opening class)
+         4600ms — gate swing completes (1800 + 2800ms), fade overlay, hide logo
+         5400ms — overlay hidden, scroll unlocked, session flag set
+       ─────────────────────────────────────────────────────────────── -->
   <script>
     (function () {
       var overlay    = document.getElementById('gate-overlay');
@@ -1623,7 +1678,7 @@
         if (statusLight) statusLight.classList.add('go');
       }, 1400);
 
-      // After 1.8s: add gate-opening class — triggers the 2.8s swing
+      // After 1.8s: add gate-opening class — triggers the 2.8s swing animation in CSS
       setTimeout(function () {
         overlay.classList.add('gate-opening');
       }, 1800);
@@ -1635,11 +1690,11 @@
         if (logo) logo.style.display = 'none';
       }, 4600);
 
-      // After fade (4.6 + 0.8 = 5.4s): remove, unlock scroll, mark seen
+      // After fade (4.6 + 0.8 = 5.4s): remove overlay, unlock scroll, mark seen in session
       setTimeout(function () {
         overlay.style.display = 'none';
         document.body.style.overflow = '';
-        sessionStorage.setItem('mpw_gate_seen', '1');
+        sessionStorage.setItem('mpw_gate_seen', '1'); // Don't show again this session
       }, 5400);
     })();
   </script>
