@@ -157,9 +157,18 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .btn-outline-gold:hover {
   background: var(--gold);
-  color: #000;
+  color: var(--dark);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(204,132,0,.35);
+}
+
+/* Focus states for keyboard accessibility */
+.btn:focus-visible,
+.btn-gold:focus-visible,
+.btn-outline-hero:focus-visible,
+.btn-outline-gold:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
 }
 
 /* ── Header / Navbar ──────────────────────────────────────── */
@@ -219,7 +228,7 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #bbb !important;
+  color: var(--text-light) !important;
   padding: .5rem .9rem !important;
   border-radius: 50px;
   transition: var(--transition);
@@ -271,7 +280,7 @@ img { max-width: 100%; height: auto; display: block; }
 .hamburger-line {
   display: block;
   width: 24px; height: 2px;
-  background: #e0e0e0;
+  background: var(--text);
   border-radius: 2px;
   transition: var(--transition);
 }
@@ -1227,6 +1236,22 @@ section { padding: 5rem 0; }
 
 .form-success.visible { display: flex; }
 .form-success i { font-size: 1.2rem; color: #66bb6a; }
+
+.form-error {
+  display: none;
+  align-items: center;
+  gap: .75rem;
+  background: rgba(229,57,53,.1);
+  border: 1px solid rgba(229,57,53,.35);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  color: #ef9a9a;
+  font-size: .92rem;
+  margin-top: 1.25rem;
+}
+.form-error.visible { display: flex; }
+.form-error i { font-size: 1.2rem; color: #e57373; }
+.form-error a { color: #ef9a9a; text-decoration: underline; }
 
 /* ── Footer ───────────────────────────────────────────────── */
 #footer { background: var(--dark); }
