@@ -51,6 +51,7 @@ initParticles();
 const header = document.getElementById('header');
 
 function updateHeader() {
+  if (!header) return;
   if (window.scrollY > 80) {
     header.classList.add('scrolled');
   } else {
@@ -264,47 +265,50 @@ document.querySelectorAll('.portfolio-zoom-btn').forEach(btn => {
   });
 });
 
-lightboxClose.addEventListener('click', closeLightbox);
-lightboxPrev.addEventListener('click',  () => showLightboxItem(currentIndex - 1));
-lightboxNext.addEventListener('click',  () => showLightboxItem(currentIndex + 1));
+if (lightbox) {
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click',  () => showLightboxItem(currentIndex - 1));
+  lightboxNext.addEventListener('click',  () => showLightboxItem(currentIndex + 1));
 
-lightbox.addEventListener('click', e => {
-  if (e.target === lightbox) closeLightbox();
-});
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
 
-document.addEventListener('keydown', e => {
-  if (!lightbox.classList.contains('active')) return;
-  if (e.key === 'Escape')     closeLightbox();
-  if (e.key === 'ArrowLeft')  showLightboxItem(currentIndex - 1);
-  if (e.key === 'ArrowRight') showLightboxItem(currentIndex + 1);
-});
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  showLightboxItem(currentIndex - 1);
+    if (e.key === 'ArrowRight') showLightboxItem(currentIndex + 1);
+  });
 
-/* ── Lightbox Touch Swipe (mobile) ───────────────────────── */
-let touchStartX = 0;
-let touchStartY = 0;
+  /* ── Lightbox Touch Swipe (mobile) ─────────────────────── */
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-lightbox.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].clientX;
-  touchStartY = e.changedTouches[0].clientY;
-}, { passive: true });
+  lightbox.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
 
-lightbox.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  const dy = e.changedTouches[0].clientY - touchStartY;
+  lightbox.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
 
-  // Only respond to primarily horizontal swipes (dx > dy)
-  if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    // Only respond to primarily horizontal swipes (dx > dy)
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
 
-  if (dx < 0) {
-    showLightboxItem(currentIndex + 1); // swipe left → next
-  } else {
-    showLightboxItem(currentIndex - 1); // swipe right → prev
-  }
-}, { passive: true });
+    if (dx < 0) {
+      showLightboxItem(currentIndex + 1); // swipe left → next
+    } else {
+      showLightboxItem(currentIndex - 1); // swipe right → prev
+    }
+  }, { passive: true });
+}
 
 /* ── Contact Form ─────────────────────────────────────────── */
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
+const formError   = document.getElementById('formError');
 
 const formErrorMessages = {
   name:    'Please enter your name.',
@@ -381,12 +385,17 @@ if (contactForm) {
       body: new URLSearchParams(new FormData(contactForm)).toString()
     })
     .then(() => {
-      formSuccess.classList.add('visible');
+      if (formSuccess) {
+        formSuccess.classList.add('visible');
+        setTimeout(() => formSuccess.classList.remove('visible'), 7000);
+      }
       contactForm.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
-      setTimeout(() => formSuccess.classList.remove('visible'), 7000);
     })
     .catch(() => {
-      alert('Sorry, there was a problem sending your message. Please call us on 07434 001222.');
+      if (formError) {
+        formError.classList.add('visible');
+        setTimeout(() => formError.classList.remove('visible'), 7000);
+      }
     });
   });
 
@@ -417,9 +426,11 @@ if (mobileCTABar) {
 /* ── Back to Top ──────────────────────────────────────────── */
 const backToTop = document.getElementById('backToTop');
 
-window.addEventListener('scroll', () => {
-  backToTop.classList.toggle('visible', window.scrollY > 400);
-}, { passive: true });
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+}
 
 /* ── Footer Year ──────────────────────────────────────────── */
 const yearEl = document.getElementById('year');
