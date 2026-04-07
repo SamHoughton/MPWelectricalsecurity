@@ -465,7 +465,7 @@ Brand SVG logos are stored in `img/brands/` and displayed in a scrolling partner
 |---|---|
 | Company Name | MPW Electrical Security |
 | Owner | Matt |
-| Address | 198 Crow Lane East, Newton-le-Willows, WA12 9UA |
+| Address | 90 Park Road South, Newton-le-Willows, WA12 8PL |
 | Phone | 07434 001222 |
 | WhatsApp | https://wa.me/447434001222 |
 | Email | Matt@mpwelectricalsecurity.com |
@@ -525,7 +525,7 @@ Matt's contact details appear in multiple places. If the phone number, email, or
 - All six service pages — quick enquiry panels
 - All three area pages
 
-**Address `198 Crow Lane East, Newton-le-Willows, WA12 9UA`:**
+**Address `90 Park Road South, Newton-le-Willows, WA12 8PL`:**
 - `index.html` — contact section, footer, JSON-LD schema `"address"` block
 - All six service pages — JSON-LD schema and quick enquiry panel
 - All three area pages — JSON-LD schema
