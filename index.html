@@ -249,6 +249,79 @@
   }
   </script>
 
+  <!-- Structured Data: Individual Reviews ─────────────────────
+       Individual Review objects validate the AggregateRating above.
+       Without these, Google may suppress the star-rating rich snippet.
+       Reviews are pulled from verified Google / customer submissions.
+       Each Review must include: reviewRating, reviewBody, author, datePublished.
+       ─────────────────────────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://www.mpwelectricalsecurity.com/#business",
+    "name": "MPW Electrical Security",
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2024-11-08",
+        "reviewBody": "MPW installed a pair of automated gates and a full CCTV system at our property. The team were professional, tidy and the finish is outstanding. Wouldn't hesitate to recommend.",
+        "author": { "@type": "Person", "name": "James T." }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2024-09-14",
+        "reviewBody": "Had MPW fit an alarm system and access control across our commercial premises. Brilliant from start to finish — came out quickly, priced fairly and the work is first class.",
+        "author": { "@type": "Person", "name": "S. Reynolds" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2024-08-22",
+        "reviewBody": "Excellent service. Matt came out to survey the same week I called, the gates were installed within a fortnight and the quality is superb. Very happy with the whole experience.",
+        "author": { "@type": "Person", "name": "L. Harrison" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2024-07-03",
+        "reviewBody": "Really pleased with our new electric gates. Matt was knowledgeable, honest about pricing and completed the job to a very high standard. Would absolutely use again.",
+        "author": { "@type": "Person", "name": "D. Callaghan" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2024-05-18",
+        "reviewBody": "Needed CCTV at short notice for our business premises. MPW came out within a couple of days and had everything installed and running perfectly. Great communication throughout.",
+        "author": { "@type": "Person", "name": "T. Greenwood" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2024-03-29",
+        "reviewBody": "Fantastic job on our driveway gates. Very professional, turned up on time, left everything clean and tidy. The gates look incredible. Highly recommend MPW to anyone in the area.",
+        "author": { "@type": "Person", "name": "P. Walsh" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2023-12-11",
+        "reviewBody": "Had sliding gates and an intercom fitted. Matt was friendly, professional and very tidy. The whole system works perfectly and looks exactly as I imagined. 5 stars.",
+        "author": { "@type": "Person", "name": "C. Molyneux" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "datePublished": "2023-10-05",
+        "reviewBody": "We had an alarm system and security lighting installed. The price was very competitive and the quality of the work is excellent. Wouldn't use anyone else.",
+        "author": { "@type": "Person", "name": "K. Birch" }
+      }
+    ]
+  }
+  </script>
+
   <!-- Structured Data: FAQPage ────────────────────────────────
        Google can display FAQ results directly in the SERP as expandable
        accordions below the main search result (FAQ rich results).
@@ -402,6 +475,7 @@
             <li><a class="nav-link" href="#faq">FAQ</a></li>
             <li><a class="nav-link" href="#areas">Areas</a></li>
             <li><a class="nav-link" href="#contact">Contact Us</a></li>
+            <li><a class="nav-link" href="blog/">Blog</a></li>
             <!-- CTA button styled differently from regular nav links (btn-nav-contact class → gold background) -->
             <li><a class="nav-link btn-nav-contact" href="quote.html"><i class="fas fa-calculator me-1"></i>Get a Quote</a></li>
           </ul>
@@ -853,11 +927,11 @@
         <div class="portfolio-grid" id="portfolioGrid">
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate.jpg" alt="Black automatic driveway gate installed by MPW Electrical Security, North West" loading="lazy">
+              <img src="img/portfolio/gate.jpg" alt="Black steel automatic swing gate installation — electric driveway gate Wigan, North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>MPW Black Gate</h5>
-                <p>Classic automatic gate</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate.jpg" data-title="MPW Black Gate">
+                <h5>Electric Swing Gate — Wigan</h5>
+                <p>Black steel automatic swing gate with fob entry</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate.jpg" data-title="Electric Swing Gate — Wigan">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -865,11 +939,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate2.jpg" alt="Residential automatic sliding gate with remote access control installed in North West" loading="lazy">
+              <img src="img/portfolio/gate2.jpg" alt="Residential automatic sliding gate installation with app remote access — Newton-le-Willows" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Residential Sliding Gate</h5>
-                <p>Space-saving sliding gate with remote access control</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate2.jpg" data-title="Residential Sliding Gate">
+                <h5>Sliding Gate — Newton-le-Willows</h5>
+                <p>Space-saving sliding gate with smartphone remote access</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate2.jpg" data-title="Sliding Gate — Newton-le-Willows">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -877,11 +951,11 @@
           </div>
           <div class="portfolio-item" data-category="lighting">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/light.jpg" alt="Professional garden and driveway security lighting installation by MPW Electrical Security" loading="lazy">
+              <img src="img/portfolio/light.jpg" alt="PIR driveway security lighting installation — outdoor security lights North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Garden Lighting</h5>
-                <p>Professional outdoor lighting</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/light.jpg" data-title="Garden Lighting">
+                <h5>Driveway Security Lighting</h5>
+                <p>PIR motion-sensor floodlights, driveway and garden</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/light.jpg" data-title="Driveway Security Lighting">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -889,11 +963,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate3.jpg" alt="Wrought iron double swing gates with video intercom installed by MPW Security" loading="lazy">
+              <img src="img/portfolio/gate3.jpg" alt="Wrought iron electric double swing gates with video intercom — automated gates St Helens" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Wrought Iron Swing Gates</h5>
-                <p>Classic wrought iron double swing gates with intercom</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate3.jpg" data-title="Wrought Iron Swing Gates">
+                <h5>Wrought Iron Swing Gates — St Helens</h5>
+                <p>Electric double swing gates with video intercom entry</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate3.jpg" data-title="Wrought Iron Swing Gates — St Helens">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -901,11 +975,11 @@
           </div>
           <div class="portfolio-item" data-category="barrier">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/barrier1.jpg" alt="Automated car park entry barrier for commercial access control by MPW Electrical Security" loading="lazy">
+              <img src="img/portfolio/barrier1.jpg" alt="Automatic car park entry barrier installation — commercial access control North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Car Park Entry Barrier</h5>
-                <p>Automated entry barrier for commercial car park access control</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier1.jpg" data-title="Car Park Entry Barrier">
+                <h5>Commercial Car Park Barrier</h5>
+                <p>Automatic entry barrier with ANPR-ready access control</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier1.jpg" data-title="Commercial Car Park Barrier">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -913,11 +987,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate4.jpg" alt="Natural timber bi-folding automated gates with electric motor and keypad, North West" loading="lazy">
+              <img src="img/portfolio/gate4.jpg" alt="Timber bi-folding automated gates with electric motor and keypad — wooden electric gates Wigan" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Timber Automated Gates</h5>
+                <h5>Timber Bi-Fold Gates — Wigan</h5>
                 <p>Natural timber bi-folding gates with electric motor and keypad</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate4.jpg" data-title="Timber Automated Gates">
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate4.jpg" data-title="Timber Bi-Fold Gates — Wigan">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -925,11 +999,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate5.jpg" alt="Full-width driveway security gates with integrated CCTV, installed by MPW" loading="lazy">
+              <img src="img/portfolio/gate5.jpg" alt="Full-width driveway security gates with CCTV camera integration — electric gates with CCTV North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Driveway Security Gates</h5>
-                <p>Full-width driveway gates with CCTV integration</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate5.jpg" data-title="Driveway Security Gates">
+                <h5>Driveway Gates with CCTV</h5>
+                <p>Full-width electric gates with integrated CCTV system</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate5.jpg" data-title="Driveway Gates with CCTV">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -937,11 +1011,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate6.jpg" alt="Heavy-duty commercial security gates for industrial premises, North West" loading="lazy">
+              <img src="img/portfolio/gate6.jpg" alt="Heavy-duty commercial automated security gates for industrial site — commercial electric gates North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Commercial Security Gates</h5>
-                <p>Heavy-duty gates for industrial and commercial premises</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate6.jpg" data-title="Commercial Security Gates">
+                <h5>Industrial Security Gates</h5>
+                <p>Heavy-duty automated gates for commercial and industrial sites</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate6.jpg" data-title="Industrial Security Gates">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -949,11 +1023,11 @@
           </div>
           <div class="portfolio-item" data-category="barrier">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/barrier2.jpg" alt="Automated car park barrier installation by MPW Electrical Security, North West" loading="lazy">
+              <img src="img/portfolio/barrier2.jpg" alt="Rising arm car park barrier installation — automated car park barrier Wigan" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Car Park Barrier</h5>
-                <p>Automated car park barrier</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier2.jpg" data-title="Car Park Barrier">
+                <h5>Rising Arm Car Park Barrier</h5>
+                <p>Automated rising arm barrier with fob and keypad access</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier2.jpg" data-title="Rising Arm Car Park Barrier">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -961,10 +1035,10 @@
           </div>
           <div class="portfolio-item" data-category="barrier">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/barrier3.jpg" alt="Height restriction barrier for multi-storey car park installed by MPW Security" loading="lazy">
+              <img src="img/portfolio/barrier3.jpg" alt="Height restriction barrier for car park — height restriction barrier installation North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Height Restriction Barrier</h5>
-                <p>Height restriction barrier for multi-storey car parks</p>
+                <p>Fixed height restriction barrier for multi-storey car parks</p>
                 <button class="portfolio-zoom-btn" data-src="img/portfolio/barrier3.jpg" data-title="Height Restriction Barrier">
                   <i class="fas fa-expand"></i>
                 </button>
@@ -973,11 +1047,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate8.jpg" alt="App-controlled automatic driveway gates with smartphone remote access, North West" loading="lazy">
+              <img src="img/portfolio/gate8.jpg" alt="App-controlled automatic driveway gates — smartphone remote access electric gates St Helens" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Remote Access Driveway Gates</h5>
-                <p>App-controlled automated gates with smartphone remote access</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate8.jpg" data-title="Remote Access Driveway Gates">
+                <h5>Smart Remote Access Gates — St Helens</h5>
+                <p>App and fob-controlled automated driveway gates</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate8.jpg" data-title="Smart Remote Access Gates — St Helens">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -985,11 +1059,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/gate9.jpg" alt="Bespoke electric double swing gates with video intercom, installed by MPW Electrical Security" loading="lazy">
+              <img src="img/portfolio/gate9.jpg" alt="Bespoke electric double swing gates with video intercom entry — automated gates Newton-le-Willows" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Electric Double Swing Gates</h5>
+                <h5>Electric Swing Gates with Intercom</h5>
                 <p>Bespoke double swing gates with video intercom system</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate9.jpg" data-title="Electric Double Swing Gates">
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/gate9.jpg" data-title="Electric Swing Gates with Intercom">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -997,11 +1071,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/newgate.jpg" alt="New automatic gate installation by MPW Electrical Security, North West" loading="lazy">
+              <img src="img/portfolio/newgate.jpg" alt="New electric gate installation — automatic driveway gate Leigh, North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>New Gate Installation</h5>
-                <p>Recent automatic gate installation</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/newgate.jpg" data-title="New Gate Installation">
+                <h5>New Electric Gate — Leigh</h5>
+                <p>Brand new automatic driveway gate installation</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/newgate.jpg" data-title="New Electric Gate — Leigh">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -1009,11 +1083,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/1newgate.jpg" alt="Bespoke automatic gate system installed by MPW Electrical Security" loading="lazy">
+              <img src="img/portfolio/1newgate.jpg" alt="Bespoke steel automatic gate installation — custom electric gate North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Bespoke Automatic Gate</h5>
-                <p>Bespoke automatic gate system</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/1newgate.jpg" data-title="Bespoke Automatic Gate">
+                <h5>Bespoke Steel Automatic Gate</h5>
+                <p>Custom-fabricated steel automatic gate with keypad entry</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/1newgate.jpg" data-title="Bespoke Steel Automatic Gate">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -1021,11 +1095,11 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/2newgate.jpg" alt="Electric gate installation by MPW Electrical Security, Wigan" loading="lazy">
+              <img src="img/portfolio/2newgate.jpg" alt="Electric sliding gate installation with intercom — automatic sliding gate Wigan" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Electric Gate</h5>
-                <p>Electric gate installation</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/2newgate.jpg" data-title="Electric Gate">
+                <h5>Electric Sliding Gate — Wigan</h5>
+                <p>Space-saving electric sliding gate with intercom</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/2newgate.jpg" data-title="Electric Sliding Gate — Wigan">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -1033,10 +1107,10 @@
           </div>
           <div class="portfolio-item" data-category="gate">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/3newgate.jpg" alt="Automated entry gate installed by MPW Electrical Security, North West" loading="lazy">
+              <img src="img/portfolio/3newgate.jpg" alt="Automated entry gate with fob access control — electric gate installation North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
                 <h5>Automated Entry Gate</h5>
-                <p>Automated entry gate system</p>
+                <p>Electric entry gate with fob and remote access control</p>
                 <button class="portfolio-zoom-btn" data-src="img/portfolio/3newgate.jpg" data-title="Automated Entry Gate">
                   <i class="fas fa-expand"></i>
                 </button>
@@ -1045,11 +1119,11 @@
           </div>
           <div class="portfolio-item" data-category="lighting">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/1lighting.jpg" alt="Outdoor security lighting installed by MPW Electrical Security, North West" loading="lazy">
+              <img src="img/portfolio/1lighting.jpg" alt="Outdoor security floodlight installation — security lighting installer North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Outdoor Security Lighting</h5>
-                <p>Outdoor security lighting installation</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/1lighting.jpg" data-title="Outdoor Security Lighting">
+                <h5>Security Floodlights</h5>
+                <p>High-output security floodlights with PIR motion detection</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/1lighting.jpg" data-title="Security Floodlights">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -1057,11 +1131,11 @@
           </div>
           <div class="portfolio-item" data-category="security">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/1security.jpg" alt="CCTV security system installed by MPW Electrical Security, North West" loading="lazy">
+              <img src="img/portfolio/1security.jpg" alt="Full HD CCTV system installation with night vision and remote viewing — CCTV installer Wigan" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>CCTV Installation</h5>
-                <p>Full HD CCTV system with remote viewing</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/1security.jpg" data-title="CCTV Installation">
+                <h5>HD CCTV System — Wigan</h5>
+                <p>Full HD CCTV with night vision and smartphone remote viewing</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/1security.jpg" data-title="HD CCTV System — Wigan">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -1069,11 +1143,11 @@
           </div>
           <div class="portfolio-item" data-category="security">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/2security.jpg" alt="Bespoke security system installed by MPW Electrical Security" loading="lazy">
+              <img src="img/portfolio/2security.jpg" alt="Bespoke CCTV and alarm system installation — security system installer North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Bespoke Security System</h5>
-                <p>Tailored security solution for residential property</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/2security.jpg" data-title="Bespoke Security System">
+                <h5>CCTV &amp; Alarm System</h5>
+                <p>Combined CCTV and intruder alarm installation for residential property</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/2security.jpg" data-title="CCTV &amp; Alarm System">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
@@ -1081,11 +1155,11 @@
           </div>
           <div class="portfolio-item" data-category="security">
             <div class="portfolio-wrap">
-              <img src="img/portfolio/ringproducts.jpg" alt="Ring doorbell and camera systems supplied and installed by MPW Electrical Security" loading="lazy">
+              <img src="img/portfolio/ringproducts.jpg" alt="Ring video doorbell and CCTV camera installation — Ring doorbell installer North West" width="600" height="400" loading="lazy">
               <div class="portfolio-overlay">
-                <h5>Ring Security Products</h5>
-                <p>Ring doorbell &amp; camera systems supplied and installed</p>
-                <button class="portfolio-zoom-btn" data-src="img/portfolio/ringproducts.jpg" data-title="Ring Security Products">
+                <h5>Ring Video Doorbell &amp; Cameras</h5>
+                <p>Ring doorbell and outdoor camera systems, supplied and installed</p>
+                <button class="portfolio-zoom-btn" data-src="img/portfolio/ringproducts.jpg" data-title="Ring Video Doorbell &amp; Cameras">
                   <i class="fas fa-expand"></i>
                 </button>
               </div>

@@ -674,6 +674,13 @@ if (contactForm) {
       body: new URLSearchParams(new FormData(contactForm)).toString()
     })
     .then(() => {
+      // Fire GA4 conversion event — lets us attribute leads to traffic source in Analytics
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'Contact Form',
+          event_label: (document.getElementById('service') || {}).value || 'general'
+        });
+      }
       // Show success message for 7 seconds, then hide it
       if (formSuccess) {
         formSuccess.classList.add('visible');
@@ -753,3 +760,57 @@ if (backToTop) {
    ─────────────────────────────────────────────────────────────────────────── */
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* ── GA4 Conversion Tracking ──────────────────────────────────────────────────
+   Tracks key user interactions as GA4 events so we can measure which traffic
+   sources and pages actually generate leads, not just visits.
+
+   Events tracked:
+     - phone_call        : click on any tel: link (header, footer, CTA bar)
+     - whatsapp_click    : click on any wa.me link
+     - cta_click         : click on primary CTA buttons ("Get a Free Quote" etc.)
+     - quote_tool_open   : click on any link to quote.html
+   ─────────────────────────────────────────────────────────────────────────── */
+if (typeof gtag === 'function' || true) { // runs regardless; gtag guard is inside each handler
+  // Phone number clicks — covers all tel: links across the page
+  document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'phone_call', {
+          event_category: 'engagement',
+          event_label: link.href.replace('tel:', '')
+        });
+      }
+    });
+  });
+
+  // WhatsApp clicks
+  document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'whatsapp_click', { event_category: 'engagement' });
+      }
+    });
+  });
+
+  // Primary CTA buttons — "Get a Free Quote", "Get Your Free Quote" etc.
+  document.querySelectorAll('.btn-gold, .btn-outline-gold').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'cta_click', {
+          event_category: 'engagement',
+          event_label: btn.textContent.trim().substring(0, 50)
+        });
+      }
+    });
+  });
+
+  // Clicks to the quote tool
+  document.querySelectorAll('a[href="quote.html"], a[href*="quote.html"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'quote_tool_open', { event_category: 'engagement' });
+      }
+    });
+  });
+}
