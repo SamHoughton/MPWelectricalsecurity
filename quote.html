@@ -72,6 +72,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-H4FW36QNJ8');
+      gtag('config', 'AW-18017630248');
   </script>
 
   <!-- Site Styles -->
@@ -1559,6 +1560,8 @@
         if (typeof gtag === 'function') {
           /* GA4 conversion event — track how many estimates become contact leads */
           gtag('event', 'quote_form_submit', { event_category: 'Quote Tool' });
+          // Google Ads conversion — fires when quote form is successfully submitted
+          gtag('event', 'conversion', { send_to: 'AW-18017630248/jDy8COOThawcEKjwvI9D' });
         }
       })
       .catch(function() {

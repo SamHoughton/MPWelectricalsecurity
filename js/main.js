@@ -680,6 +680,8 @@ if (contactForm) {
           event_category: 'Contact Form',
           event_label: (document.getElementById('service') || {}).value || 'general'
         });
+        // Google Ads conversion — fires when contact form is successfully submitted
+        gtag('event', 'conversion', { send_to: 'AW-18017630248/jDy8COOThawcEKjwvI9D' });
       }
       // Show success message for 7 seconds, then hide it
       if (formSuccess) {
