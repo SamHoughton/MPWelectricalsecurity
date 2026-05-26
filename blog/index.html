@@ -59,31 +59,37 @@
   <!-- Header / Nav -->
   <header id="header">
     <div class="container">
-      <nav class="navbar" aria-label="Main navigation">
+            <nav class="navbar" aria-label="Main navigation">
         <a class="navbar-brand" href="/">
           <img src="/img/logo.png" alt="MPW Electrical Security" width="160" height="45">
         </a>
-        <button class="hamburger" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
-          <span></span><span></span><span></span>
+
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" id="navToggle">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
         </button>
-        <ul class="nav-links" id="navMenu">
-          <li><a href="/">Home</a></li>
-          <li class="has-dropdown">
-            <a href="/#services" aria-haspopup="true" aria-expanded="false">Services <i class="fas fa-chevron-down fa-xs"></i></a>
-            <ul class="dropdown-menu-custom">
-              <li><a href="/automated-gates.html">Automated Gates</a></li>
-              <li><a href="/cctv-installation.html">CCTV Installation</a></li>
-              <li><a href="/alarm-systems.html">Alarm Systems</a></li>
-              <li><a href="/access-control.html">Access Control</a></li>
-              <li><a href="/security-lighting.html">Security Lighting</a></li>
-              <li><a href="/gate-servicing.html">Gate Servicing</a></li>
-            </ul>
-          </li>
-          <li><a href="/#portfolio">Portfolio</a></li>
-          <li><a href="/blog/" class="active">Blog</a></li>
-          <li><a href="/quote.html">Get a Quote</a></li>
-          <li><a href="/#contact">Contact</a></li>
-        </ul>
+
+        <div class="navbar-collapse-custom" id="navMenu">
+          <ul class="nav-links">
+            <li><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item-dropdown">
+              <a class="nav-link" href="/#services" aria-haspopup="true" aria-expanded="false">Services <i class="fas fa-chevron-down nav-caret"></i></a>
+              <ul class="nav-dropdown">
+                <li><a href="/automated-gates.html"><i class="fas fa-archway"></i> Automated Gates</a></li>
+                <li><a href="/cctv-installation.html"><i class="fas fa-camera"></i> CCTV Installation</a></li>
+                <li><a href="/alarm-systems.html"><i class="fas fa-bell"></i> Alarm Systems</a></li>
+                <li><a href="/gate-servicing.html"><i class="fas fa-screwdriver-wrench"></i> Gate Servicing</a></li>
+                <li><a href="/access-control.html"><i class="fas fa-fingerprint"></i> Access Control</a></li>
+                <li><a href="/security-lighting.html"><i class="fas fa-lightbulb"></i> Security Lighting</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link" href="/#portfolio">Portfolio</a></li>
+            <li><a class="nav-link active" href="/blog/">Blog</a></li>
+            <li><a class="nav-link" href="/#contact">Contact Us</a></li>
+            <li><a class="nav-link btn-nav-contact" href="/quote.html"><i class="fas fa-calculator me-1"></i>Get a Quote</a></li>
+          </ul>
+        </div>
       </nav>
     </div>
   </header>
