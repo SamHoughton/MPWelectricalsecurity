@@ -310,64 +310,46 @@ sections.forEach(s => navObserver.observe(s));
    element — the animation only plays once per page load, not every time the
    element re-enters the viewport.
    ─────────────────────────────────────────────────────────────────────────── */
+/* ── Stats Counter ────────────────────────────────────────────────────────────
+   Counts a .stat-number element from 0 up to its data-target value over
+   1800 ms. Called by revealObserver after the reveal CSS transition completes
+   so the user sees the full count animation rather than catching it mid-way.
+   ─────────────────────────────────────────────────────────────────────────── */
+function startCounter(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const dur    = 1800;
+  const step   = 16;
+  const inc    = target / (dur / step);
+  let current  = 0;
+  const timer  = setInterval(() => {
+    current += inc;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.floor(current);
+  }, step);
+}
+
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');         // Trigger CSS reveal animation
-      revealObserver.unobserve(entry.target);         // Stop watching — only animate once
+      revealObserver.unobserve(entry.target);
+
+      // If this stat item contains a counter, start it after the reveal
+      // transition finishes (650 ms matches the CSS transition duration)
+      const counter = entry.target.querySelector('.stat-number[data-target]');
+      if (counter) {
+        setTimeout(() => startCounter(counter), 650);
+      }
     }
   });
-}, { threshold: 0.12 }); // Trigger when 12% of element is visible
+}, { threshold: 0.12 });
 
 // Observe all elements that should animate in on scroll
 document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right')
   .forEach(el => revealObserver.observe(el));
-
-/* ── Stats Counter ────────────────────────────────────────────────────────────
-   Animates numeric counters (e.g. "250+ installations") from 0 up to their
-   target value when they scroll into view. The target value is stored in the
-   element's `data-target` attribute.
-
-   Animation logic:
-     - Duration: 1800 ms total
-     - Step interval: 16 ms (≈ 60 fps)
-     - Increment per step: target / (1800 / 16) ≈ target / 112.5
-     - setInterval updates the displayed number every 16 ms
-     - When current value reaches or exceeds target, it snaps to the exact
-       target value and the interval is cleared
-
-   Uses threshold: 0.4 — the counter only starts when 40% of the element
-   is visible, ensuring the user can actually see the animation play.
-   Like scroll reveal, the element is unobserved after first trigger so the
-   counter only plays once.
-   ─────────────────────────────────────────────────────────────────────────── */
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-
-    const el     = entry.target;
-    const target = parseInt(el.dataset.target, 10); // Read target number from data-target attribute
-    const dur    = 1800;                             // Total animation duration in ms
-    const step   = 16;                               // Interval between updates in ms (≈60fps)
-    const inc    = target / (dur / step);            // How much to add each interval step
-    let current  = 0;                                // Start value
-
-    const timer = setInterval(() => {
-      current += inc;
-      if (current >= target) {
-        current = target;       // Snap to exact target to avoid floating-point overshoot
-        clearInterval(timer);   // Stop the animation
-      }
-      el.textContent = Math.floor(current); // Display rounded-down value
-    }, step);
-
-    counterObserver.unobserve(el); // Don't restart the animation if element re-enters viewport
-  });
-}, { threshold: 0.4 }); // Start when 40% of the counter element is visible
-
-// Observe all counter elements (they carry data-target="250" etc.)
-document.querySelectorAll('.stat-number')
-  .forEach(el => counterObserver.observe(el));
 
 /* ── Portfolio Filter ─────────────────────────────────────────────────────────
    The portfolio grid has a row of filter buttons above it:
