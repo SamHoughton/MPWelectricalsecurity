@@ -798,3 +798,40 @@ if (typeof gtag === 'function' || true) { // runs regardless; gtag guard is insi
     });
   });
 }
+
+/* ── Reading-progress bar (article pages only) ──────────────────────────────
+   A 3px gold strip fixed to the top of the page that fills as the user
+   scrolls through the article. Only initialises when both #reading-progress
+   and a .blog-article element exist — so it stays inert on every other page.
+   ─────────────────────────────────────────────────────────────────────────── */
+(function initReadingProgress() {
+  const bar = document.getElementById('reading-progress');
+  const article = document.querySelector('.blog-article');
+  if (!bar || !article) return;
+
+  const update = () => {
+    const rect = article.getBoundingClientRect();
+    const total = rect.height - window.innerHeight;
+    const scrolled = -rect.top;
+    const pct = Math.max(0, Math.min(1, scrolled / total));
+    bar.style.width = (pct * 100) + '%';
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+})();
+
+/* ── Blog-card cursor glow ───────────────────────────────────────────────────
+   Tracks the mouse position over each .blog-card and writes it to two CSS
+   custom properties (--mx / --my) that the card's ::before radial gradient
+   reads, so the glow follows the cursor.
+   ─────────────────────────────────────────────────────────────────────────── */
+document.querySelectorAll('.blog-card').forEach(card => {
+  card.addEventListener('pointermove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
+  });
+});
