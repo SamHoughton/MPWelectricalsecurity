@@ -423,21 +423,22 @@ img { max-width: 100%; height: auto; display: block; }
 
   .navbar-collapse-custom {
     position: fixed;
-    top: 0; right: -100%;       /* Off-screen initial position */
-    width: min(280px, 80vw);    /* Responsive width — 280px or 80% of screen */
+    top: 0; right: 0;
+    width: min(280px, 80vw);
     height: 100vh;
     background: var(--dark);
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding: 2rem;
-    transition: right .4s cubic-bezier(.77,0,.175,1);
+    transform: translateX(100%);
+    transition: transform .4s cubic-bezier(.77,0,.175,1);
     box-shadow: -5px 0 30px rgba(0,0,0,.3);
     z-index: 1000;
   }
 
   .navbar-collapse-custom.open {
-    right: 0;
+    transform: translateX(0);
   }
 
   .nav-links {
