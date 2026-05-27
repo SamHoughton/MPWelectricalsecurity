@@ -835,3 +835,56 @@ document.querySelectorAll('.blog-card').forEach(card => {
     card.style.setProperty('--my', y + '%');
   });
 });
+
+/* ── Article-heading underline reveal ────────────────────────────────────────
+   Every <h2> inside a .blog-article gets a gold underline that draws in when
+   it enters the viewport. No HTML changes needed — the class is added by JS
+   when the heading intersects.
+   ─────────────────────────────────────────────────────────────────────────── */
+(function initHeadingReveal() {
+  const headings = document.querySelectorAll('.blog-article h2');
+  if (!headings.length || !('IntersectionObserver' in window)) {
+    headings.forEach(h => h.classList.add('in-view'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  headings.forEach(h => io.observe(h));
+})();
+
+/* ── Sticky mobile "Get a Quote" bar ────────────────────────────────────────
+   Shows the floating CTA once the user has scrolled past the article hero,
+   and hides it again when the in-page CTA section comes into view (so the
+   floating bar doesn't compete with the page's own CTA).
+   ─────────────────────────────────────────────────────────────────────────── */
+(function initStickyCta() {
+  const bar = document.querySelector('.sticky-cta');
+  if (!bar) return;
+
+  const hero = document.querySelector('.page-hero');
+  const pageCta = document.querySelector('.page-cta-section');
+  let pageCtaVisible = false;
+
+  if (pageCta && 'IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      pageCtaVisible = entries[0].isIntersecting;
+      update();
+    }, { threshold: 0.05 }).observe(pageCta);
+  }
+
+  const update = () => {
+    const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
+    // Show once the hero has scrolled out of view, hide once the in-page CTA is visible
+    const show = heroBottom < 0 && !pageCtaVisible;
+    bar.classList.toggle('show', show);
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+})();
