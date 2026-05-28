@@ -465,7 +465,45 @@ img { max-width: 100%; height: auto; display: block; }
   padding-top: 80px;  /* Clear the fixed header (approximately 80px tall) */
 }
 
+/* Ambient "security light" glow: two soft amber radials that slowly drift,
+   giving the hero gentle, on-brand motion (like lighting sweeping a scene at
+   night) without the busy feel of the old particle/wave effects. */
+#hero::before,
+#hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+#hero::before {
+  width: 70vw;
+  height: 70vw;
+  top: -25%;
+  left: -15%;
+  background: radial-gradient(circle, rgba(200,144,31,.16), transparent 60%);
+  animation: heroGlow 18s ease-in-out infinite;
+}
+
+#hero::after {
+  width: 55vw;
+  height: 55vw;
+  bottom: -25%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(220,166,63,.10), transparent 60%);
+  animation: heroGlow 22s ease-in-out infinite reverse;
+}
+
+@keyframes heroGlow {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: .65; }
+  50%       { transform: translate(8%, 6%) scale(1.12); opacity: 1; }
+}
+
 .hero-content {
+  position: relative;  /* Sit above the ambient glow pseudo-elements */
+  z-index: 1;
   flex: 1;
   display: flex;
   align-items: center;
@@ -3619,4 +3657,8 @@ section { padding: 5rem 0; }
   .inline-cta-btn,
   .inline-cta-btn i { transition: none; }
   .sticky-cta { transform: none; }
+  /* Hero ambient "security light" glow + floating gate image */
+  #hero::before,
+  #hero::after { animation: none; }
+  .hero-image  { animation: none; }
 }
