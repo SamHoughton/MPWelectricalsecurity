@@ -3317,3 +3317,364 @@ section { padding: 5rem 0; }
   .related-card { transition: none; }
   .blog-card:hover .blog-card-icon { transform: none; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   BLOG ARTICLE (individual post body)
+   Previously duplicated in each post's inline <style> — consolidated
+   here, extended with mobile improvements, scroll animations and
+   stronger inline link / CTA styling.
+   ──────────────────────────────────────────────────────────────── */
+
+.blog-article {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 0 5rem;
+}
+
+.blog-article h2 {
+  color: var(--gold);
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  font-family: var(--font-head);
+  position: relative;
+  padding-bottom: .5rem;
+}
+/* Animated gold underline that draws in when the heading is in view */
+.blog-article h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transition: width .6s ease .1s;
+}
+.blog-article h2.visible::after,
+.blog-article h2.in-view::after { width: 60px; }
+
+.blog-article h3 {
+  color: var(--text);
+  margin-top: 2rem;
+  margin-bottom: .75rem;
+  font-size: 1.2rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+}
+
+.blog-article p,
+.blog-article li {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+.blog-article p { margin-bottom: 1rem; }
+
+.blog-article ul,
+.blog-article ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+.blog-article li { margin-bottom: .4rem; }
+
+.blog-article strong { color: var(--text); }
+
+/* Inline links — gold with an animated underline. Overrides .text-gold
+   (which was just a flat colour) so links pop without an inline class. */
+.blog-article a:not([class]),
+.blog-article a.text-gold {
+  color: var(--gold) !important;
+  text-decoration: none;
+  background-image: linear-gradient(90deg, var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  padding-bottom: 1px;
+  transition: background-size .3s ease, color .2s ease;
+}
+.blog-article a:not([class]):hover,
+.blog-article a.text-gold:hover {
+  color: var(--gold-light) !important;
+  background-size: 100% 1px;
+}
+
+/* Article meta row */
+.article-meta {
+  color: var(--text-muted);
+  font-size: .9rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+.article-meta span { display: inline-flex; align-items: center; gap: .4rem; margin: 0; }
+.article-meta i { color: var(--gold); }
+
+/* Price tables — same look, with reveal-on-row + better mobile scroll */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  min-width: 480px; /* forces horizontal scroll on narrow viewports */
+}
+.price-table th {
+  background: var(--surface);
+  color: var(--gold);
+  padding: .75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--gold);
+  font-family: var(--font-head);
+  font-size: .9rem;
+}
+.price-table td {
+  padding: .65rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-light);
+  font-size: .92rem;
+}
+.price-table tr { transition: background .2s ease; }
+.price-table tbody tr:hover { background: rgba(204,132,0,.06); }
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+}
+.table-scroll .price-table { margin: 0; }
+
+/* Callouts */
+.callout {
+  background: linear-gradient(135deg, rgba(204,132,0,.08), var(--surface) 60%);
+  border-left: 4px solid var(--gold);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 1.75rem 0;
+  box-shadow: var(--shadow-sm);
+}
+.callout p { margin: 0; color: var(--text); }
+.callout.warning { border-left-color: #e07b00; background: linear-gradient(135deg, rgba(224,123,0,.10), var(--surface) 60%); }
+
+/* Verdict (pros/cons) grid */
+.verdict-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.75rem 0;
+}
+.verdict-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.verdict-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(204,132,0,.25);
+  box-shadow: var(--shadow-sm);
+}
+.verdict-card h4 {
+  color: var(--gold);
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  margin-bottom: .75rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.verdict-card ul { padding-left: 1.25rem; margin: 0; }
+.verdict-card li { color: var(--text-light); font-size: .95rem; margin-bottom: .35rem; line-height: 1.6; }
+
+/* Scenario tag — used as a chip in front of h3 sub-headings */
+.scenario-tag {
+  display: inline-block;
+  background: var(--gold);
+  color: #000;
+  font-size: .68rem;
+  font-weight: 700;
+  font-family: var(--font-head);
+  letter-spacing: .08em;
+  padding: .22rem .65rem;
+  border-radius: 3px;
+  margin-right: .5rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* Checklist used in the planning permission post */
+.checklist { list-style: none !important; padding-left: 0 !important; }
+.checklist li {
+  padding-left: 1.85rem;
+  position: relative;
+  margin-bottom: .5rem;
+}
+.checklist li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: var(--gold);
+  position: absolute;
+  left: 0;
+  top: .2rem;
+  font-size: .85rem;
+}
+.checklist li.no::before { content: "\f00d"; color: #e07b00; }
+
+/* ── Inline mid-article CTA card ─────────────────────────────────
+   A prominent "Get a Free Quote" panel that breaks up the body
+   text and gives the reader an obvious action. More visual weight
+   than a callout — gold border + glow + button.
+   ─────────────────────────────────────────────────────────────── */
+.inline-cta {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(204,132,0,.18), transparent 55%),
+    linear-gradient(135deg, var(--surface) 0%, #161616 100%);
+  border: 1px solid rgba(204,132,0,.35);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.75rem;
+  margin: 2.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  box-shadow: var(--shadow-sm), 0 0 0 1px rgba(204,132,0,.08) inset;
+  position: relative;
+  overflow: hidden;
+}
+.inline-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(180deg, var(--gold), var(--gold-light));
+}
+.inline-cta-icon {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(204,132,0,.15);
+  color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.inline-cta-body { flex: 1; min-width: 0; }
+.inline-cta-body h4 {
+  color: var(--text);
+  margin: 0 0 .35rem;
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+}
+.inline-cta-body p {
+  color: var(--text-light) !important;
+  margin: 0 !important;
+  font-size: .92rem;
+  line-height: 1.55;
+}
+.inline-cta-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--gold);
+  color: #000 !important;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: .9rem;
+  letter-spacing: .04em;
+  padding: .8rem 1.4rem;
+  border-radius: 50px;
+  text-decoration: none !important;
+  background-image: none !important;
+  background-size: auto !important;
+  padding-bottom: .8rem !important;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  white-space: nowrap;
+}
+.inline-cta-btn:hover {
+  background: var(--gold-light) !important;
+  color: #000 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(204,132,0,.35);
+}
+.inline-cta-btn i { transition: transform .25s ease; }
+.inline-cta-btn:hover i { transform: translateX(3px); }
+
+/* ── Sticky mobile "Get a Quote" bar ─────────────────────────────
+   A floating call-to-action that appears once the user has read
+   past the hero, on mobile only. Hides when the in-page CTA
+   section is visible (the JS adds .at-bottom).
+   ─────────────────────────────────────────────────────────────── */
+.sticky-cta {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 950;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #000;
+  padding: .85rem 1.1rem;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.15) inset;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: .92rem;
+  text-decoration: none !important;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
+}
+.sticky-cta.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.sticky-cta-text { display: flex; align-items: center; gap: .55rem; }
+.sticky-cta-text i { font-size: 1.05rem; }
+.sticky-cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  background: rgba(0,0,0,.18);
+  border-radius: 50%;
+  font-size: .8rem;
+}
+
+/* Show only on touch-friendly viewports */
+@media (max-width: 768px) {
+  .sticky-cta { display: flex; }
+  /* Lift the back-to-top button up so it doesn't overlap */
+  body:has(.sticky-cta.show) .back-to-top { bottom: 5rem !important; }
+}
+
+/* ── Mobile tightening for blog body ─────────────────────────── */
+@media (max-width: 575px) {
+  .blog-article { padding: 1.75rem 0 3rem; }
+  .blog-article h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+  .blog-article h3 { font-size: 1.05rem; margin-top: 1.5rem; }
+  .blog-article p,
+  .blog-article li { font-size: .95rem; line-height: 1.75; }
+  .verdict-grid { grid-template-columns: 1fr; }
+  .verdict-card { padding: 1.1rem 1.2rem; }
+  .callout { padding: 1rem 1.1rem; margin: 1.25rem 0; }
+  .inline-cta {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem 1.25rem;
+    gap: 1rem;
+  }
+  .inline-cta-btn { width: 100%; justify-content: center; }
+  .scenario-tag { display: inline-block; margin-bottom: .35rem; }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .blog-article h2::after,
+  .blog-article a:not([class]),
+  .blog-article a.text-gold,
+  .verdict-card,
+  .sticky-cta,
+  .inline-cta-btn,
+  .inline-cta-btn i { transition: none; }
+  .sticky-cta { transform: none; }
+}
