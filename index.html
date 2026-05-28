@@ -128,7 +128,7 @@
          the web font once it loads, avoiding invisible text during font loading. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap 5.3.2 ─────────────────────────────────────────
        Loaded via CDN for the grid system (rows/cols) and the accordion
@@ -417,12 +417,6 @@
   </div>
   <!-- End Gate Animation -->
 
-  <!-- Preloader: full-screen spinner shown while the page and assets load.
-       JavaScript fades this out and removes it from the DOM on window 'load'. -->
-  <div id="preloader">
-    <div class="preloader-spinner"></div>
-  </div>
-
   <!-- ======= Header / Navbar =======
        Fixed header that stays visible as the user scrolls.
        JavaScript adds the 'scrolled' class when scrollY > 80px, which
@@ -505,9 +499,6 @@
        loading would cause a visible delay).
        ======================================= -->
   <section id="hero">
-    <!-- Particle container: empty div populated by JS (initParticles() in main.js).
-         pointer-events: none in CSS so particles don't block clicks on content. -->
-    <div class="hero-particles" id="heroParticles"></div>
     <div class="hero-content">
       <div class="container">
         <div class="row align-items-center">
@@ -515,8 +506,8 @@
           <div class="col-lg-7 hero-text-col">
             <!-- Trust badge: small pill above headline to establish credibility -->
             <div class="hero-badge reveal-hero">
-              <i class="fas fa-shield-halved"></i>
-              North West's Trusted Security Specialists
+              <i class="fas fa-location-dot"></i>
+              Family-run installers, based in Newton-le-Willows
             </div>
             <!-- H1: must include primary SEO keywords. Only one H1 per page.
                  text-accent applies the gold brand colour to "Bespoke Security" -->
@@ -555,24 +546,6 @@
       </div>
     </div>
 
-    <!-- Animated SVG Wave Divider ─────────────────────────────────────
-         Three wave layers at different speeds and directions create a
-         natural, fluid transition from the hero gradient to the next section.
-         The wave path is defined once in <defs> then reused three times.
-         wave1/wave2/wave3 CSS classes control animation speed and direction.
-         preserveAspectRatio="none" stretches the SVG to full width.
-         ─────────────────────────────────────────────────────────────── -->
-    <div class="hero-wave-container">
-      <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
-        <defs>
-          <!-- Reusable wave path: a sinusoidal curve that tiles horizontally -->
-          <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
-        </defs>
-        <g class="wave1"><use href="#wave-path" x="50" y="3" fill="rgba(204,132,0,.1)"/></g>   <!-- Slowest, gold tint -->
-        <g class="wave2"><use href="#wave-path" x="50" y="0" fill="rgba(204,132,0,.15)"/></g>  <!-- Medium speed, slightly stronger gold -->
-        <g class="wave3"><use href="#wave-path" x="50" y="9" fill="#0a0a0a"/></g>              <!-- Fastest, page background colour — creates solid bottom edge -->
-      </svg>
-    </div>
   </section>
 
   <!-- ======= Stats Bar =======
@@ -610,10 +583,10 @@
           </div>
         </div>
         <div class="stat-item reveal-up" style="--delay:0.3s">
-          <div class="stat-icon"><i class="fas fa-star"></i></div>
+          <div class="stat-icon"><i class="fab fa-google"></i></div>
           <div class="stat-body">
-            <div class="stat-number" data-target="100">0</div><span class="stat-plus">%</span><!-- Note: % suffix not + -->
-            <div class="stat-label">Satisfaction Rate</div>
+            <div class="stat-number" data-target="47">0</div>
+            <div class="stat-label">5-Star Google Reviews</div>
           </div>
         </div>
       </div>
@@ -751,62 +724,73 @@
         <div class="row g-4">
           <div class="col-md-6 col-lg-4 reveal-up">
             <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="fas fa-screwdriver-wrench"></i>
+              <div class="service-media">
+                <img src="img/portfolio/gate2.jpg" alt="Automatic sliding gate serviced by MPW Electrical Security" loading="lazy">
+                <span class="service-media-icon"><i class="fas fa-screwdriver-wrench"></i></span>
               </div>
-              <h4>Automatic Gate Servicing</h4>
-              <p>Think of it like an MOT for your gates. Regular servicing keeps things running reliably, picks up problems early and extends the life of your system.</p>
-              <div class="service-card-line"></div>
+              <div class="service-card-body">
+                <h4>Automatic Gate Servicing</h4>
+                <p>Think of it like an MOT for your gates. Regular servicing keeps things running reliably, picks up problems early and extends the life of your system.</p>
+              </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.1s">
             <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="fas fa-archway"></i>
+              <div class="service-media">
+                <img src="img/portfolio/gate.jpg" alt="Bespoke black automatic driveway gate installed by MPW Electrical Security" loading="lazy">
+                <span class="service-media-icon"><i class="fas fa-archway"></i></span>
               </div>
-              <h4>Gate Installation</h4>
-              <p>Sliding, swing, bi-folding, timber or steel. Whatever suits your property, we design and fit it from scratch. No two jobs are the same.</p>
-              <div class="service-card-line"></div>
+              <div class="service-card-body">
+                <h4>Gate Installation</h4>
+                <p>Sliding, swing, bi-folding, timber or steel. Whatever suits your property, we design and fit it from scratch. No two jobs are the same.</p>
+              </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.2s">
             <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="fas fa-camera"></i>
+              <div class="service-media">
+                <img src="img/portfolio/1security.jpg" alt="CCTV camera system installed by MPW Electrical Security" loading="lazy">
+                <span class="service-media-icon"><i class="fas fa-camera"></i></span>
               </div>
-              <h4>CCTV Installation</h4>
-              <p>Full HD cameras with night vision, motion alerts and remote viewing on your phone. Keep an eye on your property from wherever you are.</p>
-              <div class="service-card-line"></div>
+              <div class="service-card-body">
+                <h4>CCTV Installation</h4>
+                <p>Full HD cameras with night vision, motion alerts and remote viewing on your phone. Keep an eye on your property from wherever you are.</p>
+              </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.1s">
             <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="fas fa-bell"></i>
+              <div class="service-media">
+                <img src="img/portfolio/ringproducts.jpg" alt="Alarm and smart security products fitted by MPW Electrical Security" loading="lazy">
+                <span class="service-media-icon"><i class="fas fa-bell"></i></span>
               </div>
-              <h4>Alarm Systems</h4>
-              <p>A properly fitted alarm is one of the best deterrents going, and may well reduce your home insurance premium too. We fit and service them all.</p>
-              <div class="service-card-line"></div>
+              <div class="service-card-body">
+                <h4>Alarm Systems</h4>
+                <p>A properly fitted alarm is one of the best deterrents going, and may well reduce your home insurance premium too. We fit and service them all.</p>
+              </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.2s">
             <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="fas fa-lightbulb"></i>
+              <div class="service-media">
+                <img src="img/portfolio/light.jpg" alt="Driveway and garden security lighting installed by MPW Electrical Security" loading="lazy">
+                <span class="service-media-icon"><i class="fas fa-lightbulb"></i></span>
               </div>
-              <h4>Security Lighting</h4>
-              <p>Well-placed driveway and garden lighting looks great and puts off intruders. From subtle pathway lights through to full perimeter floodlighting, we can sort it.</p>
-              <div class="service-card-line"></div>
+              <div class="service-card-body">
+                <h4>Security Lighting</h4>
+                <p>Well-placed driveway and garden lighting looks great and puts off intruders. From subtle pathway lights through to full perimeter floodlighting, we can sort it.</p>
+              </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 reveal-up" style="--delay:0.3s">
             <div class="service-card service-cta-card">
-              <div class="service-icon-wrap">
-                <i class="fas fa-comments"></i>
+              <div class="service-card-body">
+                <div class="service-icon-wrap">
+                  <i class="fas fa-comments"></i>
+                </div>
+                <h4>Not Sure What You Need?</h4>
+                <p>Intercoms, access control, electric barriers, maintenance contracts. We cover it all. <a href="#contact" class="text-gold scroll-link">Drop us a message</a> and we'll work out the right option for you.</p>
               </div>
-              <h4>Not Sure What You Need?</h4>
-              <p>Intercoms, access control, electric barriers, maintenance contracts. We cover it all. <a href="#contact" class="text-gold scroll-link">Drop us a message</a> and we'll work out the right option for you.</p>
-              <div class="service-card-line"></div>
             </div>
           </div>
         </div>
@@ -1217,6 +1201,13 @@
           <h2>What Our Customers Say</h2>
           <div class="section-divider"></div>
         </div>
+
+        <a class="google-rating reveal-up" href="https://www.google.com/maps/search/MPW+Electrical+Security+Newton-le-Willows+WA12+9UA/@53.4533,-2.6215,15z" target="_blank" rel="noopener noreferrer" aria-label="Rated 5.0 out of 5 from 47 reviews on Google">
+          <i class="fab fa-google"></i>
+          <span class="google-rating-score">5.0</span>
+          <span class="google-rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+          <span class="google-rating-text">Rated 5.0 from 47 Google reviews</span>
+        </a>
 
         <div class="row g-4">
           <div class="col-md-6 col-lg-4 reveal-up">
