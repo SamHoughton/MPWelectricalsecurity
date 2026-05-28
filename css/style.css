@@ -61,16 +61,19 @@
    ─────────────────────────────────────────────────────────── */
 :root {
   /* ── Brand colours ─────────────────────────────────────── */
-  --gold:        #CC8400;   /* Primary accent — amber gold. Used on icons, buttons, borders */
-  --gold-light:  #e8a000;   /* Lighter gold — hover states and subtle glows */
-  --gold-dark:   #a36900;   /* Darker gold — pressed/active states, deeper hover shadows */
+  --gold:        #c8901f;   /* Primary accent — warm brass amber (softened from neon gold) */
+  --gold-light:  #dca63f;   /* Lighter brass — hover states and subtle glows */
+  --gold-dark:   #9c6f17;   /* Darker brass — pressed/active states, deeper hover shadows */
 
-  /* ── Background layers (darkest → lightest) ────────────── */
-  --dark:        #0a0a0a;   /* Page background — deepest level */
-  --dark-mid:    #141414;   /* Slightly lighter background — some card/section backgrounds */
-  --bg-section:  #131313;   /* Alternating section background — creates visual rhythm */
-  --bg-light:    #1a1a1a;   /* Input fields and card backgrounds */
-  --surface:     #1e1e1e;   /* "Elevated" surface — cards, form panels, modals */
+  /* ── Background layers (darkest → lightest) ────────────────
+     Warm near-blacks (a touch of brown) rather than clinical pure black.
+     This unifies the page with the warm hero gradient and reads less like
+     a generic dark-mode template. */
+  --dark:        #100d09;   /* Page background — deepest level, warm charcoal */
+  --dark-mid:    #181410;   /* Slightly lighter background — some card/section backgrounds */
+  --bg-section:  #15110c;   /* Alternating section background — creates visual rhythm */
+  --bg-light:    #1e1812;   /* Input fields and card backgrounds */
+  --surface:     #221b13;   /* "Elevated" surface — cards, form panels, modals */
 
   /* ── Text colours ──────────────────────────────────────── */
   --white:       #ffffff;
@@ -79,7 +82,7 @@
   --text-muted:  #888;      /* Further muted — minor labels, placeholders */
 
   /* ── UI chrome ─────────────────────────────────────────── */
-  --border:      #2a2a2a;   /* Subtle card/input borders — barely visible, just enough */
+  --border:      #322a1e;   /* Subtle warm card/input borders — barely visible, just enough */
 
   /* ── Shadows — three scales for depth hierarchy ────────── */
   --shadow-sm:   0 2px 15px rgba(0,0,0,.4);
@@ -94,8 +97,8 @@
   --transition:  all .35s ease; /* Applied as shorthand for hover/state transitions */
 
   /* ── Typography ─────────────────────────────────────────── */
-  --font-body:   'Inter', 'Open Sans', sans-serif;       /* Body text — clean, readable at small sizes */
-  --font-head:   'Rajdhani', 'Montserrat', sans-serif;   /* Headings, buttons — strong, condensed, bold */
+  --font-body:   'Inter', 'Open Sans', sans-serif;                 /* Body text — clean, readable at small sizes */
+  --font-head:   'Bricolage Grotesque', 'Inter', sans-serif;       /* Headings, buttons — warm, characterful grotesque (less template than condensed Rajdhani) */
 }
 
 /* ── Reset / Base ─────────────────────────────────────────────
@@ -142,46 +145,6 @@ img { max-width: 100%; height: auto; display: block; }
 .text-gold   { color: var(--gold) !important; }
 .text-accent { color: var(--gold); }
 .bg-gold     { background: var(--gold); }
-
-/* ── Preloader ────────────────────────────────────────────────
-   Full-screen loading overlay that hides content while the page loads.
-   - z-index: 10000 ensures it sits above absolutely everything
-   - The 'hidden' class triggers opacity + visibility CSS transitions
-     (both are needed: opacity handles the fade, visibility prevents
-     invisible-but-still-interactive overlay from blocking clicks)
-   - pointer-events: none once hidden so nothing on the page is blocked
-   The JavaScript adds 'hidden' on window 'load' event, then removes
-   the element from the DOM after 600ms (slightly longer than the 500ms transition).
-   ─────────────────────────────────────────────────────────────── */
-#preloader {
-  position: fixed; inset: 0;
-  background: var(--dark);
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity .5s ease, visibility .5s ease;
-}
-
-#preloader.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none; /* Prevent invisible overlay blocking clicks during fade-out */
-}
-
-/* Spinning gold ring — a classic loading indicator.
-   The trick: all border sides are near-invisible white except the top,
-   which is gold. As the element rotates, the gold segment appears to
-   "chase" itself around the ring. */
-.preloader-spinner {
-  width: 52px; height: 52px;
-  border: 4px solid rgba(255,255,255,.15);  /* Barely visible ring base */
-  border-top-color: var(--gold);             /* The visible, rotating gold segment */
-  border-radius: 50%;
-  animation: spin 0.9s linear infinite;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── Buttons ──────────────────────────────────────────────── */
 .btn {
@@ -497,36 +460,8 @@ img { max-width: 100%; height: auto; display: block; }
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: hidden;   /* Clip particles and floating image to the hero bounds */
+  overflow: hidden;   /* Clip the floating image to the hero bounds */
   padding-top: 80px;  /* Clear the fixed header (approximately 80px tall) */
-}
-
-.hero-particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-/* Each particle is a <span> created by JS with random size, position,
-   duration, and delay. They float upward using translateY.
-   opacity: .15 keeps them subtle — visible but not distracting. */
-.hero-particle {
-  position: absolute;
-  border-radius: 50%;  /* Circle shape */
-  background: var(--gold);
-  opacity: .15;
-  animation: float linear infinite;  /* JS sets duration and delay per particle */
-}
-
-/* Float animation: particles rise from below the viewport to above it.
-   They start at scale(0) so they appear to "emerge" as they rise,
-   and fade in/out at the edges so the loop is seamless. */
-@keyframes float {
-  0%   { transform: translateY(100vh) scale(0); opacity: 0; }   /* Start below screen, invisible */
-  10%  { opacity: .15; }                                         /* Fade in early */
-  90%  { opacity: .1; }                                          /* Start fading before top */
-  100% { transform: translateY(-10vh) scale(1); opacity: 0; }   /* Exit above screen, invisible */
 }
 
 .hero-content {
@@ -540,16 +475,15 @@ img { max-width: 100%; height: auto; display: block; }
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  background: rgba(204,132,0,.15);
+  background: rgba(200,144,31,.12);
   color: var(--gold-light);
-  border: 1px solid rgba(204,132,0,.3);
+  border: 1px solid rgba(200,144,31,.25);
   border-radius: 50px;
-  padding: .4rem 1rem;
-  font-size: .8rem;
+  padding: .45rem 1.05rem;
+  font-size: .82rem;
   font-family: var(--font-head);
   font-weight: 600;
-  letter-spacing: .5px;
-  text-transform: uppercase;
+  letter-spacing: .2px;
   margin-bottom: 1.5rem;
 }
 
@@ -614,46 +548,6 @@ img { max-width: 100%; height: auto; display: block; }
 @keyframes heroFloat {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-12px); }
-}
-
-/* Hero Waves ─────────────────────────────────────────────────
-   SVG wave shapes at the bottom of the hero create a smooth, animated
-   transition into the next section. Three wave layers (wave1, wave2, wave3)
-   move at different speeds and directions:
-     - wave1: 10s, forward  — slowest, deepest
-     - wave2: 8s,  reverse  — medium speed, opposite direction (creates crossing effect)
-     - wave3: 6s,  forward  — fastest, frontmost
-
-   line-height: 0 on the container prevents a small gap below the inline SVG.
-   pointer-events: none — purely decorative, shouldn't intercept clicks.
-
-   The wave-move keyframe translates horizontally. The SVG path is designed to
-   tile seamlessly, so the wave appears to flow continuously.
-   ─────────────────────────────────────────────────────────────── */
-.hero-wave-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  line-height: 0;          /* Remove whitespace gap under inline SVG */
-  pointer-events: none;    /* Decorative only — don't block clicks */
-}
-
-.hero-waves {
-  display: block;
-  width: 100%;
-  height: 70px;
-}
-
-/* Three wave layers at different speeds and directions for a natural water effect */
-.wave1 use { animation: wave-move 10s linear infinite; animation-delay: -2s; }
-.wave2 use { animation: wave-move 8s linear infinite reverse; animation-delay: -1s; }
-.wave3 use { animation: wave-move 6s linear infinite; animation-delay: -2s; }
-
-/* Horizontal translate — the SVG path tiles, creating seamless looping motion */
-@keyframes wave-move {
-  from { transform: translate(85px, 0); }
-  to   { transform: translate(-90px, 0); }
 }
 
 /* ── Scroll Reveal Animations ─────────────────────────────────
@@ -777,10 +671,9 @@ section { padding: 5rem 0; }
 .section-tag {
   display: inline-block;
   font-family: var(--font-head);
-  font-size: .75rem;
+  font-size: .82rem;
   font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: .4px;
   color: var(--gold);
   margin-bottom: .75rem;
 }
@@ -925,47 +818,72 @@ section { padding: 5rem 0; }
 .service-card {
   background: var(--surface);
   border-radius: var(--radius-lg);
-  padding: 2rem 1.75rem;
   height: 100%;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border);
   position: relative;
   overflow: hidden;
   transition: var(--transition);
-}
-
-.service-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-light));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .4s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(204,132,0,.15);
+  border-color: rgba(200,144,31,.3);
 }
 
-.service-card:hover::before { transform: scaleX(1); }
+/* Photo header — a real install photo replaces the old generic icon tile */
+.service-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
 
-.service-card-line {
+.service-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+
+.service-card:hover .service-media img { transform: scale(1.06); }
+
+/* Gradient at the foot of the photo so the icon badge stays legible */
+.service-media::after {
+  content: '';
   position: absolute;
-  bottom: 0; left: 1.75rem; right: 1.75rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-  opacity: 0;
+  inset: 0;
+  background: linear-gradient(to top, rgba(16,13,9,.6), rgba(16,13,9,0) 55%);
+}
+
+.service-media-icon {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+  width: 46px; height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold);
+  color: #16110a;
+  border-radius: 11px;
+  font-size: 1.15rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,.45);
   transition: var(--transition);
 }
-.service-card:hover .service-card-line { opacity: 1; }
+
+.service-card:hover .service-media-icon { transform: translateY(-3px); }
+
+.service-card-body {
+  padding: 1.5rem 1.6rem 1.75rem;
+}
 
 .service-icon-wrap {
   width: 60px; height: 60px;
-  background: rgba(204,132,0,.1);
+  background: rgba(200,144,31,.12);
   border-radius: var(--radius);
   display: flex;
   align-items: center;
@@ -976,14 +894,8 @@ section { padding: 5rem 0; }
   transition: var(--transition);
 }
 
-.service-card:hover .service-icon-wrap {
-  background: var(--gold);
-  color: var(--white);
-  transform: scale(1.1) rotate(-5deg);
-}
-
 .service-card h4 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text);
   margin-bottom: .75rem;
@@ -996,23 +908,23 @@ section { padding: 5rem 0; }
   margin: 0;
 }
 
+/* CTA card has no photo — it stays icon-led and visually distinct */
 .service-cta-card {
   background: linear-gradient(135deg, var(--dark-mid) 0%, var(--dark) 100%);
-  border-color: rgba(204,132,0,.3);
+  border-color: rgba(200,144,31,.3);
+  justify-content: center;
 }
 
 .service-cta-card h4 { color: var(--white); }
 .service-cta-card p  { color: rgba(255,255,255,.65); }
 .service-cta-card .service-icon-wrap {
-  background: rgba(204,132,0,.2);
+  background: rgba(200,144,31,.2);
   color: var(--gold-light);
 }
 .service-cta-card:hover .service-icon-wrap {
   background: var(--gold);
   color: var(--white);
-}
-.service-cta-card::before {
-  background: linear-gradient(90deg, var(--gold-light), var(--gold));
+  transform: scale(1.08) rotate(-5deg);
 }
 
 /* ── Portfolio Section ────────────────────────────────────── */
@@ -2153,6 +2065,36 @@ section { padding: 5rem 0; }
   padding: 90px 0;
   background: var(--surface);
 }
+
+/* Google rating summary — uses the business's own aggregate rating */
+.google-rating {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  width: fit-content;
+  margin: -1.5rem auto 2.75rem;
+  padding: .6rem 1.1rem;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--text);
+  font-family: var(--font-head);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.google-rating:hover {
+  border-color: rgba(200,144,31,.35);
+  transform: translateY(-2px);
+  color: var(--text);
+}
+.google-rating > .fa-google { font-size: 1.15rem; color: var(--gold); }
+.google-rating-score { font-size: 1.2rem; font-weight: 700; color: var(--white); }
+.google-rating-stars { color: var(--gold); letter-spacing: 1px; font-size: .85rem; }
+.google-rating-text { font-size: .85rem; color: var(--text-light); }
+@media (max-width: 420px) {
+  .google-rating-text { display: none; }
+}
+
 .testimonial-card {
   background: var(--dark);
   border: 1px solid var(--border);

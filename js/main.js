@@ -22,82 +22,15 @@
 
 'use strict'; // Enables strict mode: catches common coding mistakes and prevents use of undeclared variables
 
-/* ── Preloader ────────────────────────────────────────────────────────────────
-   The preloader (#preloader) is a full-screen dark overlay that shows while
-   the page assets are loading. Once the 'load' event fires (all images,
-   stylesheets, and scripts have finished loading) we:
-     1. Add the 'hidden' class → triggers a CSS opacity/visibility transition
-        that fades the overlay out over 0.5 s
-     2. After 600 ms (slightly longer than the CSS transition) we remove the
-        element from the DOM entirely to free memory
-   We also trigger the hero text reveal animation at the same time so the
-   text animates in after the preloader has gone.
+/* ── Hero Reveal ──────────────────────────────────────────────────────────────
+   The hero text/image elements start invisible (.reveal-hero) and animate in
+   once the page has loaded. The staggered delay classes create a cascade.
    ─────────────────────────────────────────────────────────────────────────── */
 window.addEventListener('load', () => {
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
-    preloader.classList.add('hidden');           // Start CSS fade-out transition
-    setTimeout(() => preloader.remove(), 600);  // Remove from DOM after transition completes
-  }
-
-  // Kick off hero text animation after page load
-  // .reveal-hero elements start invisible and slide/fade in when 'show' is added
   document.querySelectorAll('.reveal-hero').forEach(el => {
     el.classList.add('show');
   });
 });
-
-/* ── Hero Particles ───────────────────────────────────────────────────────────
-   Creates floating gold dot particles inside the hero section background.
-   The container #heroParticles is an absolutely-positioned div behind the
-   hero content (pointer-events: none so it doesn't block clicks).
-
-   Each particle is a <span> with the 'hero-particle' class (a circle via
-   border-radius: 50%). Properties are randomised per particle:
-     - size:     3–9 px diameter (larger dots are visible but not distracting)
-     - left:     0–100% horizontal position
-     - duration: 10–22 s animation cycle (varied so particles don't sync up)
-     - delay:    0–15 s start delay (staggers when each particle appears)
-
-   On mobile (< 768 px) only 12 particles are created vs 22 on desktop,
-   reducing visual noise and GPU load on smaller screens.
-
-   The CSS 'float' animation translates each particle from below the viewport
-   (translateY(100vh)) upward to above it (translateY(-10vh)), fading in and
-   out at the edges to create a smooth loop.
-   ─────────────────────────────────────────────────────────────────────────── */
-function initParticles() {
-  const container = document.getElementById('heroParticles');
-  if (!container) return; // Guard: hero particles section may not exist on all pages
-
-  // Fewer particles on mobile to avoid performance issues and visual clutter
-  const count = window.innerWidth < 768 ? 12 : 22;
-
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('span');
-    p.classList.add('hero-particle');
-
-    // Randomise visual properties so particles look natural, not mechanical
-    const size     = Math.random() * 6 + 3;    // 3–9 px
-    const left     = Math.random() * 100;       // 0–100% across the width
-    const delay    = Math.random() * 15;        // 0–15 s start delay
-    const duration = Math.random() * 12 + 10;  // 10–22 s per loop
-
-    // Apply all dynamic values as inline styles
-    p.style.cssText = `
-      width:${size}px;
-      height:${size}px;
-      left:${left}%;
-      animation-duration:${duration}s;
-      animation-delay:${delay}s;
-    `;
-    container.appendChild(p);
-  }
-}
-
-// Run immediately (not inside a 'load' event) so particles are ready as soon
-// as the hero section renders. The CSS animation handles the gradual appearance.
-initParticles();
 
 /* ── Sticky Header ────────────────────────────────────────────────────────────
    The site header is `position: fixed` at the top of the viewport.
