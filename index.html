@@ -397,18 +397,23 @@
 
   <!-- ======= Gate Opening Animation =======
        A pure-CSS animated gate that plays on first page load.
-       Two panels (left/right) fill the screen, then slide apart to reveal the page.
+       Two panels (left/right) fill the screen, then swing open in 3D (on
+       perspective hinges at their outer edges) to reveal the page.
        The gate texture (iron bars, rails, finial spikes) is created entirely with
        CSS repeating-linear-gradient values — no images required.
+       Extra layers add depth: god-ray light shafts behind the gate, a metallic
+       sheen that sweeps across each leaf as it moves, and a cinematic vignette.
        The center logo sits on top of both panels; the status light blinks red
        then switches to gold when the animation starts.
-       JavaScript controls the timing (adds gate-opening and gate-done classes).
-       See css/style.css — "Gate Opening Animation" section for full detail.
+       JavaScript controls the timing (adds gate-unlock, gate-opening and
+       gate-done classes). See css/style.css — "Gate Opening Animation" section.
        ======================================= -->
   <div id="gate-overlay">
-    <div class="gate-panel-left"></div>   <!-- Left gate panel — slides left -->
-    <div class="gate-panel-right"></div>  <!-- Right gate panel — slides right -->
-    <div class="gate-divider"></div>      <!-- Centre post between the two panels -->
+    <div class="gate-rays"></div>          <!-- God-ray light shafts behind the gate -->
+    <div class="gate-panel-left"><span class="gate-sheen"></span></div>   <!-- Left leaf — swings left -->
+    <div class="gate-panel-right"><span class="gate-sheen"></span></div>  <!-- Right leaf — swings right -->
+    <div class="gate-divider"></div>       <!-- Centre post between the two leaves -->
+    <div class="gate-vignette"></div>      <!-- Cinematic vignette framing -->
   </div>
   <!-- Logo and blinking status light shown in the centre during the gate animation -->
   <div class="gate-center-logo">
@@ -1714,12 +1719,12 @@
             browser session — repeat visitors within the same tab session see it
             immediately without waiting 5.4 seconds
 
-       Timeline of classes/actions:
-         0ms    — page loads, overlay is visible, scroll is locked
-         1400ms — status light switches red → gold (.go class)
-         1800ms — gate panels start sliding (gate-opening class)
-         4600ms — gate swing completes (1800 + 2800ms), fade overlay, hide logo
-         5400ms — overlay hidden, scroll unlocked, session flag set
+       Timeline of classes/actions (tightened to ~3s for a snappier feel):
+         0ms    — page loads, overlay visible, logo eases in, scroll locked
+         550ms  — status light arms red → gold (.go) + unlock judder (gate-unlock)
+         850ms  — leaves swing open in 3D (gate-opening) — 1.6s swing
+         2450ms — swing completes, fade overlay out (gate-done), hide logo
+         3000ms — overlay hidden, scroll unlocked, session flag set
        ─────────────────────────────────────────────────────────────── -->
   <script>
     (function () {
@@ -1739,29 +1744,31 @@
       // Lock scroll while gate is showing
       document.body.style.overflow = 'hidden';
 
-      // After 1.4s: switch status light red → gold, then open gates
+      // After 0.55s: arm the status light (red → gold) and play the unlock judder
       setTimeout(function () {
         if (statusLight) statusLight.classList.add('go');
-      }, 1400);
+        overlay.classList.add('gate-unlock');
+      }, 550);
 
-      // After 1.8s: add gate-opening class — triggers the 2.8s swing animation in CSS
+      // After 0.85s: swing the leaves open (gate-opening triggers the 1.6s 3D swing)
       setTimeout(function () {
+        overlay.classList.remove('gate-unlock');
         overlay.classList.add('gate-opening');
-      }, 1800);
+      }, 850);
 
-      // After swing completes (1.8 + 2.8 = 4.6s): fade overlay out
+      // After the swing completes (0.85 + 1.6 = 2.45s): fade the overlay out
       setTimeout(function () {
         overlay.classList.add('gate-done');
         var logo = document.querySelector('.gate-center-logo');
         if (logo) logo.style.display = 'none';
-      }, 4600);
+      }, 2450);
 
-      // After fade (4.6 + 0.8 = 5.4s): remove overlay, unlock scroll, mark seen in session
+      // After the fade (2.45 + 0.55 = 3.0s): remove overlay, unlock scroll, mark seen
       setTimeout(function () {
         overlay.style.display = 'none';
         document.body.style.overflow = '';
         sessionStorage.setItem('mpw_gate_seen', '1'); // Don't show again this session
-      }, 5400);
+      }, 3000);
     })();
   </script>
 </body>
