@@ -3,8 +3,8 @@
    ============================================================
    Design language:
      - Dark theme (near-black backgrounds) with amber/gold accents
-     - Brand colour: #CC8400 (amber gold) — professional, visible on dark
-     - Typography: Inter (body) + Rajdhani (headings) from Google Fonts
+     - Brand colour: #c8901f (warm brass amber) — professional, visible on dark
+     - Typography: Inter (body) + Bricolage Grotesque (headings) from Google Fonts
      - Spacing: generous padding (5rem sections) for premium feel
      - Borders: very subtle (#2a2a2a) — barely visible on dark backgrounds,
        just enough to define card edges
@@ -64,6 +64,14 @@
   --gold:        #c8901f;   /* Primary accent — warm brass amber (softened from neon gold) */
   --gold-light:  #dca63f;   /* Lighter brass — hover states and subtle glows */
   --gold-dark:   #9c6f17;   /* Darker brass — pressed/active states, deeper hover shadows */
+
+  /* ── Semantic / status colours ─────────────────────────────
+     Used sparingly for meaning (never as decoration): negatives, success
+     confirmations and the WhatsApp brand. Kept as tokens so they're
+     consistent and themeable rather than scattered hex values. */
+  --danger:      #e0654b;   /* Negatives / "cons" / form errors — warm red, tuned to the palette */
+  --success:     #3fbf7f;   /* Success confirmations — slightly muted green */
+  --whatsapp:    #25d366;   /* WhatsApp brand green (float button) */
 
   /* ── Background layers (darkest → lightest) ────────────────
      Warm near-blacks (a touch of brown) rather than clinical pure black.
@@ -1542,7 +1550,7 @@ section { padding: 5rem 0; }
   bottom: 5.5rem;
   right: 1.5rem;
   width: 44px; height: 44px;
-  background: #25d366;
+  background: var(--whatsapp);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -2607,6 +2615,38 @@ section { padding: 5rem 0; }
   pointer-events: none;
 }
 
+/* Ambient "security light" glow that slowly drifts — mirrors the homepage
+   hero so every inner page feels alive, not static. Skipped on blog heroes,
+   which use ::after for their own stripe motion. */
+.page-hero:not(.blog-hero)::after {
+  content: '';
+  position: absolute;
+  width: 48vw; height: 48vw;
+  bottom: -28%; right: -8%;
+  background: radial-gradient(circle, rgba(220,166,63,.12), transparent 60%);
+  border-radius: 50%;
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 0;
+  animation: heroGlow 20s ease-in-out infinite;
+}
+
+/* Content slides/fades up in a staggered cascade on load (pure CSS, applies to
+   every inner page + blog hero automatically — matches the homepage reveal). */
+.page-hero-content > * {
+  animation: pageHeroReveal .7s cubic-bezier(.2, .7, .2, 1) both;
+}
+.page-hero-content > *:nth-child(1) { animation-delay: .05s; }
+.page-hero-content > *:nth-child(2) { animation-delay: .15s; }
+.page-hero-content > *:nth-child(3) { animation-delay: .25s; }
+.page-hero-content > *:nth-child(4) { animation-delay: .35s; }
+.page-hero-content > *:nth-child(5) { animation-delay: .45s; }
+
+@keyframes pageHeroReveal {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
 .page-hero-content {
   position: relative;
   z-index: 1;
@@ -3039,7 +3079,7 @@ section { padding: 5rem 0; }
 
 .mobile-cta-whatsapp {
   color: var(--white);
-  background: #25d366;
+  background: var(--whatsapp);
 }
 .mobile-cta-whatsapp:hover,
 .mobile-cta-whatsapp:active {
@@ -3138,7 +3178,7 @@ section { padding: 5rem 0; }
 .quote-banner-text { flex: 1; }
 
 .quote-banner-text h2 {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: var(--font-head);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 700;
   color: #fff;
@@ -3173,7 +3213,7 @@ section { padding: 5rem 0; }
   gap: 6px;
 }
 
-.quote-banner-note i { color: #CC8400; }
+.quote-banner-note i { color: var(--gold); }
 
 @media (max-width: 768px) {
   .quote-banner-inner {
@@ -3850,4 +3890,7 @@ section { padding: 5rem 0; }
   /* Gate intro light cues */
   #gate-overlay::before,
   #gate-overlay::after { transition: none; }
+  /* Inner-page hero drift + staggered content reveal */
+  .page-hero:not(.blog-hero)::after { animation: none; }
+  .page-hero-content > * { animation: none; }
 }
