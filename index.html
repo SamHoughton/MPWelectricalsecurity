@@ -108,14 +108,8 @@
   <meta name="apple-mobile-web-app-title" content="MPW Security">
   <link rel="manifest" href="site.webmanifest">
 
-  <!-- Preload critical assets ─────────────────────────────────
-       rel="preload" tells the browser to fetch this resource immediately,
-       before it encounters it in the HTML body. The hero gate image (edit.png)
-       is above the fold and visible as soon as the page loads, so preloading it
-       prevents a delayed flash of the page layout while waiting for the image.
-       fetchpriority="high" additionally marks it as high priority in the
-       browser's resource loading queue (Fetch Priority API). -->
-  <link rel="preload" as="image" href="img/edit.png" fetchpriority="high">
+  <!-- (The old hero photo preload was removed: the hero is now the inline
+       SVG gate scene, which needs no image fetch at all.) -->
 
   <!-- Google Fonts ─────────────────────────────────────────────
        Two fonts are loaded:
@@ -160,6 +154,9 @@
   <!-- Custom Styles — loaded AFTER CDN stylesheets so our rules
        can override Bootstrap defaults without needing !important everywhere -->
   <link href="css/style.css" rel="stylesheet">
+  <!-- Homepage showpiece styles: scroll-through gate hero, luxury type scale,
+       restyled stats band, custom cursor. Loaded only on this page. -->
+  <link href="css/home.css" rel="stylesheet">
 
   <!-- Structured Data: LocalBusiness (Schema.org JSON-LD) ─────────
        JSON-LD is the recommended format for Google structured data.
@@ -395,32 +392,10 @@
        to tab through every nav link on every page load. WCAG 2.4.1 compliant. -->
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- ======= Gate Opening Animation =======
-       A pure-CSS animated gate that plays on first page load.
-       Two panels (left/right) fill the screen, then swing open in 3D (on
-       perspective hinges at their outer edges) to reveal the page.
-       The gate texture (iron bars, rails, finial spikes) is created entirely with
-       CSS repeating-linear-gradient values — no images required.
-       Extra layers add depth: god-ray light shafts behind the gate, a metallic
-       sheen that sweeps across each leaf as it moves, and a cinematic vignette.
-       The center logo sits on top of both panels; the status light blinks red
-       then switches to gold when the animation starts.
-       JavaScript controls the timing (adds gate-unlock, gate-opening and
-       gate-done classes). See css/style.css — "Gate Opening Animation" section.
-       ======================================= -->
-  <div id="gate-overlay">
-    <div class="gate-rays"></div>          <!-- God-ray light shafts behind the gate -->
-    <div class="gate-panel-left"><span class="gate-sheen"></span></div>   <!-- Left leaf — swings left -->
-    <div class="gate-panel-right"><span class="gate-sheen"></span></div>  <!-- Right leaf — swings right -->
-    <div class="gate-divider"></div>       <!-- Centre post between the two leaves -->
-    <div class="gate-vignette"></div>      <!-- Cinematic vignette framing -->
-  </div>
-  <!-- Logo and blinking status light shown in the centre during the gate animation -->
-  <div class="gate-center-logo">
-    <img src="img/logo.png" alt="MPW Electrical Security">
-    <div class="gate-status-light" id="gate-status-light"></div><!-- Blinks red → turns gold -->
-  </div>
-  <!-- End Gate Animation -->
+  <!-- The old blocking gate-overlay intro has been retired. The gate now
+       lives IN the hero as gold SVG line-work (see #hero below): it draws
+       itself on load and swings open as the visitor scrolls — the signature
+       "scroll-through gate" scene. Orchestrated by js/motion.js. -->
 
   <!-- ======= Header / Navbar =======
        Fixed header that stays visible as the user scrolls.
@@ -484,73 +459,128 @@
     </nav>
   </header>
 
-  <!-- ======= Hero Section =======
-       Full-viewport-height section (min-height: 100vh) that is the first
-       thing visitors see. Content:
-         - Gold badge (trust signal)
-         - H1 headline (primary keyword + value proposition)
-         - Description paragraph
-         - Two CTA buttons (primary: services, secondary: free quote)
-         - Phone number (immediate contact option)
-         - Gate image (on desktop only — hidden on mobile via d-none d-lg-flex)
+  <!-- ======= Hero: the scroll-through gate =======
+       Full-viewport scene and the site's signature interaction.
 
-       reveal-hero / reveal-delay-* classes: elements start invisible and animate
-       in after the preloader disappears (JS adds 'show' class on window 'load').
-       The staggered delays create a cascade: badge first, then headline,
-       description, then buttons — guides the user's eye down the page.
+       Composition (back to front):
+         1. .hero-content — centered editorial column: kicker, oversized H1,
+            description, CTAs, phone. Readable through the gate line-work.
+         2. .gate-scene — two mirrored SVG gate leaves drawn in thin gold
+            strokes, slightly ajar, with a soft light seam leaking through
+            the gap. Pure decoration (aria-hidden, pointer-events: none).
+         3. .hero-scroll-hint — "scroll to enter" cue.
 
-       The hero image (edit.png) uses fetchpriority="high" and loading="eager"
-       to ensure it loads as fast as possible (it's above the fold, so lazy
-       loading would cause a visible delay).
+       Motion (js/motion.js, skipped on reduced-motion / no JS):
+         - On load the strokes draw themselves on and the headline rises
+           word-by-word through overflow masks.
+         - On scroll the hero pins and the leaves swing open toward the
+           viewer (3D), passing the visitor through the gate into the site.
+
+       The right leaf reuses the left leaf's geometry, mirrored with CSS
+       scaleX(-1), so the drawing only has to be maintained in one place.
+       Styling lives in css/home.css.
        ======================================= -->
   <section id="hero">
     <div class="hero-content">
       <div class="container">
-        <div class="row align-items-center">
-          <!-- Text column: 7/12 width on large screens, full width on smaller -->
-          <div class="col-lg-7 hero-text-col">
-            <!-- Trust badge: small pill above headline to establish credibility -->
-            <div class="hero-badge reveal-hero">
-              <i class="fas fa-location-dot"></i>
-              Family-run installers, based in Newton-le-Willows
-            </div>
-            <!-- H1: must include primary SEO keywords. Only one H1 per page.
-                 text-accent applies the gold brand colour to "Bespoke Security" -->
-            <h1 class="reveal-hero reveal-delay-1">
-              <span class="text-accent">Bespoke Security</span> for Your Home or Business, Built Around You
-            </h1>
-            <p class="hero-desc reveal-hero reveal-delay-2">
-              MPW design and install automated gates, CCTV, alarm systems and security lighting for homes and businesses throughout the North West. Ten years of local experience, just one call away.
-            </p>
-            <div class="hero-buttons reveal-hero reveal-delay-3">
-              <!-- Primary CTA: scroll-link class triggers smooth scroll to #services -->
-              <a href="#services" class="btn btn-gold scroll-link">
-                <span>Our Services</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <!-- Secondary CTA: outline style, less prominent than primary -->
-              <a href="#contact" class="btn btn-outline-hero scroll-link">
-                <span>Get a Free Quote</span>
-              </a>
-            </div>
-            <!-- Inline trust signals alongside phone number (free visit + response time) -->
-            <p class="hero-phone reveal-hero reveal-delay-3">
-              <i class="fas fa-phone-alt"></i>
-              <a href="tel:07434001222">07434 001222</a> &nbsp;&middot;&nbsp; Free site visit &nbsp;&middot;&nbsp; Same-week response
-            </p>
+        <div class="hero-text-col">
+          <!-- Micro-kicker: quiet, letterspaced trust line -->
+          <p class="hero-kicker">Family-run &middot; Newton-le-Willows &middot; Est. ten years</p>
+          <!-- H1: must include primary SEO keywords. Only one H1 per page.
+               motion.js splits this into word spans at runtime for the masked
+               rise — the source stays clean for SEO and screen readers. -->
+          <h1>
+            <span class="text-accent">Bespoke Security</span> for Your Home or Business, Built Around You
+          </h1>
+          <p class="hero-desc">
+            MPW design and install automated gates, CCTV, alarm systems and security lighting for homes and businesses throughout the North West. Ten years of local experience, just one call away.
+          </p>
+          <div class="hero-buttons">
+            <!-- Primary CTA: scroll-link class triggers smooth scroll to #services -->
+            <a href="#services" class="btn btn-gold scroll-link">
+              <span>Our Services</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <!-- Secondary CTA: outline style, less prominent than primary -->
+            <a href="#contact" class="btn btn-outline-hero scroll-link">
+              <span>Get a Free Quote</span>
+            </a>
           </div>
-          <!-- Gate image: only shown on large screens (d-none d-lg-flex).
-               Hidden on mobile to save space and focus attention on the text/CTAs.
-               fetchpriority="high" + loading="eager" ensures it loads immediately. -->
-          <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center">
-            <div class="hero-image-wrap reveal-hero reveal-delay-2">
-              <img src="img/edit.png" alt="MPW Electrical Security — automated gate installation North West" class="hero-image" fetchpriority="high" loading="eager">
-            </div>
-          </div>
+          <!-- Inline trust signals alongside phone number (free visit + response time) -->
+          <p class="hero-phone">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:07434001222">07434 001222</a> &nbsp;&middot;&nbsp; Free site visit &nbsp;&middot;&nbsp; Same-week response
+          </p>
         </div>
       </div>
     </div>
 
+    <!-- The gate: two mirrored line-art leaves + light seam -->
+    <div class="gate-scene" aria-hidden="true">
+      <div class="gate-leaf gate-leaf-left">
+        <svg viewBox="0 0 720 900" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <!-- Outer frame: hinge stile, top rail, centre stile -->
+          <path d="M44 900 V160 H676 V900"/>
+          <!-- Doubled centre stile — the meeting edge of the pair -->
+          <line x1="664" y1="160" x2="664" y2="900"/>
+          <!-- Inner top rail + doubled mid rails -->
+          <line x1="44" y1="208" x2="676" y2="208"/>
+          <line x1="44" y1="560" x2="676" y2="560"/>
+          <line x1="44" y1="600" x2="676" y2="600"/>
+          <!-- Nine vertical pickets -->
+          <line x1="104" y1="160" x2="104" y2="900"/>
+          <line x1="168" y1="160" x2="168" y2="900"/>
+          <line x1="232" y1="160" x2="232" y2="900"/>
+          <line x1="296" y1="160" x2="296" y2="900"/>
+          <line x1="360" y1="160" x2="360" y2="900"/>
+          <line x1="424" y1="160" x2="424" y2="900"/>
+          <line x1="488" y1="160" x2="488" y2="900"/>
+          <line x1="552" y1="160" x2="552" y2="900"/>
+          <line x1="616" y1="160" x2="616" y2="900"/>
+          <!-- Finial spikes on alternating pickets -->
+          <path d="M95 160 L104 132 L113 160"/>
+          <path d="M223 160 L232 132 L241 160"/>
+          <path d="M351 160 L360 132 L369 160"/>
+          <path d="M479 160 L488 132 L497 160"/>
+          <path d="M607 160 L616 132 L625 160"/>
+          <!-- Hinge plates on the outer stile -->
+          <rect x="34" y="300" width="20" height="58" rx="4"/>
+          <rect x="34" y="700" width="20" height="58" rx="4"/>
+        </svg>
+      </div>
+      <div class="gate-leaf gate-leaf-right">
+        <svg viewBox="0 0 720 900" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M44 900 V160 H676 V900"/>
+          <line x1="664" y1="160" x2="664" y2="900"/>
+          <line x1="44" y1="208" x2="676" y2="208"/>
+          <line x1="44" y1="560" x2="676" y2="560"/>
+          <line x1="44" y1="600" x2="676" y2="600"/>
+          <line x1="104" y1="160" x2="104" y2="900"/>
+          <line x1="168" y1="160" x2="168" y2="900"/>
+          <line x1="232" y1="160" x2="232" y2="900"/>
+          <line x1="296" y1="160" x2="296" y2="900"/>
+          <line x1="360" y1="160" x2="360" y2="900"/>
+          <line x1="424" y1="160" x2="424" y2="900"/>
+          <line x1="488" y1="160" x2="488" y2="900"/>
+          <line x1="552" y1="160" x2="552" y2="900"/>
+          <line x1="616" y1="160" x2="616" y2="900"/>
+          <path d="M95 160 L104 132 L113 160"/>
+          <path d="M223 160 L232 132 L241 160"/>
+          <path d="M351 160 L360 132 L369 160"/>
+          <path d="M479 160 L488 132 L497 160"/>
+          <path d="M607 160 L616 132 L625 160"/>
+          <rect x="34" y="300" width="20" height="58" rx="4"/>
+          <rect x="34" y="700" width="20" height="58" rx="4"/>
+        </svg>
+      </div>
+      <div class="gate-seam"></div>
+    </div>
+
+    <!-- Scroll cue: ties the interaction to the brand ("enter the gate") -->
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll to enter</span>
+      <span class="hint-line"></span>
+    </div>
   </section>
 
   <!-- ======= Stats Bar =======
@@ -697,7 +727,7 @@
           </div>
 
           <div class="col-lg-6 reveal-right">
-            <div class="about-image-wrap">
+            <div class="about-image-wrap" data-parallax>
               <img src="img/aboutusgate.jpg" class="img-fluid" alt="MPW Electrical Security — bespoke automated gate installed in the North West" loading="lazy">
               <div class="about-badge">
                 <span class="badge-number">10+</span>
@@ -1707,69 +1737,15 @@
   <!-- Custom site JS: loaded after Bootstrap so it can rely on Bootstrap being available -->
   <script src="js/main.js"></script>
 
-  <!-- Gate Animation Controller ─────────────────────────────────────────────
-       An IIFE (Immediately Invoked Function Expression) that controls the timing
-       of the gate opening animation. Uses var (not let/const) for maximum
-       browser compatibility.
-
-       Two cases where the animation is SKIPPED immediately:
-         1. prefers-reduced-motion: respects user's OS-level accessibility setting
-            that requests less animation (motion sickness / vestibular disorders)
-         2. sessionStorage has 'mpw_gate_seen': animation only plays once per
-            browser session — repeat visitors within the same tab session see it
-            immediately without waiting 5.4 seconds
-
-       Timeline of classes/actions (tightened to ~3s for a snappier feel):
-         0ms    — page loads, overlay visible, logo eases in, scroll locked
-         550ms  — status light arms red → gold (.go) + unlock judder (gate-unlock)
-         850ms  — leaves swing open in 3D (gate-opening) — 1.6s swing
-         2450ms — swing completes, fade overlay out (gate-done), hide logo
-         3000ms — overlay hidden, scroll unlocked, session flag set
-       ─────────────────────────────────────────────────────────────── -->
-  <script>
-    (function () {
-      var overlay    = document.getElementById('gate-overlay');
-      var statusLight = document.getElementById('gate-status-light');
-      if (!overlay) return;
-
-      // Skip instantly on reduced-motion or repeat visits
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-          sessionStorage.getItem('mpw_gate_seen')) {
-        overlay.style.display = 'none';
-        var logo = document.querySelector('.gate-center-logo');
-        if (logo) logo.style.display = 'none';
-        return;
-      }
-
-      // Lock scroll while gate is showing
-      document.body.style.overflow = 'hidden';
-
-      // After 0.55s: arm the status light (red → gold) and play the unlock judder
-      setTimeout(function () {
-        if (statusLight) statusLight.classList.add('go');
-        overlay.classList.add('gate-unlock');
-      }, 550);
-
-      // After 0.85s: swing the leaves open (gate-opening triggers the 1.6s 3D swing)
-      setTimeout(function () {
-        overlay.classList.remove('gate-unlock');
-        overlay.classList.add('gate-opening');
-      }, 850);
-
-      // After the swing completes (0.85 + 1.6 = 2.45s): fade the overlay out
-      setTimeout(function () {
-        overlay.classList.add('gate-done');
-        var logo = document.querySelector('.gate-center-logo');
-        if (logo) logo.style.display = 'none';
-      }, 2450);
-
-      // After the fade (2.45 + 0.55 = 3.0s): remove overlay, unlock scroll, mark seen
-      setTimeout(function () {
-        overlay.style.display = 'none';
-        document.body.style.overflow = '';
-        sessionStorage.setItem('mpw_gate_seen', '1'); // Don't show again this session
-      }, 3000);
-    })();
-  </script>
+  <!-- ── Motion stack (homepage showpiece) ─────────────────────────
+       GSAP + ScrollTrigger drive the scroll-through gate scene;
+       Lenis provides inertia smooth-scrolling. js/motion.js
+       orchestrates everything and bails out gracefully if these
+       CDN files fail or the visitor prefers reduced motion —
+       the page remains fully usable either way. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script defer src="js/motion.js"></script>
 </body>
 </html>
