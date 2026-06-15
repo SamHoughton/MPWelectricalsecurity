@@ -221,9 +221,12 @@
 
 /* ── Editorial scale-up for homepage section headers ──────── */
 .section-header h2 { font-size: clamp(1.9rem, 4vw, 3.1rem); letter-spacing: -.015em; }
-.section-tag       { letter-spacing: .3em; text-transform: uppercase; font-size: .72rem; }
 
-/* ── Custom cursor (motion.js appends the nodes) ──────────── */
+/* ── Precision reticle cursor (motion.js appends the nodes) ──
+   A targeting reticle instead of a plain ring — reads as a control
+   system locking onto a target. The ring carries four crosshair
+   ticks via ::before/::after; it squares up and turns green over an
+   interactive element ("target acquired"). */
 @media (hover: hover) and (pointer: fine) {
   body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
 }
@@ -233,22 +236,135 @@
   top: 0; left: 0;
   z-index: 100002;
   pointer-events: none;
-  border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 .cursor-dot {
-  width: 6px; height: 6px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
   background: var(--gold-light);
+  box-shadow: 0 0 8px rgba(220,166,63,.8);
 }
 .cursor-ring {
-  width: 34px; height: 34px;
-  border: 1px solid rgba(200,144,31,.55);
-  transition: width .25s ease, height .25s ease, border-color .25s ease;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,144,31,.5);
+  transition: width .25s ease, height .25s ease, border-color .25s ease, border-radius .25s ease;
 }
+.cursor-ring::before,
+.cursor-ring::after { content: ''; position: absolute; background: rgba(200,144,31,.7); }
+.cursor-ring::before { left: 50%; top: -5px; bottom: -5px; width: 1px; transform: translateX(-50%); }
+.cursor-ring::after  { top: 50%; left: -5px; right: -5px; height: 1px; transform: translateY(-50%); }
 .cursor-ring.is-active {
-  width: 56px; height: 56px;
-  border-color: rgba(220,166,63,.9);
+  width: 52px; height: 52px;
+  border-radius: 7px;
+  border-color: var(--success);
 }
+.cursor-ring.is-active::before,
+.cursor-ring.is-active::after { background: var(--success); }
+
+/* ============================================================
+   CONTROL-SYSTEM LANGUAGE
+   The page presents like a precision security/automation product:
+   technical readouts, a framing HUD, live status states, and
+   satisfying mechanical motion. Monospace = "instrument" type.
+   ============================================================ */
+:root { --mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace; }
+
+/* ── Framing HUD: corner ticks + live status readout ──────── */
+/* z-index 900: above page content, below the header/nav (1000) and the
+   mobile-nav backdrop (998) so it never clashes with the open menu. */
+.hud-frame { position: fixed; inset: 14px; z-index: 900; pointer-events: none; }
+.hud-frame .hud-corner { position: absolute; width: 16px; height: 16px; border: 1px solid rgba(200,144,31,.45); }
+.hud-frame .hc-tl { top: 0; left: 0;  border-right: 0; border-bottom: 0; }
+.hud-frame .hc-tr { top: 0; right: 0; border-left: 0;  border-bottom: 0; }
+.hud-frame .hc-bl { bottom: 0; left: 0;  border-right: 0; border-top: 0; }
+.hud-frame .hc-br { bottom: 0; right: 0; border-left: 0;  border-top: 0; }
+.hud-status {
+  position: absolute;
+  bottom: 4px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: .55rem;
+  font-family: var(--mono);
+  font-size: .64rem; letter-spacing: .26em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); white-space: nowrap;
+}
+.hud-status .hud-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--success); box-shadow: 0 0 10px var(--success);
+  animation: hudPulse 2.4s ease-in-out infinite;
+}
+.hud-status[data-state="active"] .hud-dot { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+@keyframes hudPulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+@media (max-width: 767px) {
+  .hud-frame { inset: 8px; }
+  .hud-status { font-size: .56rem; letter-spacing: .18em; }
+}
+
+/* ── Hero readout: live gate state during the scroll-through ── */
+.gate-readout {
+  position: absolute;
+  top: 17%; left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex; align-items: center; gap: .6rem;
+  font-family: var(--mono);
+  font-size: .66rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold); pointer-events: none; white-space: nowrap;
+}
+.gate-readout .gr-bar { width: 64px; height: 2px; background: rgba(200,144,31,.2); position: relative; overflow: hidden; }
+.gate-readout .gr-bar::after {
+  content: ''; position: absolute; inset: 0 auto 0 0;
+  width: var(--gate-progress, 4%); background: var(--gold);
+  transition: width .12s linear;
+}
+
+/* ── Technical section labels: [ LABEL ] ──────────────────── */
+.section-tag {
+  font-family: var(--mono);
+  letter-spacing: .26em; text-transform: uppercase;
+  font-size: .68rem; color: var(--gold);
+}
+.section-tag::before { content: '['; margin-right: .5em; color: rgba(200,144,31,.55); }
+.section-tag::after  { content: ']'; margin-left: .5em;  color: rgba(200,144,31,.55); }
+
+/* ── Services as a control panel ──────────────────────────── */
+#services .row { counter-reset: svc; }
+#services .col-md-6 { counter-increment: svc; }
+#services .service-card {
+  position: relative; overflow: hidden;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), border-color .4s ease, box-shadow .4s ease;
+}
+#services .service-card::before {
+  content: 'MOD.0' counter(svc);
+  position: absolute; top: .85rem; right: 1rem; z-index: 2;
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .18em;
+  color: rgba(255,255,255,.4);
+}
+#services .service-media { position: relative; overflow: hidden; }
+#services .service-media::after {
+  content: ''; position: absolute; top: .9rem; left: 1rem; z-index: 2;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--success); box-shadow: 0 0 10px var(--success); opacity: .85;
+}
+#services .service-media::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(220,166,63,.18) 50%, transparent);
+  transform: translateY(-100%); opacity: 0;
+}
+#services .service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200,144,31,.5);
+  box-shadow: 0 18px 50px rgba(0,0,0,.5);
+}
+#services .service-card:hover .service-media::before { animation: svcScan 1s ease-in-out; }
+@keyframes svcScan {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* ── Stats as instrument readouts ─────────────────────────── */
+#stats .stat-label { font-family: var(--mono); }
 
 /* ── Mobile: lighter scene, same language ─────────────────── */
 @media (max-width: 767px) {
@@ -264,4 +380,6 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-scroll-hint .hint-line::after { animation: none; }
   .gate-leaf-left, .gate-leaf-right { transform: none; }
+  .hud-status .hud-dot { animation: none; }
+  #services .service-card:hover .service-media::before { animation: none; }
 }

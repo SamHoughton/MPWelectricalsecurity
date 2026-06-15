@@ -392,6 +392,18 @@
        to tab through every nav link on every page load. WCAG 2.4.1 compliant. -->
   <a class="skip-link" href="#main">Skip to main content</a>
 
+  <!-- ── Framing HUD ─────────────────────────────────────────────
+       Frames the viewport like a control-panel readout and shows the
+       live "system" state, which js/motion.js updates as you operate
+       the gate (SECURED → OPENING → WELCOME). Decorative only. -->
+  <div class="hud-frame" aria-hidden="true">
+    <span class="hud-corner hc-tl"></span>
+    <span class="hud-corner hc-tr"></span>
+    <span class="hud-corner hc-bl"></span>
+    <span class="hud-corner hc-br"></span>
+    <div class="hud-status" id="hudStatus"><span class="hud-dot"></span><span class="hud-label">MPW Control &middot; System Secured</span></div>
+  </div>
+
   <!-- The old blocking gate-overlay intro has been retired. The gate now
        lives IN the hero as gold SVG line-work (see #hero below): it draws
        itself on load and swings open as the visitor scrolls — the signature
@@ -513,6 +525,12 @@
           </p>
         </div>
       </div>
+    </div>
+
+    <!-- Live gate-state readout, updated by motion.js as you scroll -->
+    <div class="gate-readout" id="gateReadout" aria-hidden="true">
+      <span class="gr-label">Gate &middot; Secured</span>
+      <span class="gr-bar"></span>
     </div>
 
     <!-- The gate: two mirrored line-art leaves + light seam -->

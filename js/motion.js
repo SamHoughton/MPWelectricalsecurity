@@ -113,7 +113,9 @@
   heroTl.from('.hero-kicker',      { autoAlpha: 0, y: 14, duration: 0.7 }, 0.3);
   heroTl.from('#hero .hero-desc',  { autoAlpha: 0, y: 18, duration: 0.8 }, 0.85);
   heroTl.from('#hero .hero-buttons,#hero .hero-phone', { autoAlpha: 0, y: 18, duration: 0.8, stagger: 0.12 }, 1.0);
+  heroTl.from('.gate-readout',     { autoAlpha: 0, y: -10, duration: 0.7 }, 1.2);
   heroTl.from('.hero-scroll-hint', { autoAlpha: 0, duration: 0.9 }, 1.5);
+  heroTl.from('.hud-frame',        { autoAlpha: 0, duration: 1.0 }, 0.2);
 
   /* ── 3. The scroll-through gate ────────────────────────────
      The hero pins while the leaves swing open toward the viewer
@@ -124,6 +126,23 @@
   mm.add(
     { desktop: '(min-width: 768px)', mobile: '(max-width: 767px)' },
     function (ctx) {
+      // Live status wiring: as the visitor scrolls the gate open, the hero
+      // readout and the framing HUD report the gate's state, so the
+      // interaction reads as operating a control system, not just scrolling.
+      var readoutLabel = document.querySelector('#gateReadout .gr-label');
+      var readoutBar   = document.querySelector('#gateReadout .gr-bar');
+      var hudStatus    = document.getElementById('hudStatus');
+      var hudLabel     = hudStatus ? hudStatus.querySelector('.hud-label') : null;
+      var lastState = '';
+      var setState = function (state, gateText, hudText) {
+        if (state === lastState) return;
+        lastState = state;
+        if (readoutLabel) readoutLabel.textContent = gateText;
+        if (hudLabel)     hudLabel.textContent = hudText;
+        // Gold dot only while actively opening; green (secured) at rest and once open.
+        if (hudStatus)    hudStatus.setAttribute('data-state', state === 'opening' ? 'active' : 'secured');
+      };
+
       var sceneTl = gsap.timeline({
         scrollTrigger: {
           trigger: '#hero',
@@ -131,7 +150,14 @@
           end: ctx.conditions.desktop ? '+=115%' : '+=70%',
           scrub: 0.6,
           pin: true,
-          anticipatePin: 1
+          anticipatePin: 1,
+          onUpdate: function (self) {
+            var p = self.progress;
+            if (readoutBar) readoutBar.style.setProperty('--gate-progress', (4 + p * 96).toFixed(1) + '%');
+            if (p < 0.06)      setState('secured', 'Gate · Secured',  'MPW Control · System Secured');
+            else if (p < 0.92) setState('opening', 'Gate · Opening',  'MPW Control · Gate Opening');
+            else               setState('open',    'Gate · Open',     'MPW Control · Welcome Home');
+          }
         }
       });
       sceneTl
@@ -139,6 +165,7 @@
         .to('.gate-leaf-right', { rotateY:  78, ease: 'power2.in' }, 0)
         .to('.gate-scene',      { scale: 1.22, ease: 'power1.in' }, 0)
         .to('.gate-seam',       { scaleX: 2.6, opacity: 0, ease: 'power1.in' }, 0.15)
+        .to('.gate-readout',    { autoAlpha: 0, ease: 'power1.in' }, 0.55)
         .to('.hero-scroll-hint',{ autoAlpha: 0, duration: 0.12 }, 0)
         .to('#hero .hero-content', { scale: 1.05, autoAlpha: 0, ease: 'power1.in' }, 0.35)
         .to('.gate-leaf',       { opacity: 0, duration: 0.25 }, 0.72);
